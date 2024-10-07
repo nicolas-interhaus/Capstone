@@ -20,6 +20,19 @@
           <label for="apellido_materno" class="form-label">Apellido Materno</label>
           <input type="text" class="form-control" id="apellido_materno">
         </div>
+        <div class="col-md-4">
+          <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+          <input type="date" class="form-control" id="fecha_nacimiento">
+        </div>
+        <div class="col-md-4">
+          <label for="inputGender" class="form-label">Género</label>
+          <select id="inputGender" class="form-select">
+            <option value="" selected>Seleccione Género</option>
+            <option>Hombre</option>
+            <option>Mujer</option>
+            <option>Otro</option>
+          </select>
+        </div>
         <div class="col-12">
           <label for="inputAddress" class="form-label">Dirección</label>
           <input type="text" class="form-control" id="inputAddress" placeholder="Av, calle, pasaje">
@@ -80,12 +93,14 @@
           const nombres = document.getElementById('nombres').value.trim();
           const apellidoPaterno = document.getElementById('apellido_paterno').value.trim();
           const apellidoMaterno = document.getElementById('apellido_materno').value.trim();
+          const fechaNacimiento = document.getElementById('fecha_nacimiento').value.trim();
+          const genero = document.getElementById('inputGender').value;
           const direccion = document.getElementById('inputAddress').value.trim();
           const villa = document.getElementById('inputAddress2').value.trim();
           const ciudad = document.getElementById('inputCity').value.trim();
           const comuna = document.getElementById('inputState').value;
           const codigoPostal = document.getElementById('inputPostal').value.trim();
-          const email = document.getElementById('inputEmail4').value.trim();
+          const email = document.getElementById('inputEmail4').value.trim();  
           const password = document.getElementById('inputPassword4').value;
           const confirmPassword = document.getElementById('confirm_password').value;
           const aceptaCondiciones = document.getElementById('gridCheck').checked;
@@ -96,6 +111,9 @@
           if (!nombres) errores.push('Nombres');
           if (!apellidoPaterno) errores.push('Apellido Paterno');
           if (!apellidoMaterno) errores.push('Apellido Materno');
+          if (!fechaNacimiento) errores.push('Fecha de Nacimiento');
+          if (!genero) errores.push('Género');
+
           if (!direccion) errores.push('Dirección');
           if (!villa) errores.push('Villa');
           if (!ciudad) errores.push('Ciudad');
