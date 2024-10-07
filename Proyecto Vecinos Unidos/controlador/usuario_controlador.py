@@ -13,20 +13,18 @@ def registrar_usuario():
     apellido_paterno = request.form['apellido_paterno']
     apellido_materno = request.form['apellido_materno']
     fec_nacimiento = request.form['fecha_nacimiento']
-    edad = request.form['edad']  # Tendrías que calcular la edad a partir de la fecha de nacimiento
+    edad = request.form['edad']
     genero = request.form['genero']
     direccion = request.form['direccion']
     comuna = request.form['comuna']
-    cargo = "vecino"  # Por ejemplo, puedes tener este valor fijo o ingresarlo
+    cargo = "vecino"
     email = request.form['email']
 
-    # Crear una instancia del modelo Usuario
-    nuevo_usuario = Usuario(nombres, apellido_paterno, apellido_materno, fec_nacimiento, edad, genero, direccion, comuna, cargo, email)
-    
-    # Aquí puedes guardar los datos en una base de datos o archivo
-    print(nuevo_usuario)  # Por ahora, solo imprimimos el usuario
+    # Llamar a la función que inserta en la BD
+    Usuario.insertar_usuario(nombres, apellido_paterno, apellido_materno, fec_nacimiento, edad, genero, direccion, comuna, cargo, email)
 
     return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

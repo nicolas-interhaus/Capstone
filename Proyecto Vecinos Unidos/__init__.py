@@ -12,7 +12,7 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 # Ejemplo de ejecución de una consulta
-cur.execute("SELECT * FROM usuarios")
+cur.execute("SELECT * FROM vecinos;")
 
 # Obtener los resultados
 rows = cur.fetchall()

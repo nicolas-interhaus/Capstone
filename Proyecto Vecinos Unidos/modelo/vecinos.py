@@ -18,9 +18,9 @@ class Usuario:
     def insertar_usuario(nombres, apellido_paterno, apellido_materno, fec_nacimiento, edad, genero, direccion, comuna, cargo, email):
         conn = psycopg2.connect(
             host="localhost",
-            database="nombre_bd",
-            user="tu_usuario",
-            password="tu_contraseña"
+            database="Capstone",
+            user="postgres",
+            password="admin"
         )
         cur = conn.cursor()
 
