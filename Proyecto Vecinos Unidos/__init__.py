@@ -1,44 +1,25 @@
-# modelo/__init__.py
-# modelo/__init__.py
 import psycopg2
-# modelo/usuario.py
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
-# Definir el motor de conexión
-DATABASE_URL = "postgresql://tu_usuario:tu_contraseña@localhost/zonaTesting"
-engine = create_engine(DATABASE_URL)
+# Establecer conexión
+conn = psycopg2.connect(
+    host="localhost",         # Cambia si es un servidor remoto
+    database="Capstone",      # Tu nombre de la base de datos
+    user="postgres",         # Tu usuario de PostgreSQL
+    password="admin"   # Tu contraseña de PostgreSQL
+)
 
-# Crear una sesión para interactuar con la base de datos
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Crear un cursor
+cur = conn.cursor()
 
-# Base declarativa para definir modelos
-Base = declarative_base()
+# Ejemplo de ejecución de una consulta
+cur.execute("SELECT * FROM usuarios")
 
-# Definir el modelo Usuario
-class Usuario(Base):
-    __tablename__ = "usuarios"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    nombre = Column(String, index=True)
-    edad = Column(Integer)
-    correo = Column(String, unique=True, index=True)
+# Obtener los resultados
+rows = cur.fetchall()
 
-# Crear las tablas en la base de datos
-Base.metadata.create_all(bind=engine)
+for row in rows:
+    print(row)
 
-def conectar_db():
-    try:
-        conexion = psycopg2.connect(
-            host="localhost",
-            database="nombre_base_de_datos",
-            user="tu_usuario",
-            password="tu_contraseña"
-        )
-        print("Conexión exitosa a la base de datos")
-        return conexion
-    except Exception as e:
-        print(f"Error al conectar a la base de datos: {e}")
-
-BASE_DE_DATOS = "db.sqlite3"
+# Cerrar cursor y conexión
+cur.close()
+conn.close()

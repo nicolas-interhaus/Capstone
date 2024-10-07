@@ -1,20 +1,32 @@
+from flask import Flask, request, render_template, redirect
 from modelo.vecinos import Usuario
-from vista.usuario_vista import mostrar_usuario, solicitar_datos_usuario
-# controlador/usuario_controlador.py
-from modelo.vecinos import Usuario, SessionLocal
 
-def crear_usuario(nombre, edad, correo):
-    session = SessionLocal()
-    nuevo_usuario = Usuario(nombre=nombre, edad=edad, correo=correo)
-    session.add(nuevo_usuario)
-    session.commit()
-    session.close()
-    print("Usuario creado exitosamente.")
+app = Flask(__name__)
 
-# controlador/usuario_controlador.py
-def obtener_usuarios():
-    session = SessionLocal()
-    usuarios = session.query(Usuario).all()
-    for usuario in usuarios:
-        print(f"Nombre: {usuario.nombre}, Edad: {usuario.edad}, Correo: {usuario.correo}")
-    session.close()
+@app.route('/')
+def formulario():
+    return render_template('registro.html')  # Esto es el archivo de la vista
+
+@app.route('/registrar', methods=['POST'])
+def registrar_usuario():
+    nombres = request.form['nombres']
+    apellido_paterno = request.form['apellido_paterno']
+    apellido_materno = request.form['apellido_materno']
+    fec_nacimiento = request.form['fecha_nacimiento']
+    edad = request.form['edad']  # Tendrías que calcular la edad a partir de la fecha de nacimiento
+    genero = request.form['genero']
+    direccion = request.form['direccion']
+    comuna = request.form['comuna']
+    cargo = "vecino"  # Por ejemplo, puedes tener este valor fijo o ingresarlo
+    email = request.form['email']
+
+    # Crear una instancia del modelo Usuario
+    nuevo_usuario = Usuario(nombres, apellido_paterno, apellido_materno, fec_nacimiento, edad, genero, direccion, comuna, cargo, email)
+    
+    # Aquí puedes guardar los datos en una base de datos o archivo
+    print(nuevo_usuario)  # Por ahora, solo imprimimos el usuario
+
+    return redirect('/')
+
+if __name__ == '__main__':
+    app.run(debug=True)
