@@ -8,9 +8,9 @@ def connect_db():
     try:
         conn = psycopg2.connect(
             host="localhost",  # Cambiar si es un servidor remoto
-            database="tu_base_de_datos",  # Nombre de tu base de datos
-            user="tu_usuario",  # Usuario de PostgreSQL
-            password="tu_contraseña"  # Contraseña de PostgreSQL
+            database="Capstone",  # Nombre de tu base de datos
+            user="postgres",  # Usuario de PostgreSQL
+            password="admin"  # Contraseña de PostgreSQL
         )
         return conn
     except Exception as e:
