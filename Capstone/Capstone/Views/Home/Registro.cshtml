@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <form id="registroForm" class="row g-3">
+    <div class="col-md-12">
+      <label for="rut" class="form-label">Rut</label>
+      <input type="text" class="form-control" id="rut" placeholder="XX.XXX.XXX-X">
+    </div>
+    <div class="col-md-12">
+      <label for="nombres" class="form-label">Nombres</label>
+      <input type="text" class="form-control" id="nombres">
+    </div>
+    <div class="col-md-6">
+      <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+      <input type="text" class="form-control" id="apellido_paterno">
+    </div>
+    <div class="col-md-6">
+      <label for="apellido_materno" class="form-label">Apellido Materno</label>
+      <input type="text" class="form-control" id="apellido_materno">
+    </div>
+    <div class="col-md-4">
+      <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" id="fecha_nacimiento">
+    </div>
+    <div class="col-md-4">
+      <label for="inputGender" class="form-label">Género</label>
+      <select id="inputGender" class="form-select">
+        <option value="" selected>Seleccione Género</option>
+        <option>Hombre</option>
+        <option>Mujer</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <label for="inputAddress" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="Av, calle, pasaje">
+    </div>
+    <div class="col-12">
+      <label for="inputAddress2" class="form-label">Villa</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="col-md-4">
+      <label for="inputCity" class="form-label">Ciudad</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">Comuna</label>
+      <select id="inputState" class="form-select">
+        <option value="" selected>Seleccione una comuna</option>
+        <option>Pedro Aguirre Cerda</option>
+        <option>San Miguel</option>
+        <option>Lo Espejo</option>
+        <option>La Cisterna</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="inputPostal" class="form-label">Código Postal</label>
+      <input type="text" class="form-control" id="inputPostal">
+    </div>
+    
+    <div class="col-md-12">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input type="email" class="form-control" id="inputEmail4">
+    </div>
+    <div class="col-md-6">
+      <label for="inputUsuario" class="form-label">Usuario</label>
+      <input type="text" class="form-control" id="inputUsuario">
+    </div>
+    <div class="col-md-4">
+      <label for="inputCargo" class="form-label">Cargo</label>
+      <select id="inputCargo" class="form-select">
+        <option value="" selected>Seleccione</option>
+        <option>Presidente</option>
+        <option>Tesorero</option>
+        <option>Secretaria</option>
+        <option>Vecino</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="inputPassword4">
+    </div>
+    <div class="col-md-6">
+      <label for="confirm_password" class="form-label">Vuelva a escribir la contraseña</label>
+      <input type="password" class="form-control" id="confirm_password">
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Acepta las condiciones de uso
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Registrarse</button>
+    </div>
+  </form>
+
+
+
+  <!-- Enlace al archivo JS -->
+  <script src="~/js/registro.js"></script>
+
+</body>
+</html>
