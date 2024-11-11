@@ -17,7 +17,7 @@ namespace Capstone.Controllers
 
         public IActionResult Index()
         {
-            var noticias = _context.Noticias.ToList(); // Asegúrate de que 'Noticias' sea el nombre de la tabla o DbSet de noticias en tu contexto
+            var noticias = _context.Noticias.ToList(); // Asegúrate de que 'Noticias' sea el nombre de la tabla o DbSet de noticias en tu contexto a
             return View(noticias);
         }
     }

@@ -940,11 +940,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ignis\\source\\repos\\Capstone\\Capstone\\Capstone.csproj",
+      "projectUniqueName": "C:\\Users\\Ignis\\Documents\\GitHub\\semestre 2024\\Capstone\\Capstone\\Capstone\\Capstone.csproj",
       "projectName": "Capstone",
-      "projectPath": "C:\\Users\\Ignis\\source\\repos\\Capstone\\Capstone\\Capstone.csproj",
+      "projectPath": "C:\\Users\\Ignis\\Documents\\GitHub\\semestre 2024\\Capstone\\Capstone\\Capstone\\Capstone.csproj",
       "packagesPath": "C:\\Users\\Ignis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ignis\\source\\repos\\Capstone\\Capstone\\obj\\",
+      "outputPath": "C:\\Users\\Ignis\\Documents\\GitHub\\semestre 2024\\Capstone\\Capstone\\Capstone\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

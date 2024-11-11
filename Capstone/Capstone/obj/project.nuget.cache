@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8Q9gUNhvjYk2c3wFRoRKFsH+Ipw/KXb3UEMwbxUoW/v2B2m+Mm/WU41YOIc/57ATD5Oqs2Iqvx8NRIZ54XUVSw==",
+  "dgSpecHash": "AkgEW8kzsfMYaSYiaUZqdlsZ3giL5Fjigc80GzjdHX/DMCI5j9tdnTmt4FVCjaU7pL/Iku4tWmPXUyKpdvmNeQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ignis\\source\\repos\\Capstone\\Capstone\\Capstone.csproj",
+  "projectFilePath": "C:\\Users\\Ignis\\Documents\\GitHub\\semestre 2024\\Capstone\\Capstone\\Capstone\\Capstone.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ignis\\.nuget\\packages\\microsoft.aspnetcore.authentication.negotiate\\6.0.5\\microsoft.aspnetcore.authentication.negotiate.6.0.5.nupkg.sha512",
     "C:\\Users\\Ignis\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\6.0.5\\microsoft.aspnetcore.connections.abstractions.6.0.5.nupkg.sha512",
