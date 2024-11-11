@@ -29,10 +29,35 @@ namespace Capstone.Controllers
         {
             return View();
         }
-        public IActionResult Eventos()
+        public IActionResult Notificaciones()
         {
             return View();
         }
+        public IActionResult Admin_certificado()
+        {
+            return View();
+        }
+        public IActionResult Admin_notificaciones()
+        {
+            return View();
+        }
+        public IActionResult Admin_usuarios()
+        {
+            return View();
+        }
+        public IActionResult Admin_vista()
+        {
+            return View();
+        }
+        public IActionResult Contacto()
+        {
+            return View();
+        }
+        public IActionResult Noticias()
+        {
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {

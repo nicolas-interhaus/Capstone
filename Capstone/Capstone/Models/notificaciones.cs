@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Modelo
 {
-    [Table("eventos")]
-    public class Evento
+    [Table("notificaciones")]
+    public class notificaciones
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,20 +16,18 @@ namespace Capstone.Modelo
         public  string? NombreEvento { get; set; }
 
         [Required]
-        public DateTime FechaEvento { get; set; }
+        public DateTime FechaRecepcion { get; set; }
 
         [StringLength(200)]
-        public string? Patrocinadores { get; set; }
+        public string? Detalle { get; set; }
 
         [Required]
         [StringLength(200)]
-        public string? DireccionEvento { get; set; }
+        public string? Correo { get; set; }
 
         [Required]
-        public float PrecioEvento { get; set; }
+        public BinaryReader Aprobacion { get; set; }
 
-        [Required]
-        public int CapacidadEvento { get; set; }
 
         public override string ToString()
         {

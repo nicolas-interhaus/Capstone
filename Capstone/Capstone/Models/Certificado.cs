@@ -6,11 +6,13 @@ namespace Capstone.Models
 {
     public class Certificado
     {
-        public Int32 Id { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion { get; set; }
+        public Int32 Id_certificado { get; set; }
+        public string Cert_nombre { get; set; }
+        public string Cert_rut { get; set; }
+        public string Cert_direccion { get; set; }
+        public string Cert_comuna { get; set; }
 
-        public DateTime Fecha_emision { get; set; }
+        public DateTime Cert_Fecha_emision { get; set; }
 
         public FileAccess Documentos { get; set; }
 
