@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Capstone.Modelo;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Models // Usa el mismo namespace de tus modelos
 {
@@ -13,5 +14,6 @@ namespace Capstone.Models // Usa el mismo namespace de tus modelos
         
         // Agrega DbSet para cada una de tus entidades, por ejemplo:
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Noticias> Noticias { get; internal set; }
     }
 }

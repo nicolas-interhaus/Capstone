@@ -13,22 +13,22 @@ namespace Capstone.Controllers
             _context = context;
         }
 
-        // Método para mostrar el formulario de creación de usuario
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // Método para recibir datos y guardarlos en la base de datos
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Usuario usuario)
         {
+            usuario.FechaNacimiento = DateTime.SpecifyKind(usuario.FechaNacimiento, DateTimeKind.Utc);
             if (ModelState.IsValid)
             {
                 _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
-                return RedirectToAction("Index"); // Puedes redirigir a una vista de éxito
+                return RedirectToAction("Index");
             }
             return View(usuario);
         }

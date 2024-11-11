@@ -2,8 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Capstone.Modelo
 {
+    [Table("vecinos")]
     public class Usuario
     {
         [Key]

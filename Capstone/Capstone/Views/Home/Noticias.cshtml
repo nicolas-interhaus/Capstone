@@ -1,14 +1,11 @@
-﻿@{
-    Layout = null;
-    var eventos = Model.Eventos;  // Asegúrate de pasar la lista de eventos desde el controlador
-}
+﻿@model List<Capstone.Modelo.Noticias> 
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Eventos</title>
+    <title>Listado de Noticias</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/styles.css">  
 </head>
@@ -46,31 +43,28 @@
       </nav>
 
     <div class="container mt-5">
-        <h2>Listado de Eventos</h2>
+        <h2>Listado de Noticias</h2>
         <a href="@Url.Action("CrearEvento", "Eventos")" class="btn btn-success mb-3">Crear Nuevo Evento</a>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Nombre del Evento</th>
-                    <th>Dirección</th>
-                    <th>Precio</th>
+                    <th>ID</th>
+                    <th>Detalle</th>
                     <th>Fecha del Evento</th>
                     <th>Patrocinadores</th>
                     <th>Capacidad</th>
                 </tr>
             </thead>
             <tbody>
-                @if (eventos != null && eventos.Count > 0)
+                @if (Model != null && Model.Count > 0)
                 {
-                    foreach (var evento in eventos)
+                    foreach (var noticia in Model)
                     {
                         <tr>
-                            <td>@evento.NombreEvento</td>
-                            <td>@evento.DireccionEvento</td>
-                            <td>$@String.Format("{0:0.00}", evento.PrecioEvento)</td>
-                            <td>@evento.FechaEvento.ToString("dd/MM/yyyy")</td>
-                            <td>@evento.Patrocinadores</td>
-                            <td>@evento.CapacidadEvento</td>
+                            <td>@noticia.Id</td>
+                            <td>@noticia.Detalle</td>
+                            <td>@noticia.FechaPublicacion.ToString("dd/MM/yyyy")</td>
+                            <td>@noticia.Autor</td>
                         </tr>
                     }
                 }
@@ -83,9 +77,6 @@
             </tbody>
         </table>
     </div>
-
-    <!-- Insertar el footer aquí -->
-    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
