@@ -21,16 +21,16 @@ namespace Capstone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vecinos usuario)
+        public IActionResult Create(Vecinos vecinos)
         {
-            usuario.FechaNacimiento = DateTime.SpecifyKind(usuario.FechaNacimiento, DateTimeKind.Utc);
+            vecinos.FechaNacimiento = DateTime.SpecifyKind(vecinos.FechaNacimiento, DateTimeKind.Utc);
             if (ModelState.IsValid)
             {
-                _context.Usuarios.Add(usuario);
+                _context.Usuarios.Add(vecinos);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            return View(vecinos);
         }
     }
 }
