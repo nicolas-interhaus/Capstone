@@ -13,7 +13,12 @@ namespace Capstone.Models // Usa el mismo namespace de tus modelos
         }
         
         // Agrega DbSet para cada una de tus entidades, por ejemplo:
-        public DbSet<vecinos> Vecinos { get; set; }
+        public DbSet<Vecinos> Vecinos { get; set; }
         public DbSet<Noticias> Noticias { get;  set; }
+        public DbSet<JuntaVecinos> JuntaVecinos{ get; set; }
+        public DbSet<notificaciones> Notificaciones { get; set; }
+        public DbSet<Resumen_pendientes> Resumen_Pendientes { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Certificado> Certificados{ get; set; }
     }
 }
