@@ -1,4 +1,4 @@
-﻿@model Capstone.Modelo.vecinos
+﻿@model Capstone.Modelo.Vecinos
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,33 +50,13 @@
       <input asp-for="Direccion" class="form-control" placeholder="Av, calle, pasaje" />
       <span asp-validation-for="Direccion" class="text-danger"></span>
     </div>
-    <div class="col-md-4">
-      <label for="inputState" class="form-label">Comuna</label>
-      <select asp-for="Comuna" class="form-select">
-        <option value="" selected>Seleccione una comuna</option>
-        <option>Pedro Aguirre Cerda</option>
-        <option>San Miguel</option>
-        <option>Lo Espejo</option>
-        <option>La Cisterna</option>
-      </select>
-      <span asp-validation-for="Comuna" class="text-danger"></span>
-    </div>
+    
     <div class="col-md-12">
       <label for="inputEmail4" class="form-label">Email</label>
       <input asp-for="Email" type="email" class="form-control" />
       <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    <div class="col-md-4">
-      <label for="inputCargo" class="form-label">Cargo</label>
-      <select asp-for="Cargo" class="form-select">
-        <option value="" selected>Seleccione</option>
-        <option>Presidente</option>
-        <option>Tesorero</option>
-        <option>Secretaria</option>
-        <option>Vecino</option>
-      </select>
-      <span asp-validation-for="Cargo" class="text-danger"></span>
-    </div>
+    
     <button type="submit" class="btn btn-primary">Registrarse</button>
   </form>
 

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Capstone.Modelo
 {
     [Table("vecinos")]
-    public class vecinos
+    public class Vecinos
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,6 +26,8 @@ namespace Capstone.Modelo
 
         [Required]
         public DateTime FechaNacimiento { get; set; }
+        [Required]
+        public string Rut { get; set; }
 
         [Required]
         public int Edad { get; set; }
@@ -46,6 +48,20 @@ namespace Capstone.Modelo
         [Required]
         [StringLength(100)]
         public string? Email { get; set; }
+        public Vecinos(int id, string? nombres, string? apellidoPaterno, string? apellidoMaterno, DateTime fechaNacimiento, string rut, int edad, string? genero, string? direccion, string? comuna, string? email)
+        {
+            Id = id;
+            Nombres = nombres;
+            ApellidoPaterno = apellidoPaterno;
+            ApellidoMaterno = apellidoMaterno;
+            FechaNacimiento = fechaNacimiento;
+            Rut = rut;
+            Edad = edad;
+            Genero = genero;
+            Direccion = direccion;
+            Comuna = comuna;
+            Email = email;
+        }
 
         public override string ToString()
         {

@@ -21,7 +21,7 @@ namespace Capstone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(vecinos usuario)
+        public IActionResult Create(Vecinos usuario)
         {
             usuario.FechaNacimiento = DateTime.SpecifyKind(usuario.FechaNacimiento, DateTimeKind.Utc);
             if (ModelState.IsValid)
