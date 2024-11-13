@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Capstone.Models
+namespace Capstone.Modelo
 {
     public class Usuario
     {
@@ -21,7 +21,9 @@ namespace Capstone.Models
         [StringLength(200)]
         public string Perfil { get; set; }
         [Required]
+
         public DateTime Fecha_registro { get; set; }
+        public Usuario() { }
         public Usuario(Int64 Usuario_id, string Usuario, string Contraseña, string Cargo, string Perfil, DateTime Fecha_registro)
         {
             this.Usuario_id = Usuario_id;

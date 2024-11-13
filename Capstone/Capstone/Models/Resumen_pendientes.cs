@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Capstone.Models
+namespace Capstone.Modelo
 {
     public class Resumen_pendientes
     {

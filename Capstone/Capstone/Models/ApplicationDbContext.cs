@@ -1,7 +1,7 @@
-﻿using Capstone.Modelo;
+﻿using Capstone.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Capstone.Models // Usa el mismo namespace de tus modelos
+namespace Capstone.Modelo // Usa el mismo namespace de tus modelos
 {
     public class ApplicationDbContext : DbContext
     {

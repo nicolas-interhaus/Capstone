@@ -9,9 +9,10 @@ namespace Capstone.Modelo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Titulo { get; set; }
-        [Required]
+
         public Int64 Noticia_id { get; set; }
+        [Required]
+        public string Titulo { get; set; }
 
         [Required]
         [StringLength(100)]

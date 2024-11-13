@@ -13,24 +13,19 @@ namespace Capstone.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vecinos vecinos)
+        public IActionResult Create(Usuario usuario)
         {
-            vecinos.FechaNacimiento = DateTime.SpecifyKind(vecinos.FechaNacimiento, DateTimeKind.Utc);
             if (ModelState.IsValid)
             {
-                _context.Usuarios.Add(vecinos);
+                _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("registro_usuario");
             }
-            return View(vecinos);
+            return View();
         }
     }
 }
