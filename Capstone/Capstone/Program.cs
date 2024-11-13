@@ -14,8 +14,8 @@ namespace Capstone
             var builder = WebApplication.CreateBuilder(args);
 
             // Configura la conexión a la base de datos directamente sin declarar una variable IServiceCollection
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
             // Agrega servicios al contenedor
             builder.Services.AddControllersWithViews();

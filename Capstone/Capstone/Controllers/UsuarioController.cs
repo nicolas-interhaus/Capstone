@@ -1,7 +1,7 @@
-﻿using Capstone.Modelo;
-using Capstone.Models;
+﻿using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
+using Capstone.Modelo;
 namespace Capstone.Controllers
 {
     public class UsuarioController : Controller
@@ -11,18 +11,6 @@ namespace Capstone.Controllers
         public UsuarioController(ApplicationDbContext context)
         {
             _context = context;
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Usuarios.Add(usuario);
-                _context.SaveChanges();
-                return RedirectToAction("registro_usuario");
-            }
-            return View();
         }
     }
 }

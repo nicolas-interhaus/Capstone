@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Modelo // Usa el mismo namespace de tus modelos
 {

@@ -29,6 +29,10 @@ namespace Capstone.Controllers
         {
             return View();
         }
+        public IActionResult Registro_usuario()
+        {
+            return View();
+        }
         public IActionResult Notificaciones()
         {
             return View();

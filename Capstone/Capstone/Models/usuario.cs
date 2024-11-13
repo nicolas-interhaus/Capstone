@@ -23,7 +23,6 @@ namespace Capstone.Modelo
         [Required]
 
         public DateTime Fecha_registro { get; set; }
-        public Usuario() { }
         public Usuario(Int64 Usuario_id, string Usuario, string Contraseña, string Cargo, string Perfil, DateTime Fecha_registro)
         {
             this.Usuario_id = Usuario_id;
