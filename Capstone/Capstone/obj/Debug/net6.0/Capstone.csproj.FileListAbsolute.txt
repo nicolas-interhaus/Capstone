@@ -86,3 +86,15 @@ C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Deb
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.CopyComplete
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.genruntimeconfig.cache
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\ref\Capstone.dll
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.AssemblyReference.cache
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.GeneratedMSBuildEditorConfig.editorconfig
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.AssemblyInfoInputs.cache
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.AssemblyInfo.cs
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.CoreCompileInputs.cache
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.MvcApplicationPartsAssemblyInfo.cache
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.RazorAssemblyInfo.cache
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.RazorAssemblyInfo.cs
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.sourcelink.json
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.dll
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\refint\Capstone.dll
+C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.pdb

@@ -1,5 +1,4 @@
 ﻿using Capstone.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Modelo // Usa el mismo namespace de tus modelos
 {
@@ -20,5 +19,10 @@ namespace Capstone.Modelo // Usa el mismo namespace de tus modelos
         public DbSet<Resumen_pendientes> Resumen_Pendientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Certificado> Certificados{ get; set; }
+
+        internal void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

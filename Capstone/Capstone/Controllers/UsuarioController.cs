@@ -12,9 +12,6 @@ namespace Capstone.Controllers
         {
             _context = context;
         }
-
-        
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Usuario usuario)
