@@ -15,20 +15,23 @@
       <input asp-for="User" class="form-control" />
       <span asp-validation-for="User" class="text-danger"></span>
     </div>
+    
     <div class="col-md-6">
-      <label for="Contraseña" class="form-label">Apellido Paterno</label>
-      <input asp-for="Contraseña" class="form-control" />
+      <label for="Contraseña" class="form-label">Contraseña</label>
+      <input asp-for="Contraseña" class="form-control" type="password" />
       <span asp-validation-for="Contraseña" class="text-danger"></span>
     </div>
-     <div class="col-md-6">
-      <label for="Contraseña" class="form-label">Repetir Contraseña</label>
-      <input asp-for="Contraseña" class="form-control" type="password"/>
+    
+    <div class="col-md-6">
+      <label for="ConfirmarContraseña" class="form-label">Repetir Contraseña</label>
+      <input id="ConfirmarContraseña" name="ConfirmarContraseña" class="form-control" type="password" />
     </div>
     
-    <a button type="submit" class="btn btn-primary" href="@Url.Action("Admin_vista", "Home")">Registrarse</a>
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary">Registrarse</button>
+    </div>
   </form>
 
-  <!-- Enlace al archivo JS -->
   <script src="~/js/registro.js"></script>
 </body>
 </html>

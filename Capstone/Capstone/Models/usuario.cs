@@ -10,19 +10,20 @@ namespace Capstone.Modelo
         public Int64 Usuario_id { get; set; }
         [Required]
         [StringLength(200)]
-        public string User { get; set; }
+        public string? User { get; set; }
         [Required]
         [StringLength(200)]
-        public string Contraseña { get; set; }
+        public string? Contraseña { get; set; }
         [Required]
         [StringLength(200)]
-        public string Cargo { get; set; }
+        public string? Cargo { get; set; }
         [Required]
         [StringLength(200)]
-        public string Perfil { get; set; }
+        public string? Perfil { get; set; }
         [Required]
 
         public DateTime Fecha_registro { get; set; }
+        public Usuario() { }
         public Usuario(Int64 Usuario_id, string Usuario, string Contraseña, string Cargo, string Perfil, DateTime Fecha_registro)
         {
             this.Usuario_id = Usuario_id;

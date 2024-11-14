@@ -26,6 +26,7 @@ namespace Capstone.Controllers
             vecinos.FechaNacimiento = DateTime.SpecifyKind(vecinos.FechaNacimiento, DateTimeKind.Utc);
             if (ModelState.IsValid)
             {
+                _context.Add(vecinos);
                 _context.SaveChanges();
                 return RedirectToAction("Registro_usuario", "Home");
             }

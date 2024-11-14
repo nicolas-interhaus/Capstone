@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Certificado/GenerarCertificado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9cR2VuZXJhckNlcnRpZmljYWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Home/Admin_certificado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbl9jZXJ0aWZpY2Fkby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -77,6 +81,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Usuario/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Usuario/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Usuario/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/Usuario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ignis/Documents/GitHub/semestre 2024/Capstone/Capstone/Capstone/Views/_ViewImports.cshtml]
