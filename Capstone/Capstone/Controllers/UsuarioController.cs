@@ -68,7 +68,34 @@ namespace Capstone.Controllers
             }
             return RedirectToAction("Admin_Vista","Home");
         }
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
+            // Busca al usuario en la base de datos
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.User == username && u.Contraseña == password);
 
+            if (usuario != null)
+            {
+                // Verifica si el usuario es de tipo admin
+                if (usuario.Perfil == "admin")
+                {
+                    // Redirige a la vista admin_vista
+                    return RedirectToAction("Admin_vista", "Home");
+                }
+                else
+                {
+                    // Redirige a una vista para usuarios estándar (opcional)
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                // Retorna a la misma vista con un mensaje de error
+                ViewBag.ErrorMessage = "Usuario o contraseña incorrectos";
+                return View("Login");
+            }
+        }
         // Acción que redirige a la vista de administración
         public IActionResult AdminVista()
         {
