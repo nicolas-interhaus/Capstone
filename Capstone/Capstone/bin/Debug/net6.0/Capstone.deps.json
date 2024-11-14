@@ -10,12 +10,22 @@
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Negotiate": "6.0.5",
           "Microsoft.EntityFrameworkCore": "6.0.35",
+          "Microsoft.EntityFrameworkCore.Design": "6.0.0",
+          "Microsoft.EntityFrameworkCore.Tools": "9.0.0",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.15.1",
           "Npgsql": "6.0.12",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "6.0.29"
         },
         "runtime": {
           "Capstone.dll": {}
+        }
+      },
+      "Humanizer.Core/2.8.26": {
+        "runtime": {
+          "lib/netstandard2.0/Humanizer.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.26.1919"
+          }
         }
       },
       "Microsoft.AspNetCore.Authentication.Negotiate/6.0.5": {
@@ -68,6 +78,18 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/6.0.35": {},
+      "Microsoft.EntityFrameworkCore.Design/6.0.0": {
+        "dependencies": {
+          "Humanizer.Core": "2.8.26",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.29"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52301"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/6.0.29": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.35",
@@ -80,6 +102,7 @@
           }
         }
       },
+      "Microsoft.EntityFrameworkCore.Tools/9.0.0": {},
       "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "6.0.0"
@@ -241,6 +264,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Humanizer.Core/2.8.26": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
+      "path": "humanizer.core/2.8.26",
+      "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Authentication.Negotiate/6.0.5": {
       "type": "package",
       "serviceable": true,
@@ -276,12 +306,26 @@
       "path": "microsoft.entityframeworkcore.analyzers/6.0.35",
       "hashPath": "microsoft.entityframeworkcore.analyzers.6.0.35.nupkg.sha512"
     },
+    "Microsoft.EntityFrameworkCore.Design/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RFdomymyuPNffl+VPk7osdxCJQ0xlGuxr28ifdfFFNUaMK0OYiJOjr6w9z3kscOM2p2gdPWNI1IFUXllEyphow==",
+      "path": "microsoft.entityframeworkcore.design/6.0.0",
+      "hashPath": "microsoft.entityframeworkcore.design.6.0.0.nupkg.sha512"
+    },
     "Microsoft.EntityFrameworkCore.Relational/6.0.29": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-cvbRXNtRLv9mm5ivt4T0aKtuolz7RkHqkT9/CsXTQbCOgas0M1G8HNeAxeX6/3/lXqIogCBrriZ3qI5+IhCCAg==",
       "path": "microsoft.entityframeworkcore.relational/6.0.29",
       "hashPath": "microsoft.entityframeworkcore.relational.6.0.29.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Tools/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qjw+3/CaWiWnyVblvKHY11rQKH5eHQDSbtxjgxVhxGJrOpmjZ3JxtD0pjwkr4y/ELubsXr6xDfBcRJSkX/9hWQ==",
+      "path": "microsoft.entityframeworkcore.tools/9.0.0",
+      "hashPath": "microsoft.entityframeworkcore.tools.9.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
       "type": "package",
