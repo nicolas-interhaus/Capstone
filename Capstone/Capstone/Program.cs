@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Capstone;
 using Capstone.Models; // Asegúrate de que este espacio de nombres sea el correcto para ApplicationDbContext
-using Capstone.Modelo;
 
 namespace Capstone
 {

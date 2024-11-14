@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Capstone.Modelo
+namespace Capstone.Models
 {
     [Table("notificaciones")]
     public class notificaciones
@@ -13,7 +13,7 @@ namespace Capstone.Modelo
 
         [Required]
         [StringLength(200)]
-        public  string? NombreEvento { get; set; }
+        public string? NombreEvento { get; set; }
 
         [Required]
         public DateTime FechaRecepcion { get; set; }
@@ -26,9 +26,9 @@ namespace Capstone.Modelo
         public string? Correo { get; set; }
 
         [Required]
-        public BinaryReader Aprobacion { get; set; }
+        public byte[] Aprobacion { get; set; }
 
-        public notificaciones(int idEvento, string? nombreEvento, DateTime fechaRecepcion, string? detalle, string? correo, BinaryReader aprobacion)
+        public notificaciones(int idEvento, string? nombreEvento, DateTime fechaRecepcion, string? detalle, string? correo, byte[] aprobacion)
         {
             IdEvento = idEvento;
             NombreEvento = nombreEvento;

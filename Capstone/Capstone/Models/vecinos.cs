@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Capstone.Modelo
+namespace Capstone.Models
 {
     [Table("vecinos")]
     public class Vecinos

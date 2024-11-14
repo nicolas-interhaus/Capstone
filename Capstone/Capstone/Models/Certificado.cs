@@ -2,14 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Capstone.Modelo
+namespace Capstone.Models
 {
     [Table("certificado_residencia")]
     public class Certificado
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 Id_certificado { get; set; }
+        public int Id_certificado { get; set; }
         [Required]
         [StringLength(200)]
         public string Cert_nombre { get; set; }
@@ -27,8 +27,8 @@ namespace Capstone.Modelo
         public DateTime Cert_Fecha_emision { get; set; }
         [Required]
 
-        public FileAccess Documentos { get; set; }
-        public Certificado(int id_certificado, string cert_nombre, string cert_rut, string cert_direccion, string cert_comuna, DateTime cert_Fecha_emision, FileAccess documentos)
+        public byte[] Documentos { get; set; }
+        public Certificado(int id_certificado, string cert_nombre, string cert_rut, string cert_direccion, string cert_comuna, DateTime cert_Fecha_emision, byte[] documentos)
         {
             Id_certificado = id_certificado;
             Cert_nombre = cert_nombre;

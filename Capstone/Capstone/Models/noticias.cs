@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Capstone.Modelo
+namespace Capstone.Models
 {
     [Table("noticias")]
     public class Noticias
@@ -10,7 +10,7 @@ namespace Capstone.Modelo
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-        public Int64 Noticia_id { get; set; }
+        public long Noticia_id { get; set; }
         [Required]
         public string Titulo { get; set; }
 
@@ -29,14 +29,14 @@ namespace Capstone.Modelo
         public DateTime FechaPublicacion { get; set; }
 
         // Constructor
-        public Noticias(string titulo, Int64 Noticia_id, string subtitulo,  string contenido, string autor, DateTime fechaPublicacion)
+        public Noticias(string titulo, long Noticia_id, string subtitulo, string detalle, string autor, DateTime fechaPublicacion)
         {
-            this.Titulo = titulo;
+            Titulo = titulo;
             this.Noticia_id = Noticia_id;
-            this.Subtitulo = subtitulo;
-            this.Detalle = contenido;
-            this.Autor = autor;
-            this.FechaPublicacion = fechaPublicacion;
+            Subtitulo = subtitulo;
+            Detalle = detalle;
+            Autor = autor;
+            FechaPublicacion = fechaPublicacion;
         }
 
         // Método para representar el objeto como una cadena de texto

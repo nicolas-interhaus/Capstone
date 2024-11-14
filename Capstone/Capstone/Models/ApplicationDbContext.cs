@@ -1,7 +1,6 @@
-﻿using Capstone.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Capstone.Modelo // Usa el mismo namespace de tus modelos
+namespace Capstone.Models // Usa el mismo namespace de tus modelos
 {
     public class ApplicationDbContext : DbContext
     {
@@ -11,19 +10,19 @@ namespace Capstone.Modelo // Usa el mismo namespace de tus modelos
             : base(options)
         {
         }
-        
+
         // Agrega DbSet para cada una de tus entidades, por ejemplo:
         public DbSet<Vecinos> Vecinos { get; set; }
-        public DbSet<Noticias> Noticias { get;  set; }
-        public DbSet<JuntaVecinos> JuntaVecinos{ get; set; }
+        public DbSet<Noticias> Noticias { get; set; }
+        public DbSet<JuntaVecinos> JuntaVecinos { get; set; }
         public DbSet<notificaciones> Notificaciones { get; set; }
         public DbSet<Resumen_pendientes> Resumen_Pendientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Certificado> Certificados{ get; set; }
+        public DbSet<Certificado> Certificados { get; set; }
 
-        internal void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
+        //internal void SaveChanges()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

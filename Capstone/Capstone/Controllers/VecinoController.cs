@@ -1,5 +1,4 @@
-﻿using Capstone.Modelo;
-using Capstone.Models;
+﻿using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone.Controllers

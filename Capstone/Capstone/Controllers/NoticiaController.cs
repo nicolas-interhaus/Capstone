@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-using Capstone.Modelo; // Asegúrate de usar el espacio de nombres adecuado de tu modelo
 using System.Linq;
 using Capstone.Models;
 

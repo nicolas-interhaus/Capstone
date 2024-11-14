@@ -1,6 +1,5 @@
 ﻿using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
-using Capstone.Modelo;
 
 namespace Capstone.Controllers
 {
@@ -80,14 +79,16 @@ namespace Capstone.Controllers
                 // Verifica si el usuario es de tipo admin
                 if (usuario.Perfil == "admin")
                 {
-                    // Redirige a la vista admin_vista
-                    return RedirectToAction("Admin_vista", "Home");
+                    // Si el usuario no existe, mostrar un mensaje de error
+                    ViewBag.ErrorMessage = "Credenciales incorrectas. Intente de nuevo.";
+                    return View("InicioSesion"); // Redirige a la vista de inicio de sesión
                 }
                 else
                 {
-                    // Redirige a una vista para usuarios estándar (opcional)
-                    return RedirectToAction("Index", "Home");
+                    // Redirige a la vista admin_vista
+                    return RedirectToAction("Admin_vista", "Home");
                 }
+                
             }
             else
             {

@@ -12,8 +12,8 @@ namespace Capstone.Models
         [StringLength(200)]
         public string Nombre_sector { get; set; }
         [Required]
-        public TextWriter Direccion { get; set; }
-        public JuntaVecinos(long Junta_vecino_id, string Nombre_sector, TextWriter Direccion)
+        public string Direccion { get; set; }
+        public JuntaVecinos(long Junta_vecino_id, string Nombre_sector, string Direccion)
         {
             this.Junta_vecino_id = Junta_vecino_id;
             this.Nombre_sector = Nombre_sector;

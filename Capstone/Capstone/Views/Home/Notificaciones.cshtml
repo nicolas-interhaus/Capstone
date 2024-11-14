@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Eventos</title>
+    <title>Listado de Notificaciones</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/styles.css">  
 </head>
@@ -47,7 +47,6 @@
 
     <div class="container mt-5">
         <h2>Listado de Eventos</h2>
-        <a href="@Url.Action("CrearEvento", "Eventos")" class="btn btn-success mb-3">Crear Nuevo Evento</a>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -60,7 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (eventos != null && eventos.Count > 0)
+                @* @if (eventos != null && notificaciones.Count > 0)
                 {
                     foreach (var evento in eventos)
                     {
@@ -79,7 +78,7 @@
                     <tr>
                         <td colspan="6" class="text-center">No hay eventos registrados.</td>
                     </tr>
-                }
+                } *@
             </tbody>
         </table>
     </div>
