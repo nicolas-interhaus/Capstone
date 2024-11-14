@@ -36,7 +36,13 @@ namespace Capstone.Controllers
         public IActionResult Notificaciones()
         {
             return View();
+
         }
+        public IActionResult Admin_contacto()
+        {
+            return View();
+        }
+
         public IActionResult Admin_certificado()
         {
             return View();
