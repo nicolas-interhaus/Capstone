@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Capstone",
+    "\\Capstone\\Views",
+    "\\Capstone\\Views\\Home"
   ],
   "SelectedNode": "\\Capstone.sln",
   "PreviewInSolutionExplorer": false
