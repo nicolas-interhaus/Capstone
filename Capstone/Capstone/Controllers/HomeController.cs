@@ -51,6 +51,10 @@ namespace Capstone.Controllers
         {
             return View();
         }
+        public IActionResult Admin_noticias()
+        {
+            return View();
+        }
         public IActionResult Admin_usuarios()
         {
             return View();
