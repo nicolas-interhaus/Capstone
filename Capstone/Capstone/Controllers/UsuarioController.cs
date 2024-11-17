@@ -50,7 +50,7 @@ namespace Capstone.Controllers
             {
                 _context.Usuarios.Update(usuario);
                 _context.SaveChanges();
-                return RedirectToAction("Admin_Vista","Home");
+                return RedirectToAction("Admin_Vista", "Home");
             }
             return View(usuario);
         }
@@ -65,7 +65,7 @@ namespace Capstone.Controllers
                 _context.Usuarios.Remove(usuario);
                 _context.SaveChanges();
             }
-            return RedirectToAction("Admin_Vista","Home");
+            return RedirectToAction("Admin_Vista", "Home");
         }
         [HttpPost]
         public IActionResult Login(string username, string password)
