@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
-    [Table("noticias")]
+    [Table("noticia")]
     public class Noticias
     {
         [Key]

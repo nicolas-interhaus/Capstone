@@ -10,11 +10,11 @@
             <td>@noticia.Autor</td>
             <td>@noticia.FechaPublicacion.ToString("dd/MM/yyyy")</td>
             <td>
-                <form asp-action="PublicarNoticia" asp-controller="Noticias" method="post" style="display:inline-block;">
+                <form asp-action="PublicarNoticia" asp-controller="Noticia" method="post" style="display:inline-block;">
                     <input type="hidden" name="id" value="@noticia.Noticia_id" />
                     <button class="btn btn-success btn-sm" type="submit">Publicar</button>
                 </form>
-                <form asp-action="RechazarNoticia" asp-controller="Noticias" method="post" style="display:inline-block;">
+                <form asp-action="RechazarNoticia" asp-controller="Noticia" method="post" style="display:inline-block;">
                     <input type="hidden" name="id" value="@noticia.Noticia_id" />
                     <button class="btn btn-danger btn-sm" type="submit">Rechazar</button>
                 </form>
@@ -29,21 +29,23 @@ else
     </tr>
 }
 <div class="container">
-    <h1>Administrar Noticias</h1>
-    <div class="row">
-        <div class="col-6">
-        <a href="@Url.Action("Admin_noticias","Home")">Noticias</a>
-        <br><a href="@Url.Action("Admin_usuarios","Home")">Nosotros</a> 
-        <br><a href="@Url.Action("Admin_contacto","Home")">Contactos</a>
-        <br><a href="@Url.Action("Admin_notificaciones","Home")">Notificaciones</a> 
-        <br>
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Redes Sociales
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="@Url.Action("Admin_certificado", "Home")">Certificado Residencia</a></li>
-            <li><a class="dropdown-item" href=“@Url.Action("Admin_certificado", "Home")">Reserva sede vecinal</a></li>
-        </ul>
+    <h2>Agregar Nueva Noticia</h2>
+    <form asp-action="InsertarNoticiasPrueba" asp-controller="Noticias" method="post">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="subtitulo">Subtítulo</label>
+            <input type="text" class="form-control" id="subtitulo" name="subtitulo" required>
+        </div>
+        <div class="form-group">
+            <label for="detalle">Detalle</label>
+            <textarea class="form-control" id="detalle" name="detalle" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="autor">Autor</label>
+            <input type="text" class="form-control" id="autor" name="autor" required>
         </div>
         <div class="form-group">
             <label for="fechaPublicacion">Fecha de Publicación</label>
@@ -52,3 +54,4 @@ else
         <button type="submit" class="btn btn-primary">Agregar Noticia</button>
     </form>
 </div>
+

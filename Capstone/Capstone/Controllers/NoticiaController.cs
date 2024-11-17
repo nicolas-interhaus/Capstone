@@ -12,12 +12,7 @@ namespace Capstone.Controllers
             _context = context;
         }
 
-        public IActionResult Admin_noticias()
-        {
-            // Recupera todas las noticias de la base de datos
-            var noticias = _context.Noticias.ToList();
-            return View(noticias); // Pasa la lista de noticias a la vista
-        }
+        
 
         [HttpPost]
         public IActionResult PublicarNoticia(long id)
@@ -32,34 +27,7 @@ namespace Capstone.Controllers
             return RedirectToAction("Admin_noticias");
         }
 
-        public IActionResult Admin_noticias()
-        {
-            var noticias = _context.Noticias.ToList();
-
-            if (noticias == null || !noticias.Any())
-            {
-                Console.WriteLine("No se encontraron noticias.");
-            }
-            else
-            {
-                Console.WriteLine($"Se encontraron {noticias.Count} noticias.");
-            }
-
-            return View(noticias);
-        }
-
         [HttpPost]
-        public IActionResult PublicarNoticia(long id)
-        {
-            var noticia = _context.Noticias.Find(id);
-            if (noticia != null)
-            {
-                // Aquí puedes agregar lógica para marcar la noticia como publicada
-                // Por ejemplo, agregar una columna `Estado` en la base de datos
-                _context.SaveChanges();
-            }
-            return RedirectToAction("Admin_noticias");
-        }
         public IActionResult InsertarNoticiasPrueba()
         {
             var noticiasPrueba = new List<Noticias>
@@ -71,7 +39,7 @@ namespace Capstone.Controllers
                 Subtitulo = "Subtítulo de prueba",
                 Detalle = "Este es un detalle de prueba.",
                 Autor = "Admin",
-                FechaPublicacion = DateTime.Now
+                FechaPublicacion = DateTime.UtcNow
             },
             new Noticias
             {
@@ -80,15 +48,22 @@ namespace Capstone.Controllers
                 Subtitulo = "Otro subtítulo de prueba",
                 Detalle = "Este es otro detalle de prueba.",
                 Autor = "Admin2",
-                FechaPublicacion = DateTime.Now
+                FechaPublicacion = DateTime.UtcNow
             }
         };
+
 
             _context.Noticias.AddRange(noticiasPrueba);
             _context.SaveChanges();
 
             return RedirectToAction("Admin_noticias");
         }
+        public IActionResult Admin_noticias()
+        {
+            var noticias = _context.Noticias.ToList();
+            return View(noticias);
+        }
+
 
         [HttpPost]
         public IActionResult RechazarNoticia(long id)
