@@ -36,19 +36,17 @@ namespace Capstone.Controllers
             {
                 Titulo = "Primera Noticia",
                 Noticia_id = 1,
-                Subtitulo = "Subtítulo de prueba",
                 Detalle = "Este es un detalle de prueba.",
                 Autor = "Admin",
-                FechaPublicacion = DateTime.UtcNow
+                Fecha_publicacion = DateTime.UtcNow
             },
             new Noticias
             {
                 Titulo = "Segunda Noticia",
                 Noticia_id = 2,
-                Subtitulo = "Otro subtítulo de prueba",
                 Detalle = "Este es otro detalle de prueba.",
                 Autor = "Admin2",
-                FechaPublicacion = DateTime.UtcNow
+                Fecha_publicacion = DateTime.UtcNow
             }
         };
 

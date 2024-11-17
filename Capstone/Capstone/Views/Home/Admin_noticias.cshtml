@@ -5,10 +5,9 @@
         <tr>
             <td>@noticia.Noticia_id</td>
             <td>@noticia.Titulo</td>
-            <td>@noticia.Subtitulo</td>
             <td>@noticia.Detalle</td>
             <td>@noticia.Autor</td>
-            <td>@noticia.FechaPublicacion.ToString("dd/MM/yyyy")</td>
+            <td>@noticia.Fecha_publicacion.ToString("dd/MM/yyyy")</td>
             <td>
                 <form asp-action="PublicarNoticia" asp-controller="Noticia" method="post" style="display:inline-block;">
                     <input type="hidden" name="id" value="@noticia.Noticia_id" />
@@ -36,10 +35,6 @@ else
             <input type="text" class="form-control" id="titulo" name="titulo" required>
         </div>
         <div class="form-group">
-            <label for="subtitulo">Subtítulo</label>
-            <input type="text" class="form-control" id="subtitulo" name="subtitulo" required>
-        </div>
-        <div class="form-group">
             <label for="detalle">Detalle</label>
             <textarea class="form-control" id="detalle" name="detalle" required></textarea>
         </div>
@@ -48,8 +43,8 @@ else
             <input type="text" class="form-control" id="autor" name="autor" required>
         </div>
         <div class="form-group">
-            <label for="fechaPublicacion">Fecha de Publicación</label>
-            <input type="date" class="form-control" id="fechaPublicacion" name="fechaPublicacion" required>
+            <label for="Fecha_publicacion">Fecha de Publicación</label>
+            <input type="date" class="form-control" id="Fecha_publicacion" name="Fecha_publicacion" required>
         </div>
         <button type="submit" class="btn btn-primary">Agregar Noticia</button>
     </form>

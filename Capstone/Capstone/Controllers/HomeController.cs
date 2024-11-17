@@ -6,13 +6,28 @@ namespace Capstone.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public IActionResult TestDatabaseConnection()
         {
-            _logger = logger;
+            try
+            {
+                // Intenta ejecutar una consulta simple para verificar la conexión
+                var test = _context.Database.CanConnect();
+                if (test)
+                {
+                    return Content("Conexión a la base de datos exitosa");
+                }
+                else
+                {
+                    return Content("No se pudo conectar a la base de datos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content($"Error de conexión: {ex.Message}");
+            }
         }
-
         public IActionResult Index()
         {
             return View();

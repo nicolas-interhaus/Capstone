@@ -14,9 +14,6 @@ namespace Capstone.Models
         [Required]
         public string Titulo { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Subtitulo { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -27,26 +24,25 @@ namespace Capstone.Models
         public string Autor { get; set; }
 
         [Required]
-        public DateTime FechaPublicacion { get; set; }
+        public DateTime Fecha_publicacion { get; set; }
 
         // Constructor vacío (necesario para Entity Framework y otros usos)
         public Noticias() { }
 
         // Constructor parametrizado
-        public Noticias(string titulo, long noticia_id, string subtitulo, string detalle, string autor, DateTime fechaPublicacion)
+        public Noticias(string titulo, long noticia_id,  string detalle, string autor, DateTime Fecha_publicacion)
         {
             Titulo = titulo;
             Noticia_id = noticia_id;
-            Subtitulo = subtitulo;
             Detalle = detalle;
             Autor = autor;
-            FechaPublicacion = fechaPublicacion;
+            this.Fecha_publicacion = Fecha_publicacion;
         }
 
         // Método para representar el objeto como una cadena de texto
         public override string ToString()
         {
-            return $"{Titulo} - {Autor} ({FechaPublicacion:dd/MM/yyyy})";
+            return $"{Titulo} - {Autor} ({Fecha_publicacion:dd/MM/yyyy})";
         }
     }
 }
