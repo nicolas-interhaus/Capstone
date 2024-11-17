@@ -14,6 +14,26 @@ namespace Capstone.Controllers
 
         public IActionResult Admin_noticias()
         {
+            // Recupera todas las noticias de la base de datos
+            var noticias = _context.Noticias.ToList();
+            return View(noticias); // Pasa la lista de noticias a la vista
+        }
+
+        [HttpPost]
+        public IActionResult PublicarNoticia(long id)
+        {
+            var noticia = _context.Noticias.Find(id);
+            if (noticia != null)
+            {
+                // Aquí puedes agregar lógica para marcar la noticia como publicada
+                // Por ejemplo, agregar una columna `Estado` en la base de datos
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Admin_noticias");
+        }
+
+        public IActionResult Admin_noticias()
+        {
             var noticias = _context.Noticias.ToList();
 
             if (noticias == null || !noticias.Any())
