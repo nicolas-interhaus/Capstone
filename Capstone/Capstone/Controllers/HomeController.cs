@@ -7,7 +7,7 @@ namespace Capstone.Controllers
     public class HomeController : Controller
     {
 
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext? _context;
         public IActionResult TestDatabaseConnection()
         {
             try
@@ -37,6 +37,10 @@ namespace Capstone.Controllers
             return View();
         }
         public IActionResult Certificado()
+        {
+            return View();
+        }
+        public IActionResult GenerarCertificado()
         {
             return View();
         }
