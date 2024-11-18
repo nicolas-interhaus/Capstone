@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241115114921_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241117195119_ActualizacionNoticias2")]
+    partial class ActualizacionNoticias2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,13 +104,8 @@ namespace Capstone.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<DateTime>("FechaPublicacion")
+                    b.Property<DateTime>("Fecha_publicacion")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Subtitulo")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -118,7 +113,7 @@ namespace Capstone.Migrations
 
                     b.HasKey("Noticia_id");
 
-                    b.ToTable("noticias");
+                    b.ToTable("noticia");
                 });
 
             modelBuilder.Entity("Capstone.Models.notificaciones", b =>

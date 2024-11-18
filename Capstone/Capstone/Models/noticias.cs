@@ -4,19 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
-    [Table("noticias")]
+    [Table("noticia")]
     public class Noticias
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public long Noticia_id { get; set; }
+
         [Required]
         public string Titulo { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Subtitulo { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -25,24 +22,27 @@ namespace Capstone.Models
         [Required]
         [StringLength(100)]
         public string Autor { get; set; }
-        [Required]
-        public DateTime FechaPublicacion { get; set; }
 
-        // Constructor
-        public Noticias(string titulo, long Noticia_id, string subtitulo, string detalle, string autor, DateTime fechaPublicacion)
+        [Required]
+        public DateTime Fecha_publicacion { get; set; }
+
+        // Constructor vacío (necesario para Entity Framework y otros usos)
+        public Noticias() { }
+
+        // Constructor parametrizado
+        public Noticias(string titulo, long noticia_id,  string detalle, string autor, DateTime Fecha_publicacion)
         {
             Titulo = titulo;
-            this.Noticia_id = Noticia_id;
-            Subtitulo = subtitulo;
+            Noticia_id = noticia_id;
             Detalle = detalle;
             Autor = autor;
-            FechaPublicacion = fechaPublicacion;
+            this.Fecha_publicacion = Fecha_publicacion;
         }
 
         // Método para representar el objeto como una cadena de texto
         public override string ToString()
         {
-            return $"{Titulo} - {Autor} ({FechaPublicacion.ToString("dd/MM/yyyy")})";
+            return $"{Titulo} - {Autor} ({Fecha_publicacion:dd/MM/yyyy})";
         }
     }
 }

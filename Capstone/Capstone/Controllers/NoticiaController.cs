@@ -12,12 +12,7 @@ namespace Capstone.Controllers
             _context = context;
         }
 
-        public IActionResult Admin_noticias()
-        {
-            // Recupera todas las noticias de la base de datos
-            var noticias = _context.Noticias.ToList();
-            return View(noticias); // Pasa la lista de noticias a la vista
-        }
+        
 
         [HttpPost]
         public IActionResult PublicarNoticia(long id)
@@ -31,6 +26,42 @@ namespace Capstone.Controllers
             }
             return RedirectToAction("Admin_noticias");
         }
+
+        [HttpPost]
+        public IActionResult InsertarNoticiasPrueba()
+        {
+            var noticiasPrueba = new List<Noticias>
+    {
+            new Noticias
+            {
+                Titulo = "Primera Noticia",
+                Noticia_id = 1,
+                Detalle = "Este es un detalle de prueba.",
+                Autor = "Admin",
+                Fecha_publicacion = DateTime.UtcNow
+            },
+            new Noticias
+            {
+                Titulo = "Segunda Noticia",
+                Noticia_id = 2,
+                Detalle = "Este es otro detalle de prueba.",
+                Autor = "Admin2",
+                Fecha_publicacion = DateTime.UtcNow
+            }
+        };
+
+
+            _context.Noticias.AddRange(noticiasPrueba);
+            _context.SaveChanges();
+
+            return RedirectToAction("Admin_noticias");
+        }
+        public IActionResult Admin_noticias()
+        {
+            var noticias = _context.Noticias.ToList();
+            return View(noticias);
+        }
+
 
         [HttpPost]
         public IActionResult RechazarNoticia(long id)
