@@ -9,13 +9,9 @@
     const fechaNacimiento = document.getElementById('fecha_nacimiento').value.trim();
     const genero = document.getElementById('inputGender').value;
     const direccion = document.getElementById('inputAddress').value.trim();
-    const villa = document.getElementById('inputAddress2').value.trim();
-    const ciudad = document.getElementById('inputCity').value.trim();
     const comuna = document.getElementById('inputState').value;
-    const codigoPostal = document.getElementById('inputPostal').value.trim();
     const email = document.getElementById('inputEmail4').value.trim();
     const usuario = document.getElementById('inputUsuario').value.trim();
-    const cargo = document.getElementById('inputCargo').value;
     const password = document.getElementById('inputPassword4').value;
     const confirmPassword = document.getElementById('confirm_password').value;
     const aceptaCondiciones = document.getElementById('gridCheck').checked;

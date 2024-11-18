@@ -27,6 +27,7 @@
             if (response.ok) {
                 // Si el servidor retorna un éxito, redirigir según el rol
                 const data = await response.json();
+                console.log("encontro la data")
                 if (data.isAdmin) {
                     window.location.href = '/Home/Admin_vista'; // Redirige a la vista de administrador
                 } else {
