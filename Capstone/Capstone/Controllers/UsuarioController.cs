@@ -1,5 +1,6 @@
 ﻿using Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Controllers
 {
@@ -50,7 +51,7 @@ namespace Capstone.Controllers
             {
                 _context.Usuarios.Update(usuario);
                 _context.SaveChanges();
-                return RedirectToAction("Admin_Vista", "Home");
+                return RedirectToAction("Admin_vista", "Home");
             }
             return View(usuario);
         }
@@ -65,38 +66,34 @@ namespace Capstone.Controllers
                 _context.Usuarios.Remove(usuario);
                 _context.SaveChanges();
             }
-            return RedirectToAction("Admin_Vista", "Home");
+            return RedirectToAction("Admin_vista", "Home");
         }
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        public IActionResult Login([FromBody] Usuario loginData)
         {
-            // Busca al usuario en la base de datos
-            var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.User == username && u.Contraseña == password);
+            // Validar si los datos de inicio de sesión no son nulos
+            if (string.IsNullOrWhiteSpace(loginData.User) || string.IsNullOrWhiteSpace(loginData.Contraseña))
+            {
+                return Unauthorized(new { Message = "Usuario o contraseña no pueden estar vacíos." });
+            }
 
-            if (usuario != null)
+            // Buscar el usuario en la base de datos
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.User == loginData.Contraseña && u.Contraseña == loginData.Contraseña);
+
+            if (usuario == null)
             {
-                // Verifica si el usuario es de tipo admin
-                if (usuario.Perfil == "admin")
-                {
-                    // Si el usuario no existe, mostrar un mensaje de error
-                    ViewBag.ErrorMessage = "Credenciales incorrectas. Intente de nuevo.";
-                    return View("InicioSesion"); // Redirige a la vista de inicio de sesión
-                }
-                else
-                {
-                    // Redirige a la vista admin_vista
-                    return RedirectToAction("Admin_vista", "Home");
-                }
-                
+                // Si no se encuentra el usuario, devolver error
+                return Unauthorized(new { Message = "Usuario o contraseña incorrectos." });
             }
-            else
-            {
-                // Retorna a la misma vista con un mensaje de error
-                ViewBag.ErrorMessage = "Usuario o contraseña incorrectos";
-                return View("Login");
-            }
+
+            // Determinar si el usuario es administrador
+            var isAdmin = usuario.Perfil == "admin";
+
+            // Retornar información sobre el rol del usuario
+            return Json(new { isAdmin });
         }
+
         // Acción que redirige a la vista de administración
         public IActionResult AdminVista()
         {

@@ -8,12 +8,18 @@ namespace Capstone.Controllers
     {
 
         private readonly ApplicationDbContext? _context;
-        public IActionResult TestDatabaseConnection()
+
+        public ApplicationDbContext? Get_context()
+        {
+            return _context;
+        }
+
+        public IActionResult TestDatabaseConnection(ApplicationDbContext? _context)
         {
             try
             {
                 // Intenta ejecutar una consulta simple para verificar la conexión
-                var test = _context.Database.CanConnect();
+                bool test = _context.Database.CanConnect();
                 if (test)
                 {
                     return Content("Conexión a la base de datos exitosa");
