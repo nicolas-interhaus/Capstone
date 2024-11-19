@@ -2,6 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\Capstone",
+    "\\Capstone\\Controllers",
     "\\Capstone\\Views",
     "\\Capstone\\Views\\Home"
   ],
