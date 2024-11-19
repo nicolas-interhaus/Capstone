@@ -79,7 +79,7 @@ namespace Capstone.Controllers
 
             // Buscar el usuario en la base de datos
             var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.User == loginData.Contraseña && u.Contraseña == loginData.Contraseña);
+                .FirstOrDefault(u => u.User == loginData.User && u.Contraseña == loginData.Contraseña);
 
             if (usuario == null)
             {
@@ -93,6 +93,7 @@ namespace Capstone.Controllers
             // Retornar información sobre el rol del usuario
             return Json(new { isAdmin });
         }
+
 
         // Acción que redirige a la vista de administración
         public IActionResult AdminVista()
