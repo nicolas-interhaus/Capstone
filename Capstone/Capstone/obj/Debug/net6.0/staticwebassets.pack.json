@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\js\\login.js"
     },
     {
+      "Id": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\noticias.js",
+      "PackagePath": "staticwebassets\\js\\noticias.js"
+    },
+    {
       "Id": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\registro.js",
       "PackagePath": "staticwebassets\\js\\registro.js"
     },
