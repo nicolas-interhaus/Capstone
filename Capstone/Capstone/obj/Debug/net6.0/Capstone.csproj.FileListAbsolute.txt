@@ -102,6 +102,8 @@ C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Deb
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.runtimeconfig.json
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.pdb
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Docker.DotNet.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Docker.DotNet.X509.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Negotiate.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
@@ -113,6 +115,7 @@ C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Deb
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Npgsql.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.Charting.dll
