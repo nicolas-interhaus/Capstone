@@ -19,7 +19,9 @@ namespace Capstone.Controllers
             try
             {
                 // Intenta ejecutar una consulta simple para verificar la conexión
+#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
                 bool test = _context.Database.CanConnect();
+#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
                 if (test)
                 {
                     return Content("Conexión a la base de datos exitosa");
@@ -67,7 +69,10 @@ namespace Capstone.Controllers
         {
             return View();
         }
-
+        public IActionResult Admin_reserva()
+        {
+            return View();
+        }
         public IActionResult Admin_certificado()
         {
             return View();

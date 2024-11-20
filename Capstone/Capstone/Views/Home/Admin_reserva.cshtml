@@ -1,0 +1,134 @@
+﻿@{
+    ViewData["Title"] = "Reservas";
+}
+
+<h2>Reservas</h2>
+
+<!-- Lista de Reservas -->
+<div>
+    <h3>Lista de Reservas</h3>
+    <ul id="reserva-list" class="list-group">
+        <!-- Las reservas se llenarán aquí con JavaScript -->
+    </ul>
+</div>
+
+<!-- Calendario -->
+<div id="calendar"></div>
+
+<!-- Botones para las operaciones -->
+<div class="mt-3">
+    <button class="btn btn-success" id="crearReservaBtn">Crear Reserva</button>
+</div>
+
+<!-- Modal para crear o editar reserva -->
+<div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reservaModalLabel">Crear/Editar Reserva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="reservaNombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="reservaNombre">
+                </div>
+                <div class="mb-3">
+                    <label for="reservaFecha" class="form-label">Fecha</label>
+                    <input type="datetime-local" class="form-control" id="reservaFecha">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="guardarReservaBtn">Guardar Reserva</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@3.0.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@3.0.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@3.0.0/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar el calendario
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                editable: true,
+                selectable: true,
+                events: [], // Aquí se llenarán los eventos
+                select: function(info) {
+                    // Abrir modal para crear reserva
+                    $('#reservaModal').modal('show');
+                    $('#reservaFecha').val(info.startStr);
+                    $('#guardarReservaBtn').data('action', 'create');
+                },
+                eventClick: function(info) {
+                    // Abrir modal para editar reserva
+                    $('#reservaModal').modal('show');
+                    $('#reservaNombre').val(info.event.title);
+                    $('#reservaFecha').val(info.event.startStr);
+                    $('#guardarReservaBtn').data('action', 'edit');
+                    $('#guardarReservaBtn').data('eventId', info.event.id);
+                }
+            });
+
+            calendar.render();
+
+            // Mostrar las reservas al cargar
+            loadReservas();
+
+            // Función para cargar las reservas desde el servidor
+            function loadReservas() {
+                // Simulando la carga de datos desde el servidor
+                let reservas = [
+                    { id: 1, title: 'Reserva 1', start: '2024-11-21T10:00:00' },
+                    { id: 2, title: 'Reserva 2', start: '2024-11-22T15:00:00' }
+                ];
+                reservas.forEach(reserva => {
+                    calendar.addEvent(reserva);
+                    $('#reserva-list').append('<li class="list-group-item" data-id="' + reserva.id + '">' + reserva.title + ' - ' + reserva.start + 
+                        '<button class="btn btn-danger btn-sm float-end ms-2 deleteBtn">Eliminar</button></li>');
+                });
+            }
+
+            // Crear o editar reserva
+            $('#guardarReservaBtn').click(function() {
+                var action = $(this).data('action');
+                var nombre = $('#reservaNombre').val();
+                var fecha = $('#reservaFecha').val();
+
+                if (action === 'create') {
+                    // Crear nueva reserva
+                    var newEvent = {
+                        id: new Date().getTime(),
+                        title: nombre,
+                        start: fecha
+                    };
+                    calendar.addEvent(newEvent);
+                    $('#reserva-list').append('<li class="list-group-item" data-id="' + newEvent.id + '">' + newEvent.title + ' - ' + newEvent.start + 
+                        '<button class="btn btn-danger btn-sm float-end ms-2 deleteBtn">Eliminar</button></li>');
+                } else if (action === 'edit') {
+                    var eventId = $(this).data('eventId');
+                    var event = calendar.getEventById(eventId);
+                    event.setProp('title', nombre);
+                    event.setStart(fecha);
+                }
+
+                $('#reservaModal').modal('hide');
+            });
+
+            // Eliminar reserva
+            $('#reserva-list').on('click', '.deleteBtn', function() {
+                var li = $(this).closest('li');
+                var eventId = li.data('id');
+                var event = calendar.getEventById(eventId);
+                event.remove();
+                li.remove();
+            });
+
+        });
+    </script>
+}
