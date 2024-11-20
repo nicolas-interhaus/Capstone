@@ -42,52 +42,6 @@ C:\Users\Ignis\source\repos\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityF
 C:\Users\Ignis\source\repos\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Ignis\source\repos\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Ignis\source\repos\Capstone\Capstone\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.AssemblyReference.cache
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.AssemblyInfoInputs.cache
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.AssemblyInfo.cs
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.CoreCompileInputs.cache
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.RazorAssemblyInfo.cache
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.RazorAssemblyInfo.cs
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\refint\Capstone.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.pdb
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\appsettings.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.staticwebassets.runtime.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.exe
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.deps.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.runtimeconfig.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.pdb
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Negotiate.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Npgsql.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\System.DirectoryServices.Protocols.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\System.IO.Pipelines.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\staticwebassets.build.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\scopedcss\bundle\Capstone.styles.css
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\scopedcss\projectbundle\Capstone.bundle.scp.css
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.CopyComplete
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.genruntimeconfig.cache
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\ref\Capstone.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Humanizer.dll
-C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\tools\archivoODOO\Capstone\Capstone\Capstone\bin\Debug\net6.0\appsettings.Development.json
 C:\tools\archivoODOO\Capstone\Capstone\Capstone\bin\Debug\net6.0\appsettings.json
 C:\tools\archivoODOO\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.staticwebassets.runtime.json
@@ -140,3 +94,57 @@ C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\refint\Capstone
 C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.pdb
 C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.genruntimeconfig.cache
 C:\tools\archivoODOO\Capstone\Capstone\Capstone\obj\Debug\net6.0\ref\Capstone.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\appsettings.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.staticwebassets.runtime.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.exe
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.deps.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.runtimeconfig.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Capstone.pdb
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Negotiate.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Npgsql.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.Charting.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.Quality.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.Snippets.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.System.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.WPFonts.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\PdfSharp.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\de\PdfSharp.Charting.resources.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\de\PdfSharp.resources.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.AssemblyReference.cache
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.AssemblyInfoInputs.cache
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.AssemblyInfo.cs
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.CoreCompileInputs.cache
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.RazorAssemblyInfo.cache
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.RazorAssemblyInfo.cs
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\scopedcss\bundle\Capstone.styles.css
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\scopedcss\projectbundle\Capstone.bundle.scp.css
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.csproj.CopyComplete
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\refint\Capstone.dll
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.pdb
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\Capstone.genruntimeconfig.cache
+C:\Users\Ignis\Documents\GitHub\semestre 2024\Capstone\Capstone\Capstone\obj\Debug\net6.0\ref\Capstone.dll

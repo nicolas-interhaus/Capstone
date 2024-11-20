@@ -7,9 +7,22 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Capstone.styles.css" asp-append-version="true" />
+    <style>
+        /* Asegurar que el HTML y body ocupen toda la altura */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        /* El contenedor principal ocupa todo el espacio disponible */
+        .container {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
-    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

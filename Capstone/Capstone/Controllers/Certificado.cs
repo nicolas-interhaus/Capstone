@@ -1,50 +1,51 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Npgsql;
-using System;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using System.IO;
 
 namespace Capstone.Controllers
 {
     public class CertificadosController : Controller
     {
-        // Método para mostrar el formulario
+        [HttpGet]
         public IActionResult GenerarCertificado()
         {
-            return View();
+            return View(); // Asegúrate de que la vista "GenerarCertificado.cshtml" exista.
         }
-
-        // Método para manejar la petición POST
         [HttpPost]
-        public IActionResult GenerarCertificado(string nombre, string rut, string direccion, string comuna, DateTime fecha)
+        public IActionResult GenerarCertificado(string nombre, string rut, string direccion, string comuna, string fecha)
         {
-            string connectionString = "Host=localhost;Database=capstone;Username=Postgres;Password=admin";
+            // Crear un documento PDF
+            PdfDocument documento = new PdfDocument();
+            documento.Info.Title = "Certificado de Residencia";
 
-            using (var conn = new NpgsqlConnection(connectionString))
+            // Crear una página
+            PdfPage pagina = documento.AddPage();
+
+            // Crear un gráfico para dibujar texto en la página
+            XGraphics gfx = XGraphics.FromPdfPage(pagina);
+
+            // Configurar fuente básica
+            XFont fuente = new XFont("Arial", 12);
+
+            // Dibujar contenido (datos en bruto)
+            gfx.DrawString("Certificado de Residencia", fuente, XBrushes.Black, new XPoint(40, 40));
+            gfx.DrawString($"Nombre: {nombre}", fuente, XBrushes.Black, new XPoint(40, 80));
+            gfx.DrawString($"RUT: {rut}", fuente, XBrushes.Black, new XPoint(40, 100));
+            gfx.DrawString($"Dirección: {direccion}", fuente, XBrushes.Black, new XPoint(40, 120));
+            gfx.DrawString($"Comuna: {comuna}", fuente, XBrushes.Black, new XPoint(40, 140));
+            gfx.DrawString($"Fecha de emisión: {fecha}", fuente, XBrushes.Black, new XPoint(40, 160));
+
+            // Guardar el PDF en un MemoryStream
+            using (MemoryStream stream = new MemoryStream())
             {
-                try
-                {
-                    conn.Open();
-                    string query = "INSERT INTO certificados_residencia (nombre, rut, direccion, comuna, fecha_emision) VALUES (@nombre, @rut, @direccion, @comuna, @fecha)";
+                documento.Save(stream);
+                stream.Position = 0;
 
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("nombre", nombre);
-                        cmd.Parameters.AddWithValue("rut", rut);
-                        cmd.Parameters.AddWithValue("direccion", direccion);
-                        cmd.Parameters.AddWithValue("comuna", comuna);
-                        cmd.Parameters.AddWithValue("fecha", fecha);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    ViewBag.Message = "Certificado generado exitosamente";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = $"Error al generar el certificado: {ex.Message}";
-                }
+                // Retornar el archivo PDF como respuesta
+                return File(stream.ToArray(), "application/pdf", "Certificado_Residencia.pdf");
             }
 
-            return View();
         }
     }
 }
