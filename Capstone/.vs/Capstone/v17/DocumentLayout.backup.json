@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{25CCCFA3-71C0-4996-8A27-DDE94DED5224}|Capstone\\Capstone.csproj|c:\\tools\\archivoodoo\\capstone\\capstone\\capstone\\wwwroot\\js\\noticias.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{25CCCFA3-71C0-4996-8A27-DDE94DED5224}|Capstone\\Capstone.csproj|solutionrelative:capstone\\wwwroot\\js\\noticias.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{25CCCFA3-71C0-4996-8A27-DDE94DED5224}|Capstone\\Capstone.csproj|c:\\tools\\archivoodoo\\capstone\\capstone\\capstone\\wwwroot\\js\\login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{25CCCFA3-71C0-4996-8A27-DDE94DED5224}|Capstone\\Capstone.csproj|solutionrelative:capstone\\wwwroot\\js\\login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -162,11 +166,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "noticias.js",
+              "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\noticias.js",
+              "RelativeDocumentMoniker": "Capstone\\wwwroot\\js\\noticias.js",
+              "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\noticias.js",
+              "RelativeToolTip": "Capstone\\wwwroot\\js\\noticias.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-11-19T19:37:24.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UsuarioApiController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\UsuarioApiController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\UsuarioApiController.cs",
@@ -179,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "site.js",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "Capstone\\wwwroot\\js\\site.js",
@@ -192,20 +209,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "login.js",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\login.js",
               "RelativeDocumentMoniker": "Capstone\\wwwroot\\js\\login.js",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\login.js",
               "RelativeToolTip": "Capstone\\wwwroot\\js\\login.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAxwBQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-11-18T18:37:29.027Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "registro.js",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\wwwroot\\js\\registro.js",
               "RelativeDocumentMoniker": "Capstone\\wwwroot\\js\\registro.js",
@@ -213,11 +230,12 @@
               "RelativeToolTip": "Capstone\\wwwroot\\js\\registro.js",
               "ViewState": "AgIAABEAAAAAAAAAAAAQwAkAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-18T18:37:21.871Z"
+              "WhenOpened": "2024-11-18T18:37:21.871Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "VecinoController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\VecinoController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\VecinoController.cs",
@@ -225,11 +243,12 @@
               "RelativeToolTip": "Capstone\\Controllers\\VecinoController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T18:37:10.006Z"
+              "WhenOpened": "2024-11-18T18:37:10.006Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Admin_usuarios.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_usuarios.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Admin_usuarios.cshtml",
@@ -237,11 +256,12 @@
               "RelativeToolTip": "Capstone\\Views\\Home\\Admin_usuarios.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-18T18:34:49.445Z"
+              "WhenOpened": "2024-11-18T18:34:49.445Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "usuario.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\usuario.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\usuario.cs",
@@ -249,11 +269,12 @@
               "RelativeToolTip": "Capstone\\Models\\usuario.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAowB4AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:16:49.494Z"
+              "WhenOpened": "2024-11-14T14:16:49.494Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\UsuarioController.cs",
@@ -266,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Admin_notificaciones.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_notificaciones.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Admin_notificaciones.cshtml",
@@ -274,23 +295,25 @@
               "RelativeToolTip": "Capstone\\Views\\Home\\Admin_notificaciones.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-18T18:34:50.124Z"
+              "WhenOpened": "2024-11-18T18:34:50.124Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Contacto.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Contacto.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Contacto.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Contacto.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Contacto.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-18T18:34:42.547Z"
+              "WhenOpened": "2024-11-18T18:34:42.547Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\HomeController.cs",
@@ -298,23 +321,25 @@
               "RelativeToolTip": "Capstone\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAcwBUAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:20:27.337Z"
+              "WhenOpened": "2024-11-14T14:20:27.337Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Admin_noticias.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_noticias.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Admin_noticias.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_noticias.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Admin_noticias.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAIBJwDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-15T14:06:27.675Z"
+              "WhenOpened": "2024-11-15T14:06:27.675Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Certificado.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\Certificado.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\Certificado.cs",
@@ -322,11 +347,12 @@
               "RelativeToolTip": "Capstone\\Controllers\\Certificado.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAgwBQAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:20:18.133Z"
+              "WhenOpened": "2024-11-14T14:20:18.133Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "NoticiaController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\NoticiaController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\NoticiaController.cs",
@@ -334,11 +360,12 @@
               "RelativeToolTip": "Capstone\\Controllers\\NoticiaController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:20:34.38Z"
+              "WhenOpened": "2024-11-14T14:20:34.38Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Certificado.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\Certificado.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\Certificado.cs",
@@ -346,11 +373,12 @@
               "RelativeToolTip": "Capstone\\Models\\Certificado.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAmwA4AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:08:56.242Z"
+              "WhenOpened": "2024-11-14T14:08:56.242Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Shared\\_Layout.cshtml",
@@ -358,11 +386,12 @@
               "RelativeToolTip": "Capstone\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T16:31:22.105Z"
+              "WhenOpened": "2024-11-14T16:31:22.105Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Registro.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Registro.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Registro.cshtml",
@@ -370,23 +399,25 @@
               "RelativeToolTip": "Capstone\\Views\\Home\\Registro.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T13:13:50.413Z"
+              "WhenOpened": "2024-11-14T13:13:50.413Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Admin_vista.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_vista.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Admin_vista.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_vista.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Admin_vista.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBJwA8AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-18T14:11:56.993Z"
+              "WhenOpened": "2024-11-18T14:11:56.993Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "GenerarCertificado.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Certificado\\GenerarCertificado.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Certificado\\GenerarCertificado.cshtml",
@@ -394,23 +425,25 @@
               "RelativeToolTip": "Capstone\\Views\\Certificado\\GenerarCertificado.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-18T14:48:50.431Z"
+              "WhenOpened": "2024-11-18T14:48:50.431Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Admin_certificado.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_certificado.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Admin_certificado.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_certificado.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Admin_certificado.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAIBJwAYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T13:10:41.771Z"
+              "WhenOpened": "2024-11-14T13:10:41.771Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\appsettings.json",
               "RelativeDocumentMoniker": "Capstone\\appsettings.json",
@@ -418,11 +451,12 @@
               "RelativeToolTip": "Capstone\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-14T16:29:46.617Z"
+              "WhenOpened": "2024-11-14T16:29:46.617Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "ApplicationDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Capstone\\Migrations\\ApplicationDbContextModelSnapshot.cs",
@@ -430,23 +464,23 @@
               "RelativeToolTip": "Capstone\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "ViewState": "AgIAAGcAAAAAAAAAAAAgwBoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-15T14:12:30.072Z"
+              "WhenOpened": "2024-11-15T14:12:30.072Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "20241115114921_InitialCreate.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Migrations\\20241115114921_InitialCreate.cs",
               "RelativeDocumentMoniker": "Capstone\\Migrations\\20241115114921_InitialCreate.cs",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Migrations\\20241115114921_InitialCreate.cs",
               "RelativeToolTip": "Capstone\\Migrations\\20241115114921_InitialCreate.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAQwJoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-15T14:12:39.643Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\ErrorViewModel.cs",
@@ -454,23 +488,25 @@
               "RelativeToolTip": "Capstone\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:19:27.242Z"
+              "WhenOpened": "2024-11-14T14:19:27.242Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "noticias.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\noticias.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\noticias.cs",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\noticias.cs",
               "RelativeToolTip": "Capstone\\Models\\noticias.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAACkAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAABQwCkAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:00:33.931Z"
+              "WhenOpened": "2024-11-14T14:00:33.931Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -478,23 +514,25 @@
               "RelativeToolTip": "Capstone\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T16:32:09.063Z"
+              "WhenOpened": "2024-11-14T16:32:09.063Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAABEAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAIBJwBEAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T16:32:17.155Z"
+              "WhenOpened": "2024-11-14T16:32:17.155Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "JuntaVecinos.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\JuntaVecinos.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\JuntaVecinos.cs",
@@ -502,35 +540,38 @@
               "RelativeToolTip": "Capstone\\Models\\JuntaVecinos.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:03:27.457Z"
+              "WhenOpened": "2024-11-14T14:03:27.457Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "Registro_usuario.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Registro_usuario.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Registro_usuario.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Registro_usuario.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Registro_usuario.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwA4AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T13:12:42.279Z"
+              "WhenOpened": "2024-11-14T13:12:42.279Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\ApplicationDbContext.cs",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\ApplicationDbContext.cs",
               "RelativeToolTip": "Capstone\\Models\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA3wBsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAzwBsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:19:11.704Z"
+              "WhenOpened": "2024-11-14T14:19:11.704Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "Inicio_sesion.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Inicio_sesion.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Inicio_sesion.cshtml",
@@ -538,23 +579,25 @@
               "RelativeToolTip": "Capstone\\Views\\Home\\Inicio_sesion.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T13:28:30.584Z"
+              "WhenOpened": "2024-11-14T13:28:30.584Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "Notificaciones.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Notificaciones.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Notificaciones.cshtml",
               "ToolTip": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Notificaciones.cshtml",
               "RelativeToolTip": "Capstone\\Views\\Home\\Notificaciones.cshtml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAADoAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAIBJwDoAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T16:18:52.024Z"
+              "WhenOpened": "2024-11-14T16:18:52.024Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "JuntaVecinoController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\JuntaVecinoController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\JuntaVecinoController.cs",
@@ -562,11 +605,12 @@
               "RelativeToolTip": "Capstone\\Controllers\\JuntaVecinoController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:20:31.165Z"
+              "WhenOpened": "2024-11-14T14:20:31.165Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "NotificacionesController.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Controllers\\NotificacionesController.cs",
               "RelativeDocumentMoniker": "Capstone\\Controllers\\NotificacionesController.cs",
@@ -574,11 +618,12 @@
               "RelativeToolTip": "Capstone\\Controllers\\NotificacionesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:20:40.413Z"
+              "WhenOpened": "2024-11-14T14:20:40.413Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "notificaciones.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\notificaciones.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\notificaciones.cs",
@@ -586,11 +631,12 @@
               "RelativeToolTip": "Capstone\\Models\\notificaciones.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:08:32.266Z"
+              "WhenOpened": "2024-11-14T14:08:32.266Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "Resumen_pendientes.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\Resumen_pendientes.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\Resumen_pendientes.cs",
@@ -598,11 +644,12 @@
               "RelativeToolTip": "Capstone\\Models\\Resumen_pendientes.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAowAsAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:03:42.652Z"
+              "WhenOpened": "2024-11-14T14:03:42.652Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "vecinos.cs",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Models\\vecinos.cs",
               "RelativeDocumentMoniker": "Capstone\\Models\\vecinos.cs",
@@ -610,11 +657,12 @@
               "RelativeToolTip": "Capstone\\Models\\vecinos.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T14:16:55.273Z"
+              "WhenOpened": "2024-11-14T14:16:55.273Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "Admin_contacto.cshtml",
               "DocumentMoniker": "C:\\tools\\archivoODOO\\Capstone\\Capstone\\Capstone\\Views\\Home\\Admin_contacto.cshtml",
               "RelativeDocumentMoniker": "Capstone\\Views\\Home\\Admin_contacto.cshtml",
@@ -622,7 +670,8 @@
               "RelativeToolTip": "Capstone\\Views\\Home\\Admin_contacto.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-14T13:11:05.565Z"
+              "WhenOpened": "2024-11-14T13:11:05.565Z",
+              "EditorCaption": ""
             }
           ]
         }

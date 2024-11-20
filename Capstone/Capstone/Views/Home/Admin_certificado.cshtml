@@ -4,7 +4,7 @@
 
 <h2>Generar Certificado de Residencia</h2>
 
-<form method="post" asp-controller="Certificado" asp-action="GenerarCertificado">
+<form method="post" asp-controller="Certificados" asp-action="GenerarCertificado">
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre completo</label>
         <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -32,5 +32,11 @@
 {
     <div class="alert alert-info mt-3">
         @ViewBag.Message
+        @if (ViewBag.PdfUrl != null)
+        {
+            <br />
+            <a href="@ViewBag.PdfUrl" target="_blank" class="btn btn-success mt-2">Descargar Certificado</a>
+        }
     </div>
 }
+

@@ -1,51 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
+﻿using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using Microsoft.AspNetCore.Mvc;
 using System.IO;
 
 namespace Capstone.Controllers
 {
     public class CertificadosController : Controller
     {
-        [HttpGet]
-        public IActionResult GenerarCertificado()
-        {
-            return View(); // Asegúrate de que la vista "GenerarCertificado.cshtml" exista.
-        }
         [HttpPost]
-        public IActionResult GenerarCertificado(string nombre, string rut, string direccion, string comuna, string fecha)
+        public IActionResult GenerarCertificado(string nombre, string rut, string direccion, string comuna, DateTime fecha)
         {
-            // Crear un documento PDF
-            PdfDocument documento = new PdfDocument();
-            documento.Info.Title = "Certificado de Residencia";
+            // Ruta temporal para guardar el archivo PDF
+            string pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "certificados", $"Certificado_{rut}.pdf");
 
-            // Crear una página
-            PdfPage pagina = documento.AddPage();
+            // Crea el directorio si no existe
+            Directory.CreateDirectory(Path.GetDirectoryName(pdfPath));
 
-            // Crear un gráfico para dibujar texto en la página
-            XGraphics gfx = XGraphics.FromPdfPage(pagina);
-
-            // Configurar fuente básica
-            XFont fuente = new XFont("Arial", 12);
-
-            // Dibujar contenido (datos en bruto)
-            gfx.DrawString("Certificado de Residencia", fuente, XBrushes.Black, new XPoint(40, 40));
-            gfx.DrawString($"Nombre: {nombre}", fuente, XBrushes.Black, new XPoint(40, 80));
-            gfx.DrawString($"RUT: {rut}", fuente, XBrushes.Black, new XPoint(40, 100));
-            gfx.DrawString($"Dirección: {direccion}", fuente, XBrushes.Black, new XPoint(40, 120));
-            gfx.DrawString($"Comuna: {comuna}", fuente, XBrushes.Black, new XPoint(40, 140));
-            gfx.DrawString($"Fecha de emisión: {fecha}", fuente, XBrushes.Black, new XPoint(40, 160));
-
-            // Guardar el PDF en un MemoryStream
-            using (MemoryStream stream = new MemoryStream())
+            // Generar el PDF
+            using (var writer = new PdfWriter(pdfPath))
             {
-                documento.Save(stream);
-                stream.Position = 0;
+                var pdf = new PdfDocument(writer);
+                var document = new Document(pdf);
 
-                // Retornar el archivo PDF como respuesta
-                return File(stream.ToArray(), "application/pdf", "Certificado_Residencia.pdf");
+                // Añadir contenido al PDF
+                document.Add(new Paragraph("Certificado de Residencia").SetFontSize(18));
+                document.Add(new Paragraph($"Nombre: {nombre}"));
+                document.Add(new Paragraph($"RUT: {rut}"));
+                document.Add(new Paragraph($"Dirección: {direccion}"));
+                document.Add(new Paragraph($"Comuna: {comuna}"));
+                document.Add(new Paragraph($"Fecha de emisión: {fecha.ToString("dd/MM/yyyy")}"));
+
+                document.Close();
             }
 
+            // Mensaje de éxito
+            ViewBag.Message = "El certificado se ha generado exitosamente.";
+            ViewBag.PdfUrl = $"/certificados/Certificado_{rut}.pdf";
+
+            return View();
         }
     }
 }
