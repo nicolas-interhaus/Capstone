@@ -19,7 +19,9 @@ namespace Capstone.Models // Usa el mismo namespace de tus modelos
         public DbSet<Resumen_pendientes> Resumen_Pendientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Certificado> Certificados { get; set; }
-        public object Reservas { get; internal set; }
+        public DbSet<Reserva> Reserva { get; set; }
+        public DbSet<Reserva_detalle> Detalles_reserva { get; set; }
+        
 
         //internal void SaveChanges()
         //{

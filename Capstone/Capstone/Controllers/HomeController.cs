@@ -6,14 +6,6 @@ namespace Capstone.Controllers
 {
     public class HomeController : Controller
     {
-
-        private readonly ApplicationDbContext? _context;
-
-        public ApplicationDbContext? Get_context()
-        {
-            return _context;
-        }
-
         public IActionResult TestDatabaseConnection(ApplicationDbContext? _context)
         {
             try
@@ -101,8 +93,6 @@ namespace Capstone.Controllers
         {
             return View();
         }
-
-
         public IActionResult Privacy()
         {
             return View();

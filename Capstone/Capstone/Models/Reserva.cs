@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
-    internal class Reserva
+    public class Reserva
     {
         public string? Nombre { get; set; }
         public bool Semanal { get; set; }
