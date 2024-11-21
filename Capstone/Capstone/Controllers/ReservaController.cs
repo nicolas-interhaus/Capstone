@@ -1,30 +1,24 @@
 ﻿using Capstone.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Capstone.Controllers
 {
     public class ReservaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        public ApplicationDbContext Context { get; }
 
         public ReservaController(ApplicationDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         // Cargar todas las reservas
         public IActionResult Index()
         {
-            var reservas = _context.Reservas.ToList(); // Suponiendo que tienes una entidad "Reserva"
+            var reservas = Context.Reservas.ToList(); // Suponiendo que tienes una entidad "Reserva"
             return View(reservas);
         }
 
-        // GET: ReservaController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: ReservaController/Create
         public ActionResult Create()
@@ -33,25 +27,25 @@ namespace Capstone.Controllers
         }
         // Crear reserva
         [HttpPost]
-        public IActionResult CrearReserva(string nombre, DateTime fecha)
+        public IActionResult CrearReserva(string nombre, bool semanal, string rut_usuario, bool aprobacion)
         {
-            var reserva = new Reserva { Nombre = nombre, Fecha = fecha };
-            _context.Reservas.Add(reserva);
-            _context.SaveChanges();
+            var reserva = new Reserva { Nombre = nombre, Semanal = semanal, Rut_usuario = rut_usuario, Aprobacion = aprobacion};
+            Context.Reservas.Add(reserva);
+            Context.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         // Editar reserva
         [HttpPost]
-        public IActionResult EditarReserva(int id, string nombre, DateTime fecha)
+        public IActionResult EditarReserva(int id, string nombre, bool semanal, string rut_usuario, bool aprobacion)
         {
-            var reserva = _context.Reservas.Find(id);
+            var reserva = Context.Reservas.Find(id);
             if (reserva != null)
             {
                 reserva.Nombre = nombre;
-                reserva.Fecha = fecha;
-                _context.SaveChanges();
+                reserva.Semanal = semanal;
+                Context.SaveChanges();
             }
             return RedirectToAction("Index");
         }
@@ -60,11 +54,11 @@ namespace Capstone.Controllers
         [HttpPost]
         public IActionResult EliminarReserva(int id)
         {
-            var reserva = _context.Reservas.Find(id);
+            var reserva = Context.Reservas.Find(id);
             if (reserva != null)
             {
-                _context.Reservas.Remove(reserva);
-                _context.SaveChanges();
+                Context.Reservas.Remove(reserva);
+                Context.SaveChanges();
             }
             return RedirectToAction("Index");
         }
