@@ -12,16 +12,16 @@ namespace Capstone.Models
         public long Noticia_id { get; set; }
 
         [Required]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
 
 
         [Required]
         [StringLength(100)]
-        public string Detalle { get; set; }
+        public string? Detalle { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Autor { get; set; }
+        public string? Autor { get; set; }
 
         [Required]
         public DateTime Fecha_publicacion { get; set; }
