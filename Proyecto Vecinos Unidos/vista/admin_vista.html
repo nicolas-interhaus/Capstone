@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Sitio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Administrar sitio</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li><a class="d-block mb-2 btn btn-primary" href="/admin_noticias">Administrar Noticias</a></li>
+                    <li><a class="d-block mb-2 btn btn-primary" href="/admin_usuarios">Administrar Nosotros</a></li>
+                    <li><a class="d-block mb-2 btn btn-primary" href="/admin_contacto">Administrar Contactos</a></li>
+                    <li><a class="d-block mb-2 btn btn-primary" href="/admin_notificaciones">Administrar Notificaciones</a></li>
+                </ul>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Solicitudes
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/admin_certificado">Certificado de Residencia</a></li>
+                        <li><a class="dropdown-item" href="/reserva_sede">Reserva de Sede Vecinal</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

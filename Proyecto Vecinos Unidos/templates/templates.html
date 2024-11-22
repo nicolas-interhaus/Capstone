@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Capstone</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Capstone.styles.css" asp-append-version="true" />
+    <style>
+        /* Asegurar que el HTML y body ocupen toda la altura */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        /* El contenedor principal ocupa todo el espacio disponible */
+        .container {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenido principal -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Powered by:</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+                  <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+                  <li><strong>Institución:</strong> DUOC UC</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Contacto</h5>
+                <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+                <p>Teléfono: +56 9 562 712 75</p>
+              </div>
+            </div>
+        </div>
+        <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
+          <small>&copy; 2024 Todos los derechos reservados</small>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
