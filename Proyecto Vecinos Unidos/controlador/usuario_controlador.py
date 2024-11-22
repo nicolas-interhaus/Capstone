@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, send_file
 from fpdf import FPDF
-from modelo.usuario import Usuario
+from models.usuario import Usuario
 import io
 
 app = Flask(__name__)

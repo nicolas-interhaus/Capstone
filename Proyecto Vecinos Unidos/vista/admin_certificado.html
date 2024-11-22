@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Contacto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Administrar Contacto</h1>
+        <form id="contactoForm">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="correo_contacto" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="correo_contacto" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="telefono_contacto" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono_contacto" pattern="[0-9]{9}" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="redes_sociales" class="form-label">Redes Sociales</label>
+                    <input type="text" class="form-control" id="redes_sociales" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        // Validación de formulario
+        document.getElementById('contactoForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita el envío predeterminado del formulario
+            const correo = document.getElementById('correo_contacto').value;
+            const telefono = document.getElementById('telefono_contacto').value;
+            const redes = document.getElementById('redes_sociales').value;
+
+            // Verificación básica
+            if (correo && telefono && redes) {
+                alert('¡Contacto guardado exitosamente!');
+                // Aquí podrías realizar una acción adicional como enviar datos a un servidor
+            } else {
+                alert('Por favor, completa todos los campos.');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

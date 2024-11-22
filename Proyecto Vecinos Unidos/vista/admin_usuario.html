@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Administración de Usuarios</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Cargo</th>
+                    <th>Perfil</th>
+                    <th>Fecha de Registro</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <!-- Los usuarios serán cargados dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para editar usuario -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <div class="mb-3">
+                            <label for="editUsuario" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="editUsuario" name="usuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCargo" class="form-label">Cargo</label>
+                            <select class="form-control" id="editCargo" name="cargo" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Usuario">Usuario</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="editUserId">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadUsers();
+
+            // Cargar usuarios desde el backend
+            function loadUsers() {
+                fetch('/usuarios')
+                    .then(response => response.json())
+                    .then(data => {
+                        const userTable = document.getElementById('userTable');
+                        userTable.innerHTML = '';
+                        data.forEach(user => {
+                            const row = `
+                                <tr>
+                                    <td>${user.Usuario_id}</td>
+                                    <td>${user.User}</td>
+                                    <td>${user.Contraseña}</td>
+                                    <td>${user.Cargo}</td>
+                                    <td>${user.Perfil}</td>
+                                    <td>${new Date(user.Fecha_registro).toLocaleDateString()}</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" onclick="editUser(${user.Usuario_id}, '${user.User}', '${user.Cargo}')">Editar</button>
+                                    </td>
+                                </tr>
+                            `;
+                            userTable.innerHTML += row;
+                        });
+                    });
+            }
+
+            // Abrir modal para editar usuario
+            window.editUser = function (id, user, cargo) {
+                document.getElementById('editUserId').value = id;
+                document.getElementById('editUsuario').value = user;
+                document.getElementById('editCargo').value = cargo;
+                const modal = new bootstrap.Modal(document.getElementById('editUserModal'));
+                modal.show();
+            };
+
+            // Guardar cambios de usuario
+            document.getElementById('editUserForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const id = document.getElementById('editUserId').value;
+                const user = document.getElementById('editUsuario').value;
+                const cargo = document.getElementById('editCargo').value;
+
+                fetch(`/usuarios/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario: user, cargo })
+                }).then(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editUserModal'));
+                    modal.hide();
+                    loadUsers();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
