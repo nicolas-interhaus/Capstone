@@ -11,8 +11,6 @@ class Reserva(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     fecha = db.Column(db.DateTime, nullable=False)
 
-db.create_all()
-
 @app.route('/')
 def index():
     return render_template('reservas.html')

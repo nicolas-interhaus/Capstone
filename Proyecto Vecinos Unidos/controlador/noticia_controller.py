@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from models import db, Noticias  # Asegúrate de importar correctamente tu modelo
+from models import  noticias  # Asegúrate de importar correctamente tu modelo
 
 app = Flask(__name__)
 app.secret_key = 'clave_secreta'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://usuario:contraseña@localhost/tu_base_datos'
-db.init_app(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://usuario:contraseña@localhost/capstone'
+db = SQLAlchemy(app)
 
 @app.route('/noticias', methods=['GET', 'POST'])
 def administrar_noticias():
@@ -16,7 +17,7 @@ def administrar_noticias():
         autor = request.form['autor']
         fecha_publicacion = request.form['Fecha_publicacion']
 
-        nueva_noticia = Noticias(
+        nueva_noticia = noticias(
             titulo=titulo,
             detalle=detalle,
             autor=autor,
@@ -28,7 +29,7 @@ def administrar_noticias():
         return redirect(url_for('administrar_noticias'))
 
     # Obtenemos todas las noticias para mostrarlas en la vista
-    noticias = Noticias.query.all()
+    noticias = noticias.query.all()
     return render_template('noticias.html', noticias=noticias)
 
 @app.route('/publicar/<int:noticia_id>', methods=['POST'])

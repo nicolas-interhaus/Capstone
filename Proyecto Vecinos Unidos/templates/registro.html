@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Formulario de Registro</h2>
+        <form id="registroForm" class="row g-3">
+            <div class="col-md-12">
+                <label for="nombres" class="form-label">Nombres</label>
+                <input id="nombres" name="nombres" class="form-control" type="text" />
+                <span id="nombresError" class="text-danger"></span>
+            </div>
+            
+            <div class="col-md-6">
+                <label for="contraseña" class="form-label">Contraseña</label>
+                <input id="contraseña" name="contraseña" class="form-control" type="password" />
+                <span id="contraseñaError" class="text-danger"></span>
+            </div>
+            
+            <div class="col-md-6">
+                <label for="confirmarContraseña" class="form-label">Repetir Contraseña</label>
+                <input id="confirmarContraseña" name="confirmarContraseña" class="form-control" type="password" />
+                <span id="confirmarContraseñaError" class="text-danger"></span>
+            </div>
+            
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" onclick="validarFormulario()">Registrarse</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Función para validar el formulario
+        function validarFormulario() {
+            // Limpiar mensajes de error
+            document.getElementById('nombresError').textContent = '';
+            document.getElementById('contraseñaError').textContent = '';
+            document.getElementById('confirmarContraseñaError').textContent = '';
+
+            // Capturar valores del formulario
+            const nombres = document.getElementById('nombres').value.trim();
+            const contraseña = document.getElementById('contraseña').value.trim();
+            const confirmarContraseña = document.getElementById('confirmarContraseña').value.trim();
+
+            let esValido = true;
+
+            // Validación de nombres
+            if (nombres === '') {
+                document.getElementById('nombresError').textContent = 'El campo nombres es obligatorio.';
+                esValido = false;
+            }
+
+            // Validación de contraseña
+            if (contraseña === '') {
+                document.getElementById('contraseñaError').textContent = 'El campo contraseña es obligatorio.';
+                esValido = false;
+            } else if (contraseña.length < 6) {
+                document.getElementById('contraseñaError').textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                esValido = false;
+            }
+
+            // Validación de confirmación de contraseña
+            if (confirmarContraseña === '') {
+                document.getElementById('confirmarContraseñaError').textContent = 'Debe confirmar la contraseña.';
+                esValido = false;
+            } else if (confirmarContraseña !== contraseña) {
+                document.getElementById('confirmarContraseñaError').textContent = 'Las contraseñas no coinciden.';
+                esValido = false;
+            }
+
+            // Si todo es válido, enviar los datos
+            if (esValido) {
+                alert('Formulario enviado con éxito');
+                // Aquí podrías enviar los datos al servidor usando fetch() o XMLHttpRequest
+            }
+        }
+    </script>
+</body>
+</html>

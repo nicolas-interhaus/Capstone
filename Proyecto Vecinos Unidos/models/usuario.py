@@ -15,7 +15,7 @@ class Usuario(db.Model):
     Perfil = db.Column(db.String(200), nullable=False)
     Fecha_registro = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-db.create_all()
+
 
 @app.route('/usuarios', methods=['GET'])
 def obtener_usuarios():
