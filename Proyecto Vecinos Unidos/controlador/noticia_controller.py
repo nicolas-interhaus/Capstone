@@ -5,7 +5,7 @@ from models import  noticias  # Asegúrate de importar correctamente tu modelo
 
 app = Flask(__name__)
 app.secret_key = 'clave_secreta'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://usuario:contraseña@localhost/capstone'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:admin@localhost:5432/capstone'
 db = SQLAlchemy(app)
 
 @app.route('/noticias', methods=['GET', 'POST'])
