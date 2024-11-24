@@ -1,0 +1,66 @@
+{% extends './layout.html' %}
+{% block title %} Capstone Vecinos Unidos {% endblock %}
+
+
+    {% block body %}
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-6">*Sugerencia
+            <br>*Preguntas
+            <br>Comentarios
+          </div>
+          <div class="col-6">Correo: ni.zamoranov@duocuc.cl
+          <br>Telefono: +56956271275
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Redes Sociales
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Facebook</a></li>
+              <li><a class="dropdown-item" href="#">Instagram</a></li>
+              <li><a class="dropdown-item" href="#">X (Twitter)</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <input class="btn btn-primary" type="submit" value="Submit">
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+</body>
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Powered by:</h5>
+            <ul class="list-unstyled">
+              <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+              <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+              <li><strong>Institución:</strong> DUOC UC</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5>Contacto</h5>
+            <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+            <p>Teléfono: +56 9 562 712 75</p>
+          </div>
+        </div>
+    </div>
+    <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
+      <small>&copy; 2024 Todos los derechos reservados</small>
+    </div>
+</footer>
+{% endblock %}

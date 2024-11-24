@@ -22,12 +22,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="reservaNombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="reservaNombre">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre">
                         </div>
                         <div class="mb-3">
-                            <label for="reservaFecha" class="form-label">Fecha</label>
-                            <input type="datetime-local" class="form-control" id="reservaFecha">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input type="datetime-local" class="form-control" id="fecha">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -52,7 +52,7 @@
                 select: function(info) {
                     // Mostrar modal para crear reserva
                     let modal = new bootstrap.Modal(document.getElementById('reservaModal'));
-                    document.getElementById('reservaFecha').value = info.startStr;
+                    document.getElementById('fecha').value = info.startStr;
                     modal.show();
                 }
             });
@@ -60,10 +60,10 @@
             calendar.render();
 
             document.getElementById('guardarReservaBtn').addEventListener('click', function() {
-                let nombre = document.getElementById('reservaNombre').value;
-                let fecha = document.getElementById('reservaFecha').value;
+                let nombre = document.getElementById('nombre').value;
+                let fecha = document.getElementById('fecha').value;
 
-                fetch('/reservas', {
+                fetch('/reserva', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nombre, fecha })

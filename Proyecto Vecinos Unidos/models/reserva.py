@@ -13,10 +13,10 @@ class Reserva(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('reservas.html')
+    return render_template('admin_reserva.html')
 
-@app.route('/reservas', methods=['GET', 'POST'])
-def reservas():
+@app.route('/reserva', methods=['GET', 'POST'])
+def reserva():
     if request.method == 'GET':
         reservas = Reserva.query.all()
         eventos = [{"id": r.id, "title": r.nombre, "start": r.fecha.isoformat()} for r in reservas]

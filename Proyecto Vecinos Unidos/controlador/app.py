@@ -1,10 +1,12 @@
 import psycopg2
-from flask import Flask, request, jsonify, render_template, flash
+from flask import Flask, redirect, request, jsonify, render_template, flash, url_for
+from flask_cors import CORS
 import webbrowser
 import threading
 
 app = Flask(__name__)
 
+CORS(app)
 # Configuración de la conexión a PostgreSQL
 DATABASE_CONFIG = {
     'host': 'localhost',
@@ -30,10 +32,10 @@ def home():
 # Ruta para la página de inicio de sesión
 @app.route('/')
 def login_page():
-    return render_template('home.html')
+    return render_template('inicio_sesion.html')
 
 # Ruta para manejar el inicio de sesión
-@app.route('/login', methods=['POST'])
+@app.route('/inicio_sesion', methods=['POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
@@ -77,7 +79,7 @@ def login():
 def admin_page():
     return render_template('admin_vista.html')
 # Ruta para generar un certificado (mantén las rutas existentes)
-@app.route('/generar_certificado', methods=['POST'])
+@app.route('/generacion_certificado', methods=['POST'])
 def generar_certificado():
     data = request.json
     nombre = data.get('nombre')

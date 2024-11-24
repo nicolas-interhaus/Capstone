@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Capstone Vecinos Unidos{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <style>
+        /* Asegurar que el HTML y body ocupen toda la altura */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        /* El contenedor principal ocupa todo el espacio disponible */
+        .container {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bloque principal que será sobrescrito en las vistas específicas -->
+    {% block body %}
+    {% endblock %}
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-pp5iZsAIy+32J6TB36EvG2uDTV9Iq8C7mfkHpV1c13GXSHt+0k6ijQ1rBW01R9jG" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+</body>
+</html>

@@ -20,4 +20,15 @@
   img:hover {
     transform: scale(1.05); /* Efecto de zoom al pasar el mouse por encima */
   }
-  
+  /* Asegurar que el HTML y body ocupen toda la altura */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/* El contenedor principal ocupa todo el espacio disponible */
+.container {
+    flex: 1;
+}
