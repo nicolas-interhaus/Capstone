@@ -1,10 +1,13 @@
 from __init__ import create_app
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify,redirect, url_for, flash
+from flask import Flask, render_template, request, jsonify,redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
+from werkzeug.security import check_password_hash
 import psycopg2
+from functools import wraps
+
 
 app = create_app()
 
@@ -26,6 +29,16 @@ def connect_db():
         print(f"Error conectando a la base de datos: {e}")
         return None
     
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('tipo_usuario') != 'admin':
+            flash('Acceso denegado', 'danger')
+            return redirect(url_for('login_page'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -191,7 +204,6 @@ def registrar_usuario():
 
     return jsonify({'message': f'Usuario registrado con éxito con ID {nuevo_id}'}), 201
 
-# Ruta para manejar el inicio de sesión
 @app.route('/inicio_sesion', methods=['POST'])
 def login():
     username = request.form['username']
@@ -203,33 +215,41 @@ def login():
 
     cursor = conn.cursor()
 
-    # Consulta para verificar las credenciales
+    # Consulta solo para obtener la contraseña hasheada y tipo de usuario
     query = """
-    SELECT tipo_usuario
+    SELECT password, tipo_usuario
     FROM vecinos
-    WHERE username = %s AND password = %s
+    WHERE username = %s
     """
     try:
-        cursor.execute(query, (username, password))
+        cursor.execute(query, (username,))
         result = cursor.fetchone()
 
         if result is None:
-            flash('Usuario o contraseña incorrectos', 'error')
+            flash('Usuario no encontrado', 'danger')
             return redirect(url_for('login_page'))
-        
-        tipo_usuario = result[0]
+
+        hashed_password, tipo_usuario = result
+
+        # Validar la contraseña usando check_password_hash
+        if not check_password_hash(hashed_password, password):
+            flash('Contraseña incorrecta', 'danger')
+            return redirect(url_for('login_page'))
+
+        # Redirigir según el tipo de usuario
         if tipo_usuario == 'admin':
-            return redirect(url_for('admin_page'))  # Redirigir a la página de administrador
+            return redirect(url_for('admin_page'))
         else:
             flash('Acceso denegado. Solo administradores pueden entrar.', 'warning')
             return redirect(url_for('login_page'))
     except Exception as e:
         print(f"Error al verificar usuario: {e}")
-        flash('Error al procesar la solicitud', 'error')
+        flash('Error al procesar la solicitud', 'danger')
         return redirect(url_for('login_page'))
     finally:
         cursor.close()
         conn.close()
+
 
 
 if __name__ == '__main__':
