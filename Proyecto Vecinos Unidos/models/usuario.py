@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/capstone'
@@ -18,3 +19,5 @@ class Usuario(db.Model):
     perfil = db.Column(db.String(210),nullable=False)
     fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)  # Campo con fecha actual por defecto
 
+    def set_password(self, password):
+        self.password = generate_password_hash(password)

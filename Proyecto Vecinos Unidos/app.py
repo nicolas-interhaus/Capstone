@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, jsonify,redirect, url_for, fl
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
+import psycopg2
 
 app = create_app()
 
@@ -16,7 +17,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 db = SQLAlchemy(app)
-
+# Función para conectar a la base de datos
+def connect_db():
+    try:
+        conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
+        return conn
+    except Exception as e:
+        print(f"Error conectando a la base de datos: {e}")
+        return None
+    
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -182,7 +191,45 @@ def registrar_usuario():
 
     return jsonify({'message': f'Usuario registrado con éxito con ID {nuevo_id}'}), 201
 
- 
+# Ruta para manejar el inicio de sesión
+@app.route('/inicio_sesion', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+
+    conn = connect_db()
+    if conn is None:
+        return "Error al conectar con la base de datos", 500
+
+    cursor = conn.cursor()
+
+    # Consulta para verificar las credenciales
+    query = """
+    SELECT tipo_usuario
+    FROM vecinos
+    WHERE username = %s AND password = %s
+    """
+    try:
+        cursor.execute(query, (username, password))
+        result = cursor.fetchone()
+
+        if result is None:
+            flash('Usuario o contraseña incorrectos', 'error')
+            return redirect(url_for('login_page'))
+        
+        tipo_usuario = result[0]
+        if tipo_usuario == 'admin':
+            return redirect(url_for('admin_page'))  # Redirigir a la página de administrador
+        else:
+            flash('Acceso denegado. Solo administradores pueden entrar.', 'warning')
+            return redirect(url_for('login_page'))
+    except Exception as e:
+        print(f"Error al verificar usuario: {e}")
+        flash('Error al procesar la solicitud', 'error')
+        return redirect(url_for('login_page'))
+    finally:
+        cursor.close()
+        conn.close()
 
 
 if __name__ == '__main__':
