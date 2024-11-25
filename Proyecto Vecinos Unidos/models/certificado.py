@@ -19,7 +19,7 @@ def generar_certificado():
         flash('Certificado generado exitosamente.', 'info')
         return render_template('certificado.html', pdf_url=pdf_url)
 
-    return render_template('certificado.html')
+    return render_template('admin_vista.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

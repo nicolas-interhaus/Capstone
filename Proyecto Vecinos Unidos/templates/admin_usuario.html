@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registros y Noticias</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
@@ -44,26 +46,7 @@
             </tbody>
         </table>
 
-        <h2>Agregar Nueva Noticia</h2>
-        <form id="noticiaForm">
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" required>
-            </div>
-            <div class="mb-3">
-                <label for="detalle" class="form-label">Detalle</label>
-                <textarea class="form-control" id="detalle" name="detalle" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="autor" class="form-label">Autor</label>
-                <input type="text" class="form-control" id="autor" name="autor" required>
-            </div>
-            <div class="mb-3">
-                <label for="fecha_publicacion" class="form-label">Fecha de Publicación</label>
-                <input type="date" class="form-control" id="fecha_publicacion" name="fecha_publicacion" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Agregar Noticia</button>
-        </form>
+        
     </div>
 
     <script>
@@ -112,19 +95,34 @@
         // Llamar a la función al cargar la página
         window.onload = cargarDatos;
 
-        // Manejador del formulario de noticias
-        document.getElementById('noticiaForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const data = new FormData(this);
-            await fetch('/api/noticias', {
-                method: 'POST',
-                body: data,
-            });
-
-            alert('Noticia agregada correctamente');
-            this.reset();
-        });
+        
     </script>
+    {% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Powered by:</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+                  <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+                  <li><strong>Institución:</strong> DUOC UC</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Contacto</h5>
+                <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+                <p>Teléfono: +56 9 562 712 75</p>
+              </div>
+            </div>
+        </div>
+        <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
+          <small>&copy; 2024 Todos los derechos reservados</small>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    {% endblock %}
 </body>
 </html>

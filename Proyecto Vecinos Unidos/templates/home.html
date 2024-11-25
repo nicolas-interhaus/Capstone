@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio, Junta de Vecinos N°14</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="src/css/styles.css">
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <style>
         /* Asegurar que el HTML y body ocupen toda la altura */
         html, body {
@@ -45,21 +47,21 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../src/img/foto1_vecinos.jfif" class="d-block w-100" alt="Registro de vecinos">
+                                <img src="../static/img/foto1_vecinos.jfif" class="d-block w-100" alt="Registro de vecinos">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Registro de vecinos, Emisión de Certificado</h5>
                                     <p>Algunos contenidos representativos del primer slide.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../src/img/foto2_eventos.jfif" class="d-block w-100" alt="Eventos">
+                                <img src="../static/img/foto2_eventos.jfif" class="d-block w-100" alt="Eventos">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Registro de eventos</h5>
                                     <p>Algunos contenidos representativos del segundo slide.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../src/img/madre-ninos-amarrados-pedro-aguirre-cerda.jpeg" class="d-block w-100" alt="Últimas noticias">
+                                <img src="../static/img/madre-ninos-amarrados-pedro-aguirre-cerda.jpeg" class="d-block w-100" alt="Últimas noticias">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Últimas noticias</h5>
                                     <p>Algunos contenidos representativos del tercer slide.</p>

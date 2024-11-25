@@ -1,42 +1,20 @@
-from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, jsonify
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:admin@localhost:5432/capstone'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/capstone'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
+# Modelo para la tabla usuario
 class Usuario(db.Model):
     __tablename__ = 'usuario'
-    Usuario_id = db.Column(db.Integer, primary_key=True)
-    User = db.Column(db.String(200), nullable=False)
-    Contraseña = db.Column(db.String(200), nullable=False)
-    Cargo = db.Column(db.String(200), nullable=False)
-    Perfil = db.Column(db.String(200), nullable=False)
-    Fecha_registro = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    usuario_id = db.Column(db.Integer, primary_key=True)
+    usuario = db.Column(db.String(100), nullable=False)
+    contraseña = db.Column(db.String(100), nullable=False)
+    cargo = db.Column(db.String(210),nullable=False)
+    perfil = db.Column(db.String(210),nullable=False)
+    fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)  # Campo con fecha actual por defecto
 
-
-
-@app.route('/usuarios', methods=['GET'])
-def obtener_usuarios():
-    usuarios = Usuario.query.all()
-    return jsonify([{
-        'Usuario_id': u.Usuario_id,
-        'User': u.User,
-        'Contraseña': u.Contraseña,
-        'Cargo': u.Cargo,
-        'Perfil': u.Perfil,
-        'Fecha_registro': u.Fecha_registro
-    } for u in usuarios])
-
-@app.route('/usuarios/<int:id>', methods=['PUT'])
-def actualizar_usuario(id):
-    data = request.json
-    usuario = Usuario.query.get_or_404(id)
-    usuario.User = data['usuario']
-    usuario.Cargo = data['cargo']
-    db.session.commit()
-    return jsonify({'message': 'Usuario actualizado correctamente'})
-
-if __name__ == '__main__':
-    app.run(debug=True)

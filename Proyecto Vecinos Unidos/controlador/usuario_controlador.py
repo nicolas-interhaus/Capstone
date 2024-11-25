@@ -1,30 +1,34 @@
-from flask import Flask, request, render_template, redirect, send_file
+from flask import Flask, request, render_template, redirect, send_file,jsonify
 from fpdf import FPDF
 from models.usuario import Usuario
 import io
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/capstone'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = Falsedb = SQLAlchemy(app)
 @app.route('/')
 def formulario():
     return render_template('registro.html')  # Esto es el archivo de la vista
 
-@app.route('/registrar', methods=['POST'])
+@app.route('/registro', methods=['POST'])
 def registrar_usuario():
-    nombres = request.form['nombres']
-    apellido_paterno = request.form['apellido_paterno']
-    apellido_materno = request.form['apellido_materno']
-    fec_nacimiento = request.form['fecha_nacimiento']
-    edad = request.form['edad']
-    genero = request.form['genero']
-    direccion = request.form['direccion']
-    comuna = request.form['comuna']
-    cargo = request.form['cargo']
-    email = request.form['email']
+    try:
+        data = request.get_json()
+        nombres = data.get('nombres')
+        contraseña = data.get('contraseña')
 
-    # Llamar a la función que inserta en la BD
-    Usuario.insertar_usuario(nombres, apellido_paterno, apellido_materno, fec_nacimiento, edad, genero, direccion, comuna, cargo, email)
-
-    return redirect('/')
+        print(f"nuevo usuario creado {data}")
+        # Crear un nuevo usuario
+        nuevo_usuario = Usuario(nombres=nombres, contraseña=contraseña)
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+        print(f"nuevo usuario creado {data}")
+        return jsonify({'message': 'Usuario registrado exitosamente'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': 'Error al registrar usuario', 'error': str(e)}), 500
 @app.route('/generar-certificado', methods=['POST'])
 def generar_certificado():
     nombre = request.form['nombre']

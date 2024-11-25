@@ -9,11 +9,11 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Formulario de Registro</h2>
-        <form id="registroForm" class="row g-3">
+        <form action="/registrar_usuario" id="registroForm" class="row g-3" method="POST">
             <div class="col-md-12">
-                <label for="nombres" class="form-label">Nombres</label>
-                <input id="nombres" name="nombres" class="form-control" type="text" />
-                <span id="nombresError" class="text-danger"></span>
+                <label for="usuario" class="form-label">Usuario</label>
+                <input id="usuario" name="usuario" class="form-control" type="text" />
+                <span id="usuarioError" class="text-danger"></span>
             </div>
             
             <div class="col-md-6">
@@ -33,25 +33,52 @@
             </div>
         </form>
     </div>
+    {% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Powered by:</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+                  <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+                  <li><strong>Institución:</strong> DUOC UC</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Contacto</h5>
+                <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+                <p>Teléfono: +56 9 562 712 75</p>
+              </div>
+            </div>
+        </div>
+        <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
+          <small>&copy; 2024 Todos los derechos reservados</small>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    {% endblock %}
     <script>
         // Función para validar el formulario
-        function validarFormulario() {
+         function validarFormulario() {
+            event.preventDefault(); // Prevenir el envío estándar del formulario
             // Limpiar mensajes de error
-            document.getElementById('nombresError').textContent = '';
+            document.getElementById('usuarioError').textContent = '';
             document.getElementById('contraseñaError').textContent = '';
             document.getElementById('confirmarContraseñaError').textContent = '';
 
             // Capturar valores del formulario
-            const nombres = document.getElementById('nombres').value.trim();
+            const usuario = document.getElementById('usuario').value.trim();
             const contraseña = document.getElementById('contraseña').value.trim();
             const confirmarContraseña = document.getElementById('confirmarContraseña').value.trim();
 
             let esValido = true;
 
             // Validación de nombres
-            if (nombres === '') {
-                document.getElementById('nombresError').textContent = 'El campo nombres es obligatorio.';
+            if (usuario === '') {
+                document.getElementById('usuarioError').textContent = 'El campo nombres es obligatorio.';
                 esValido = false;
             }
 
@@ -73,11 +100,41 @@
                 esValido = false;
             }
 
-            // Si todo es válido, enviar los datos
             if (esValido) {
-                alert('Formulario enviado con éxito');
-                // Aquí podrías enviar los datos al servidor usando fetch() o XMLHttpRequest
+    const data = {
+        usuario: usuario,
+        contraseña: contraseña,
+        perfil: "user",
+        cargo: "vecino",
+    };
+    console.log(data)
+    fetch('/registro', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json(); // Convertir la respuesta en JSON
+            } else {
+                console.log(response)
+                return response.json().then((errorData) => {
+                    throw new Error(errorData.message || 'Error desconocido');
+                });
             }
+        })
+        .then((data) => {
+            alert('Formulario enviado con éxito');
+            window.location.href = '/'; // Redirige a home.html
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert(`Ocurrió un error al enviar el formulario: ${error.message}`);
+        });
+}
+
         }
     </script>
 </body>
