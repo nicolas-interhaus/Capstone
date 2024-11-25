@@ -7,70 +7,50 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <form id="registroForm" class="row g-3">
-    <div class="col-md-12">
-      <label for="rut" class="form-label">Rut</label>
-      <input type="text" class="form-control" id="rut" placeholder="XX.XXX.XXX-X">
+  <form action="/ingreso" method="POST">
+    <div class="mb-3">
+        <label for="rut" class="form-label">Rut</label>
+        <input type="text" class="form-control" id="rut" name="rut" required>
     </div>
-    <div class="col-md-12">
-      <label for="nombres" class="form-label">Nombres</label>
-      <input type="text" class="form-control" id="nombres">
+    <div class="mb-3">
+        <label for="nombres" class="form-label">Nombres</label>
+        <input type="text" class="form-control" id="nombres" name="nombres" required>
     </div>
-    <div class="col-md-6">
-      <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
-      <input type="text" class="form-control" id="apellido_paterno">
+    <div class="mb-3">
+        <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" required>
     </div>
-    <div class="col-md-6">
-      <label for="apellido_materno" class="form-label">Apellido Materno</label>
-      <input type="text" class="form-control" id="apellido_materno">
+    <div class="mb-3">
+        <label for="apellido_materno" class="form-label">Apellido Materno</label>
+        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" required>
     </div>
-    <div class="col-md-4">
-      <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
-      <input type="date" class="form-control" id="fecha_nacimiento">
+    <div class="mb-3">
+        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
     </div>
-    <div class="col-md-4">
-      <label for="inputGender" class="form-label">Género</label>
-      <select id="inputGender" class="form-select">
-        <option value="" selected>Seleccione Género</option>
-        <option>Hombre</option>
-        <option>Mujer</option>
-        <option>Otro</option>
-      </select>
+    <div class="mb-3">
+        <label for="genero" class="form-label">Género</label>
+        <select class="form-control" id="genero" name="genero" required>
+            <option value="">Seleccione...</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+        </select>
     </div>
-    <div class="col-12">
-      <label for="inputAddress" class="form-label">Dirección</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Av, calle, pasaje">
+    <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" required>
     </div>
-    
-    <div class="col-md-4">
-      <label for="inputState" class="form-label">Comuna</label>
-      <select id="inputState" class="form-select">
-        <option value="" selected>Seleccione una comuna</option>
-        <option>Pedro Aguirre Cerda</option>
-        <option>San Miguel</option>
-        <option>Lo Espejo</option>
-        <option>La Cisterna</option>
-      </select>
+    <div class="mb-3">
+        <label for="comuna" class="form-label">Comuna</label>
+        <input type="text" class="form-control" id="comuna" name="comuna" required>
     </div>
-    
-    
-    <div class="col-md-12">
-      <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
     </div>
-    
-    <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Acepta las condiciones de uso
-        </label>
-      </div>
-    </div>
-    <div class="col-12">
-      <a class="btn btn-primary mb-2" href="{{ url_for('registro') }}" role="button">Registrarse</a>
-    </div>
-  </form>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</form>
+
   <!-- Insertar el footer aquí -->
 <footer class="bg-dark text-white py-4">
   <div class="container">
@@ -108,43 +88,79 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-  <script>
-    document.getElementById('registroForm').addEventListener('submit', function(event) {
-
-      // Obtener valores de los campos
-      const rut = document.getElementById('rut').value.trim();
-      const nombres = document.getElementById('nombres').value.trim();
-      const apellidoPaterno = document.getElementById('apellido_paterno').value.trim();
-      const apellidoMaterno = document.getElementById('apellido_materno').value.trim();
-      const fechaNacimiento = document.getElementById('fecha_nacimiento').value.trim();
-      const genero = document.getElementById('inputGender').value;
-      const direccion = document.getElementById('inputAddress').value.trim();
-      const comuna = document.getElementById('inputState').value;
-      const email = document.getElementById('inputEmail4').value.trim();  
-      const aceptaCondiciones = document.getElementById('gridCheck').checked;
-
-      let errores = [];
-
-      // Validaciones
-      if (!rut) errores.push('Rut');
-      if (!nombres) errores.push('Nombres');
-      if (!apellidoPaterno) errores.push('Apellido Paterno');
-      if (!apellidoMaterno) errores.push('Apellido Materno');
-      if (!fechaNacimiento) errores.push('Fecha de Nacimiento');
-      if (!genero) errores.push('Género');
-
-      if (!direccion) errores.push('Dirección');
-      if (!comuna) errores.push('Comuna');
-      if (!email) errores.push('Email');
-      if (!aceptaCondiciones) errores.push('Debe aceptar las condiciones de uso');
-
-      if (errores.length > 0) {
-        alert("Error: " + errores.join(", "));
-      } else {
-        window.location.href = "/home.html"; 
-      }
-    });
-  </script>
+    <script>
+      document.getElementById('registroForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Evitar que el formulario se envíe de forma predeterminada
+    
+        // Obtener valores de los campos
+        const rut = document.getElementById('rut').value.trim();
+        const nombres = document.getElementById('nombres').value.trim();
+        const apellidoPaterno = document.getElementById('apellido_paterno').value.trim();
+        const apellidoMaterno = document.getElementById('apellido_materno').value.trim();
+        const fechaNacimiento = document.getElementById('fecha_nacimiento').value.trim();
+        const genero = document.getElementById('inputGender').value;
+        const direccion = document.getElementById('inputAddress').value.trim();
+        const comuna = document.getElementById('inputState').value;
+        const email = document.getElementById('inputEmail4').value.trim();
+        const aceptaCondiciones = document.getElementById('gridCheck').checked;
+    
+        let errores = [];
+    
+        // Validaciones
+        if (!rut) errores.push('Rut');
+        if (!nombres) errores.push('Nombres');
+        if (!apellidoPaterno) errores.push('Apellido Paterno');
+        if (!apellidoMaterno) errores.push('Apellido Materno');
+        if (!fechaNacimiento) errores.push('Fecha de Nacimiento');
+        if (!genero) errores.push('Género');
+        if (!direccion) errores.push('Dirección');
+        if (!comuna) errores.push('Comuna');
+        if (!email) errores.push('Email');
+        if (!aceptaCondiciones) errores.push('Debe aceptar las condiciones de uso');
+    
+        if (errores.length > 0) {
+          alert("Error: " + errores.join(", "));
+          return;
+        }
+    
+        // Crear objeto con los datos del formulario
+        const datos = {
+          rut: rut,
+          nombres: nombres,
+          apellido_paterno: apellidoPaterno,
+          apellido_materno: apellidoMaterno,
+          fecha_nacimiento: fechaNacimiento,
+          genero: genero,
+          direccion: direccion,
+          comuna: comuna,
+          email: email
+        };
+    
+        try {
+          // Enviar datos al backend usando fetch
+          const response = await fetch('/registro', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+          });
+    
+          if (response.ok) {
+            const result = await response.json();
+            alert(result.message);
+            window.location.href = '/registro.html'; // Redirige al usuario si el registro fue exitoso
+          } else {
+            const error = await response.json();
+            alert("Error en el registro: " + error.message);
+          }
+        } catch (error) {
+          console.error('Error en la solicitud:', error);
+          alert('Ocurrió un error inesperado al registrar el usuario.');
+        }
+      });
+    </script>
+    
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -74,10 +74,7 @@ def login():
         cursor.close()
         conn.close()
 
-# Ruta para la vista de administrador
-@app.route('/admin_vista')
-def admin_page():
-    return render_template('admin_vista.html')
+
 # Ruta para generar un certificado (mantén las rutas existentes)
 @app.route('/generacion_certificado', methods=['POST'])
 def generar_certificado():
