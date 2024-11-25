@@ -1,8 +1,14 @@
-from flask import Flask, request, render_template, redirect, send_file,jsonify
-from fpdf import FPDF
-from models.usuario import Usuario
-import io
+
+from datetime import datetime
+from flask import Flask, render_template, request, jsonify,redirect, url_for, flash, session, Blueprint
 from flask_sqlalchemy import SQLAlchemy
+from models.usuario import Usuario
+from models.vecinos import Vecino
+from werkzeug.security import check_password_hash
+import psycopg2
+from functools import wraps
+
+usuario_app = Blueprint('usuario_app', __name__)
 
 
 app = Flask(__name__)
@@ -11,39 +17,78 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = Falsedb = SQLAlchemy(app)
 @app.route('/')
 def formulario():
     return render_template('registro.html')  # Esto es el archivo de la vista
+def connect_db():
+    try:
+        conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
+        return conn
+    except Exception as e:
+        print(f"Error conectando a la base de datos: {e}")
 
-@app.route('/generar-certificado', methods=['POST'])
-def generar_certificado():
-    nombre = request.form['nombre']
-    rut = request.form['rut']
-    direccion = request.form['direccion']
-    comuna = request.form['comuna']
-    fecha = request.form['fecha']
+        return None
+@app.route('/api/vecinos', methods=['GET'])
+def api_vecinos():
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
 
-    # Crear un PDF con FPDF
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
+    cursor = conn.cursor()
+    query = "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, comuna, email FROM vecinos"
+    try:
+        cursor.execute(query)
+        vecinos = cursor.fetchall()
+        # Convierte los resultados en una lista de diccionarios
+        vecinos_list = [
+            {
+                "rut": row[0],
+                "nombres": row[1],
+                "apellido_paterno": row[2],
+                "apellido_materno": row[3],
+                "direccion": row[4],
+                "comuna": row[5],
+                "email": row[6],
+            }
+            for row in vecinos
+        ]
+        print(f"Vecinos obtenidos: {vecinos_list}")
+        return jsonify(vecinos_list)
+    except Exception as e:
+        print(f"Error al obtener vecinos: {e}")
+        return jsonify({"error": "Error al obtener los vecinos"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+@app.route('/api/usuarios', methods=['GET'])
+def api_usuarios():
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
 
-    # Agregar contenido al PDF
-    pdf.cell(200, 10, txt="Certificado de Residencia", ln=True, align='C')
-    pdf.ln(10)
-    pdf.cell(200, 10, txt=f"Nombre: {nombre}", ln=True)
-    pdf.cell(200, 10, txt=f"RUT: {rut}", ln=True)
-    pdf.cell(200, 10, txt=f"Dirección: {direccion}", ln=True)
-    pdf.cell(200, 10, txt=f"Comuna: {comuna}", ln=True)
-    pdf.cell(200, 10, txt=f"Fecha de emisión: {fecha}", ln=True)
+    cursor = conn.cursor()
+    query = "SELECT usuario_id, usuario, contraseña, cargo, perfil, fecha_registro FROM usuarios"
+    try:
+        cursor.execute(query)
+        usuarios = cursor.fetchall()
+        usuarios_list = [
+            {
+                "usuario_id": row[0],
+                "usuario": row[1],
+                "contraseña": row[2],
+                "cargo": row[3],
+                "perfil": row[4],
+                "fecha_registro": row[5],
+            }
+            for row in usuarios
+        ]
+        print(f"Usuarios obtenidos: {usuarios_list}")
 
-    # Generar el PDF en memoria
-    pdf_output = io.BytesIO()
-    pdf.output(pdf_output)
-    pdf_output.seek(0)
+        return jsonify(usuarios_list)
+    except Exception as e:
+        print(f"Error al obtener usuarios: {e}")
+        return jsonify({"error": "Error al obtener los usuarios"}), 500
+    finally:
+        cursor.close()
+        conn.close()
 
-    # Devolver el archivo PDF al usuario
-    return send_file(pdf_output, as_attachment=True, download_name="certificado_residencia.pdf", mimetype='application/pdf')
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 def mostrar_usuario(usuario):
     print(f"Nombre: {usuario.nombre}")
@@ -55,3 +100,6 @@ def solicitar_datos_usuario():
     edad = int(input("Ingresa la edad del usuario: "))
     correo = input("Ingresa el correo del usuario: ")
     return nombre, edad, correo
+
+if __name__ == '__main__':
+    app.run(debug=True)

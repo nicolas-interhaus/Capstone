@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, jsonify,redirect, url_for, fl
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
+from controlador.usuario_controlador import app as usuario_app
 from werkzeug.security import check_password_hash
 import psycopg2
 from functools import wraps
@@ -12,6 +13,8 @@ from functools import wraps
 app = create_app()
 
 app = Flask(__name__)
+app.register_blueprint(usuario_app)
+
 app.secret_key = 'mi_clave_super_secreta'
 
 # Configuración de la URI de la base de datos
@@ -87,22 +90,6 @@ def admin_vista():
 @app.route('/certificado')
 def certificado():
     return render_template('certificado.html')
-
-@app.route('/query_string')
-def query_string():
-    print(request)
-    print(request.args)
-    print(request.args.get('param1'))
-    return 'Listo'
-
-@app.before_request
-def before_request():
-    print("Antes de la peticion de algo")
-
-@app.after_request
-def after_request(response):
-    print("Despues de la peticion de algo")
-    return response
 
 @app.errorhandler(404)
 def pagina_no_encontrada(error):
