@@ -170,7 +170,7 @@ def api_vecinos():
     finally:
         cursor.close()
         conn.close()
-        
+
 @app.route('/api/usuarios', methods=['GET'])
 def api_usuarios():
     conn = connect_db()
@@ -205,7 +205,7 @@ def api_usuarios():
 
 
 
-@app.route('/api/admin_noticias', methods=['GET'])
+@app.route('/admin_noticias', methods=['GET'])
 def admin_noticias():
     conn = connect_db()  # Reemplaza con tu función de conexión a la base de datos
     if conn is None:
