@@ -11,6 +11,7 @@ db = SQLAlchemy(app)
 class Vecino(db.Model):
     __tablename__ = 'vecinos'
     id = db.Column(db.Integer, primary_key=True)
+    rut = db.Column(db.String(12), nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellido_paterno = db.Column(db.String(100), nullable=False)
     apellido_materno = db.Column(db.String(100), nullable=False)
@@ -52,6 +53,7 @@ def actualizar_vecino(id):
     vecino = Vecino.query.get_or_404(id)
 
     # Actualizar los campos permitidos
+
     vecino.nombres = data.get('nombres', vecino.nombres)
     vecino.apellido_paterno = data.get('apellido_paterno', vecino.apellido_paterno)
     vecino.apellido_materno = data.get('apellido_materno', vecino.apellido_materno)

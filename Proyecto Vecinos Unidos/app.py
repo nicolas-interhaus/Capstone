@@ -13,7 +13,6 @@ from functools import wraps
 app = create_app()
 
 app = Flask(__name__)
-app.register_blueprint(usuario_app)
 
 app.secret_key = 'mi_clave_super_secreta'
 
@@ -63,6 +62,7 @@ def registro_vecino():
     return render_template('ingreso.html')  # Asegúrate de que 'registro.html' sea la plantilla correcta
 
 
+
 @app.route('/admin_certificado')
 def admin_certificado():
     return render_template('admin_certificado.html')
@@ -97,71 +97,112 @@ def pagina_no_encontrada(error):
 
 @app.route('/ingreso', methods=['POST'])
 def ingreso():
-    # Obtener los datos del formulario enviados mediante POST
-    datos = request.form
-    print("Datos recibidos:", datos)  # Depuración para ver si los datos son recibidos correctamente
+    # Obtener los datos enviados como JSON
+    data = request.get_json()
+    if not data:
+        return jsonify({'message': 'Datos no válidos'}), 400
 
-    rut = datos.get('rut')
-    nombres = datos.get('nombres')
-    apellido_paterno = datos.get('apellido_paterno')
-    apellido_materno = datos.get('apellido_materno')
-    fecha_nacimiento = datos.get('fecha_nacimiento')
-    genero = datos.get('genero')
-    direccion = datos.get('direccion')
-    comuna = datos.get('comuna')
-    email = datos.get('email')
-    
-    # Verifica los valores de los datos
-    print(f"Rut: {rut}, Nombres: {nombres}, Apellido Paterno: {apellido_paterno}")
-    
-    # Validaciones básicas
-    errores = []
-    if not rut: errores.append("Rut es obligatorio")
-    if not nombres: errores.append("Nombres son obligatorios")
-    if not apellido_paterno: errores.append("Apellido paterno es obligatorio")
-    if not apellido_materno: errores.append("Apellido materno es obligatorio")
-    if not fecha_nacimiento: errores.append("Fecha de nacimiento es obligatoria")
-    if not genero: errores.append("Género es obligatorio")
-    if not direccion: errores.append("Dirección es obligatoria")
-    if not comuna: errores.append("Comuna es obligatoria")
-    if not email: errores.append("Email es obligatorio")
-    
-    print("Errores encontrados:", errores)
-    
-    if errores:
-        # Mostrar mensajes de error y redirigir al formulario
-        for error in errores:
-            flash(error, 'danger')
-        return render_template('home.html')
-    
-    # Crear un nuevo registro para la base de datos
+    # Extraer los datos obligatorios del JSON
+    rut = data.get('rut')
+    nombres = data.get('nombres')
+    apellido_paterno = data.get('apellido_paterno')
+    apellido_materno = data.get('apellido_materno')
+    direccion = data.get('direccion')
+    comuna = data.get('comuna')
+    email = data.get('email')
+    print(f"valor de data en ingreso{data}")
+    # Verificar que los campos obligatorios estén presentes
+    if not (rut and nombres and apellido_paterno and apellido_materno and direccion and comuna and email):
+        return jsonify({'message': 'Faltan datos obligatorios'}), 400
+
     try:
+        # Insertar el nuevo vecino en la base de datos
         nuevo_vecino = Vecino(
             rut=rut,
             nombres=nombres,
             apellido_paterno=apellido_paterno,
             apellido_materno=apellido_materno,
-            fecha_nacimiento=fecha_nacimiento,
-            genero=genero,
             direccion=direccion,
             comuna=comuna,
-            email=email,
-            fecha_registro=datetime.utcnow()  # Fecha actual
+            email=email
         )
-        print("Nuevo vecino:", nuevo_vecino)
         db.session.add(nuevo_vecino)
         db.session.commit()
-
-        # Mensaje de éxito y redirección
-        flash("Usuario registrado exitosamente", "success")
-        return redirect(url_for('registro_vecino'))
+        print("Se ha crado el vecino")
+        # Redirigir a la página de registro.html si el registro fue exitoso
+        flash(f'Vecino registrado con éxito con RUT {rut}', 'success')
+        return redirect(url_for('registro.html'))  # Asegúrate de que 'formulario' sea la ruta correcta.
     except Exception as e:
-        # Manejo de errores de base de datos
-        db.session.rollback()
-        flash(f"Error al registrar usuario: {str(e)}", "danger")
-        return render_template('registro.html')
+        print(f"Error al registrar vecino: {e}")
+        db.session.rollback()  # Revertir cambios si ocurre un error
+        flash('Error al registrar el vecino', 'danger')
+        return redirect(url_for('registro.html'))
 
-    
+
+@app.route('/api/vecinos', methods=['GET'])
+def api_vecinos():
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
+
+    cursor = conn.cursor()
+    query = "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, comuna, email FROM vecinos"
+    try:
+        cursor.execute(query)
+        vecinos = cursor.fetchall()
+        # Convierte los resultados en una lista de diccionarios
+        vecinos_list = [
+            {
+                "rut": row[0],
+                "nombres": row[1],
+                "apellido_paterno": row[2],
+                "apellido_materno": row[3],
+                "direccion": row[4],
+                "comuna": row[5],
+                "email": row[6],
+            }
+            for row in vecinos
+        ]
+        print(f"Vecinos obtenidos: {vecinos_list}")
+        return jsonify(vecinos_list)
+    except Exception as e:
+        print(f"Error al obtener vecinos: {e}")
+        return jsonify({"error": "Error al obtener los vecinos"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+@app.route('/api/usuarios', methods=['GET'])
+def api_usuarios():
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
+
+    cursor = conn.cursor()
+    query = "SELECT usuario_id, usuario, contraseña, cargo, perfil, fecha_registro FROM usuario"
+    try:
+        cursor.execute(query)
+        usuarios = cursor.fetchall()
+        usuarios_list = [
+            {
+                "usuario_id": row[0],
+                "usuario": row[1],
+                "contraseña": row[2],
+                "cargo": row[3],
+                "perfil": row[4],
+                "fecha_registro": row[5],
+            }
+            for row in usuarios
+        ]
+        print(f"Usuarios obtenidos: {usuarios_list}")
+
+        return jsonify(usuarios_list)
+    except Exception as e:
+        print(f"Error al obtener usuarios: {e}")
+        return jsonify({"error": "Error al obtener los usuarios"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
 @app.route('/registro', methods=['POST'])
 def registrar_usuario():
 

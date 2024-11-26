@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <form action="/ingreso" method="POST">
+  <form action="/ingreso" id="registroUsuarioForm" class="row g-3" method="POST">
     <div class="mb-3">
         <label for="rut" class="form-label">Rut</label>
         <input type="text" class="form-control" id="rut" name="rut" required>
@@ -89,7 +89,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <script>
-      document.getElementById('registroForm').addEventListener('submit', async function (event) {
+      document.getElementById('registroUsuarioForm').addEventListener('submit', async function (event) {
         event.preventDefault(); // Evitar que el formulario se envíe de forma predeterminada
     
         // Obtener valores de los campos
@@ -98,11 +98,10 @@
         const apellidoPaterno = document.getElementById('apellido_paterno').value.trim();
         const apellidoMaterno = document.getElementById('apellido_materno').value.trim();
         const fechaNacimiento = document.getElementById('fecha_nacimiento').value.trim();
-        const genero = document.getElementById('inputGender').value;
-        const direccion = document.getElementById('inputAddress').value.trim();
-        const comuna = document.getElementById('inputState').value;
-        const email = document.getElementById('inputEmail4').value.trim();
-        const aceptaCondiciones = document.getElementById('gridCheck').checked;
+        const genero = document.getElementById('genero').value;
+        const direccion = document.getElementById('direccion').value.trim();
+        const comuna = document.getElementById('comuna').value;
+        const email = document.getElementById('email').value.trim();
     
         let errores = [];
     
@@ -116,7 +115,6 @@
         if (!direccion) errores.push('Dirección');
         if (!comuna) errores.push('Comuna');
         if (!email) errores.push('Email');
-        if (!aceptaCondiciones) errores.push('Debe aceptar las condiciones de uso');
     
         if (errores.length > 0) {
           alert("Error: " + errores.join(", "));
