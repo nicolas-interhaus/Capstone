@@ -10,7 +10,7 @@ class Noticias(db.Model):
     titulo = db.Column(db.String, nullable=False)
     detalle = db.Column(db.String(100), nullable=False)
     autor = db.Column(db.String(100), nullable=False)
-    fecha_publicacion = db.Column(db.Date, nullable=False)
+    fecha_publicacion = db.Column(db.DateTime, default=datetime.utcnow)  # Campo con fecha actual por defecto
 
     def __repr__(self):
         return f'<Noticias {self.titulo} - {self.autor}>'

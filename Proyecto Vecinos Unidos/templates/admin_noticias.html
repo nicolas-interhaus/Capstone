@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,30 +32,8 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                {% if noticias %}
-                    {% for noticia in noticias %}
-                        <tr>
-                            <td>{{ noticia.noticia_id }}</td>
-                            <td>{{ noticia.titulo }}</td>
-                            <td>{{ noticia.detalle }}</td>
-                            <td>{{ noticia.autor }}</td>
-                            <td>{{ noticia.fecha_publicacion.strftime('%d/%m/%Y') }}</td>
-                            <td>
-                                <form action="{{ url_for('publicar_noticia', noticia_id=noticia.noticia_id) }}" method="post" style="display:inline-block;">
-                                    <button class="btn btn-success btn-sm" type="submit">Publicar</button>
-                                </form>
-                                <form action="{{ url_for('rechazar_noticia', noticia_id=noticia.noticia_id) }}" method="post" style="display:inline-block;">
-                                    <button class="btn btn-danger btn-sm" type="submit">Rechazar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="6" class="text-center">No hay noticias para mostrar.</td>
-                    </tr>
-                {% endif %}
+            <tbody id="noticiasTableBody">
+                <!-- Las noticias se cargarán aquí con JavaScript -->
             </tbody>
         </table>
 
@@ -83,32 +61,70 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {% block body %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Función para cargar las noticias desde la API
+        async function cargarNoticias() {
+            try {
+                // Hacer la solicitud para obtener las noticias
+                const response = await fetch('/api/noticias');
+                if (!response.ok) throw new Error('Error al obtener las noticias');
+                const noticias = await response.json();
+
+                const noticiasTableBody = document.getElementById('noticiasTableBody');
+                noticiasTableBody.innerHTML = ''; // Limpia la tabla antes de cargar las nuevas noticias
+
+                // Insertar los datos de las noticias en la tabla
+                noticias.forEach(noticia => {
+                    noticiasTableBody.innerHTML += `
+                        <tr>
+                            <td>${noticia.noticia_id}</td>
+                            <td>${noticia.titulo}</td>
+                            <td>${noticia.detalle}</td>
+                            <td>${noticia.autor}</td>
+                            <td>${new Date(noticia.fecha_publicacion).toLocaleDateString()}</td>
+                            <td>
+                                <form action="/publicar_noticia/${noticia.noticia_id}" method="post" style="display:inline-block;">
+                                    <button class="btn btn-success btn-sm" type="submit">Publicar</button>
+                                </form>
+                                <form action="/rechazar_noticia/${noticia.noticia_id}" method="post" style="display:inline-block;">
+                                    <button class="btn btn-danger btn-sm" type="submit">Rechazar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error('Error al cargar las noticias:', error);
+                alert('No se pudieron cargar las noticias. Intenta nuevamente.');
+            }
+        }
+
+        // Llamar a la función cargarNoticias al cargar la página
+        window.onload = cargarNoticias;
+    </script>
+
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
             <div class="row">
-              <div class="col-md-6">
-                <h5>Powered by:</h5>
-                <ul class="list-unstyled">
-                  <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
-                  <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
-                  <li><strong>Institución:</strong> DUOC UC</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5>Contacto</h5>
-                <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
-                <p>Teléfono: +56 9 562 712 75</p>
-              </div>
+                <div class="col-md-6">
+                    <h5>Powered by:</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+                        <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+                        <li><strong>Institución:</strong> DUOC UC</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5>Contacto</h5>
+                    <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+                    <p>Teléfono: +56 9 562 712 75</p>
+                </div>
             </div>
         </div>
         <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
-          <small>&copy; 2024 Todos los derechos reservados</small>
+            <small>&copy; 2024 Todos los derechos reservados</small>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    {% endblock %}
 </body>
 </html>

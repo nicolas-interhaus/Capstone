@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, jsonify,redirect, url_for, fl
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
+from models.noticias import Noticias
 from controlador.usuario_controlador import app as usuario_app
 from werkzeug.security import check_password_hash
 import psycopg2
@@ -71,9 +72,7 @@ def admin_certificado():
 def admin_contacto():
     return render_template('admin_contacto.html')
 
-@app.route('/admin_noticias')
-def admin_noticias():
-    return render_template('admin_noticias.html')
+
 
 @app.route('/admin_reserva')
 def admin_reserva():
@@ -96,7 +95,7 @@ def pagina_no_encontrada(error):
     return render_template('404.html'), 404
 
 @app.route('/ingreso', methods=['POST'])
-def ingreso():
+def registro_vecinos():
     # Obtener los datos enviados como JSON
     data = request.get_json()
     if not data:
@@ -171,6 +170,7 @@ def api_vecinos():
     finally:
         cursor.close()
         conn.close()
+        
 @app.route('/api/usuarios', methods=['GET'])
 def api_usuarios():
     conn = connect_db()
@@ -200,6 +200,54 @@ def api_usuarios():
         print(f"Error al obtener usuarios: {e}")
         return jsonify({"error": "Error al obtener los usuarios"}), 500
     finally:
+        cursor.close()
+        conn.close()
+
+
+
+@app.route('/api/admin_noticias', methods=['GET'])
+def admin_noticias():
+    conn = connect_db()  # Reemplaza con tu función de conexión a la base de datos
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
+
+    cursor = conn.cursor()
+    query = """
+        SELECT 
+            noticia_id, 
+            titulo, 
+            detalle, 
+            autor, 
+            fecha_publicacion 
+        FROM 
+            noticia
+    """
+    try:
+        # Ejecutar consulta
+        cursor.execute(query)
+        noticias = cursor.fetchall()
+        
+        # Formatear las noticias en una lista de diccionarios
+        noticias_list = [
+            {
+                "noticia_id": row[0],
+                "titulo": row[1],
+                "detalle": row[2],
+                "autor": row[3],
+                "fecha_publicacion": row[4].strftime('%Y-%m-%d')  # Formato de fecha
+            }
+            for row in noticias
+        ]
+        print(f"Noticias obtenidas: {noticias_list}")
+
+        # Devolver las noticias en formato JSON
+        return jsonify(noticias_list)
+    
+    except Exception as e:
+        print(f"Error al obtener noticias: {e}")
+        return jsonify({"error": "Error al obtener las noticias"}), 500
+    finally:
+        # Cerrar cursor y conexión
         cursor.close()
         conn.close()
 
