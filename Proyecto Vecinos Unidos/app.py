@@ -1,6 +1,6 @@
 from __init__ import create_app
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify,redirect, url_for, flash, session
+from flask import Flask, make_response, render_template, request, jsonify,redirect, send_file, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
@@ -9,7 +9,9 @@ from controlador.usuario_controlador import app as usuario_app
 from werkzeug.security import check_password_hash
 import psycopg2
 from functools import wraps
-
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+import os   
 
 app = create_app()
 
@@ -62,7 +64,40 @@ def registro():
 def registro_vecino():
     return render_template('ingreso.html')  # Asegúrate de que 'registro.html' sea la plantilla correcta
 
+@app.route('/generar_certificado', methods=['POST'])
+def generar_certificado():
+    nombre = request.form['nombre']
+    rut = request.form['rut']
+    direccion = request.form['direccion']
+    comuna = request.form['comuna']
+    fecha = request.form['fecha']
+    
+    # Ruta completa donde se va a guardar el archivo PDF
+    archivo_pdf = os.path.join(os.getcwd(), 'certificado_residencia.pdf')
+    print(f"Archivo PDF guardado en: {archivo_pdf}")  # Verificar la ruta
+    
+    # Crear el archivo PDF
+    c = canvas.Canvas(archivo_pdf, pagesize=letter)
+    
+    # Escribir contenido en el PDF
+    c.drawString(100, 750, f"Certificado de Residencia")
+    c.drawString(100, 730, f"Nombre completo: {nombre}")
+    c.drawString(100, 710, f"RUT: {rut}")
+    c.drawString(100, 690, f"Dirección: {direccion}")
+    c.drawString(100, 670, f"Comuna: {comuna}")
+    c.drawString(100, 650, f"Fecha de emisión: {fecha}")
+    
+    # Guardar el PDF
+    c.save()
+    
+    # Verificar si el archivo fue creado correctamente
+    if os.path.exists(archivo_pdf):
+        print(f"El archivo PDF se creó correctamente en: {archivo_pdf}")
+    else:
+        print("No se pudo crear el archivo PDF.")
 
+    # Devolver el archivo PDF como respuesta
+    return send_file(archivo_pdf, as_attachment=True)
 
 @app.route('/admin_certificado')
 def admin_certificado():
