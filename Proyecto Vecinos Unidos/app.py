@@ -317,49 +317,47 @@ def registrar_usuario():
 
 @app.route('/inicio_sesion', methods=['POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
-
+    data = request.json
+    username = data.get('usuario')
+    password = data.get('contraseña')
+    print(f"valor del usaername: {username}")
+    print(f"valor del password: {password}")
     conn = connect_db()
     if conn is None:
-        return "Error al conectar con la base de datos", 500
+        return jsonify({'message': 'Error al conectar con la base de datos'}), 500
 
     cursor = conn.cursor()
-
-    # Consulta solo para obtener la contraseña hasheada y tipo de usuario
     query = """
-    SELECT password, tipo_usuario
-    FROM vecinos
-    WHERE username = %s
+    SELECT contraseña, perfil
+    FROM usuario
+    WHERE usuario = %s
     """
     try:
         cursor.execute(query, (username,))
         result = cursor.fetchone()
 
         if result is None:
-            flash('Usuario no encontrado', 'danger')
-            return redirect(url_for('login_page'))
+            return jsonify({'message': 'Usuario no encontrado'}), 404
 
         hashed_password, tipo_usuario = result
-
-        # Validar la contraseña usando check_password_hash
+        print(hashed_password)
+        print(tipo_usuario)
+        print(result)
         if not check_password_hash(hashed_password, password):
-            flash('Contraseña incorrecta', 'danger')
-            return redirect(url_for('login_page'))
+            return jsonify({'message': 'Contraseña incorrecta'}), 401
 
         # Redirigir según el tipo de usuario
         if tipo_usuario == 'admin':
-            return redirect(url_for('admin_page'))
+            return jsonify({'redirect': url_for('admin_vista')})
         else:
-            flash('Acceso denegado. Solo administradores pueden entrar.', 'warning')
-            return redirect(url_for('login_page'))
+            return jsonify({'message': 'Acceso denegado. Solo administradores pueden entrar.'}), 403
     except Exception as e:
         print(f"Error al verificar usuario: {e}")
-        flash('Error al procesar la solicitud', 'danger')
-        return redirect(url_for('login_page'))
+        return jsonify({'message': 'Error interno del servidor'}), 500
     finally:
         cursor.close()
         conn.close()
+
 
 
 
