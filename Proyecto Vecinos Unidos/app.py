@@ -148,10 +148,14 @@ def registro_vecinos():
     # Verificar que los campos obligatorios estén presentes
     if not (rut and nombres and apellido_paterno and apellido_materno and direccion and comuna and email):
         return jsonify({'message': 'Faltan datos obligatorios'}), 400
+    # Obtener el último ID en la tabla
+    ultimo_usuario = db.session.query(Vecino).order_by(Vecino.id.desc()).first()
+    nuevo_id = (ultimo_usuario.id + 1) if ultimo_usuario else 1
 
     try:
         # Insertar el nuevo vecino en la base de datos
         nuevo_vecino = Vecino(
+            id=nuevo_id,
             rut=rut,
             nombres=nombres,
             apellido_paterno=apellido_paterno,
@@ -162,7 +166,7 @@ def registro_vecinos():
         )
         db.session.add(nuevo_vecino)
         db.session.commit()
-        print("Se ha crado el vecino")
+        print("Se ha creado el vecino")
         # Redirigir a la página de registro.html si el registro fue exitoso
         flash(f'Vecino registrado con éxito con RUT {rut}', 'success')
         return redirect(url_for('registro.html'))  # Asegúrate de que 'formulario' sea la ruta correcta.
@@ -180,20 +184,21 @@ def api_vecinos():
         return jsonify({"error": "Error al conectar con la base de datos"}), 500
 
     cursor = conn.cursor()
-    query = "SELECT rut, nombres, apellido_paterno, apellido_materno, direccion, comuna, email FROM vecinos"
+    query = "SELECT id, rut, nombres, apellido_paterno, apellido_materno, direccion, comuna, email FROM vecinos"
     try:
         cursor.execute(query)
         vecinos = cursor.fetchall()
         # Convierte los resultados en una lista de diccionarios
         vecinos_list = [
             {
-                "rut": row[0],
-                "nombres": row[1],
-                "apellido_paterno": row[2],
-                "apellido_materno": row[3],
-                "direccion": row[4],
-                "comuna": row[5],
-                "email": row[6],
+                "id":row[0],
+                "rut": row[1],
+                "nombres": row[2],
+                "apellido_paterno": row[3],
+                "apellido_materno": row[4],
+                "direccion": row[5],
+                "comuna": row[6],
+                "email": row[7],
             }
             for row in vecinos
         ]

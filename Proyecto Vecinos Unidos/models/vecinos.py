@@ -17,12 +17,10 @@ class Vecino(db.Model):
     apellido_materno = db.Column(db.String(100), nullable=False)
     fecha_nacimiento = db.Column(db.Date, nullable=False)
     rut = db.Column(db.String(20), unique=True, nullable=False)
-    edad = db.Column(db.Integer, nullable=False)
     genero = db.Column(db.String(10), nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
     comuna = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    fecha_registro = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 # Crear tablas en la base de datos
 
@@ -38,12 +36,10 @@ def obtener_vecinos():
         'apellido_materno': v.apellido_materno,
         'fecha_nacimiento': v.fecha_nacimiento.strftime('%Y-%m-%d'),
         'rut': v.rut,
-        'edad': v.edad,
         'genero': v.genero,
         'direccion': v.direccion,
         'comuna': v.comuna,
         'email': v.email,
-        'fecha_registro': v.fecha_registro.strftime('%Y-%m-%d %H:%M:%S')
     } for v in vecinos])
 
 # Ruta para actualizar un vecino
