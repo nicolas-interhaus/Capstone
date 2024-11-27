@@ -58,14 +58,15 @@
         // Función para cargar usuarios desde la API
         async function cargarUsuarios() {
             try {
-                const response = await fetch('/api/usuarios'); // Cambia la URL según tu backend
+                const response = await fetch('/api/vecinos'); // Cambia la URL según tu backend
                 if (!response.ok) throw new Error('Error al cargar los usuarios');
                 const usuarios = await response.json();
+                console.log('Usuarios cargados:', usuarios); // Verifica la estructura en la consola
 
                 // Rellenar la lista desplegable
                 const selectUsuario = document.getElementById('usuario');
                 usuarios.forEach(usuario => {
-                    selectUsuario.innerHTML += `<option value="${usuario.id}">${usuario.nombre}</option>`;
+                    selectUsuario.innerHTML += `<option value="${usuario.id}">${usuario.nombres,usuario.apellido_paterno,usuario.apellido_materno}</option>`;
                 });
             } catch (error) {
                 console.error('Error al cargar usuarios:', error);
@@ -79,12 +80,12 @@
             if (!userId) return; // Si no se selecciona un usuario, no hacer nada
 
             try {
-                const response = await fetch(`/api/usuarios/${userId}`); // Cambia la URL según tu backend
+                const response = await fetch(`/api/vecinos`); // Cambia la URL según tu backend
                 if (!response.ok) throw new Error('Error al obtener datos del usuario');
                 const usuario = await response.json();
 
                 // Rellenar los campos del formulario
-                document.getElementById('nombre').value = usuario.nombre;
+                document.getElementById('nombre').value = usuario.nombres;
                 document.getElementById('rut').value = usuario.rut;
                 document.getElementById('direccion').value = usuario.direccion;
                 document.getElementById('comuna').value = usuario.comuna;
