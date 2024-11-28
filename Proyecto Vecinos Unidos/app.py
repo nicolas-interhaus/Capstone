@@ -102,6 +102,9 @@ def generar_certificado():
 @app.route('/admin_certificado')
 def admin_certificado():
     return render_template('admin_certificado.html')
+@app.route('/admin_noticias')
+def admin_noticias():
+    return render_template('admin_noticias.html')
 
 @app.route('/admin_contacto')
 def admin_contacto():
@@ -134,7 +137,8 @@ def registro_vecinos():
     # Obtener los datos enviados como JSON
     data = request.get_json()
     if not data:
-        return jsonify({'message': 'Datos no válidos'}), 400
+        flash('Datos no válidos', 'danger')
+        return redirect(url_for('registro'))  # Redirige de nuevo al formulario
 
     # Extraer los datos obligatorios del JSON
     rut = data.get('rut')
@@ -144,10 +148,12 @@ def registro_vecinos():
     direccion = data.get('direccion')
     comuna = data.get('comuna')
     email = data.get('email')
-    print(f"valor de data en ingreso{data}")
+
     # Verificar que los campos obligatorios estén presentes
     if not (rut and nombres and apellido_paterno and apellido_materno and direccion and comuna and email):
-        return jsonify({'message': 'Faltan datos obligatorios'}), 400
+        flash('Faltan datos obligatorios', 'danger')
+        return redirect(url_for('registro'))
+
     # Obtener el último ID en la tabla
     ultimo_usuario = db.session.query(Vecino).order_by(Vecino.id.desc()).first()
     nuevo_id = (ultimo_usuario.id + 1) if ultimo_usuario else 1
@@ -166,15 +172,15 @@ def registro_vecinos():
         )
         db.session.add(nuevo_vecino)
         db.session.commit()
-        print("Se ha creado el vecino")
-        # Redirigir a la página de registro.html si el registro fue exitoso
         flash(f'Vecino registrado con éxito con RUT {rut}', 'success')
-        return redirect(url_for('registro.html'))  # Asegúrate de que 'formulario' sea la ruta correcta.
+        # Redirigir al formulario de registro después de éxito
+        return redirect(url_for('registro'))
     except Exception as e:
         print(f"Error al registrar vecino: {e}")
         db.session.rollback()  # Revertir cambios si ocurre un error
         flash('Error al registrar el vecino', 'danger')
-        return redirect(url_for('registro.html'))
+        return redirect(url_for('registro'))
+
 
 
 @app.route('/api/vecinos', methods=['GET'])
@@ -210,43 +216,8 @@ def api_vecinos():
     finally:
         cursor.close()
         conn.close()
-
-@app.route('/api/usuarios', methods=['GET'])
-def api_usuarios():
-    conn = connect_db()
-    if conn is None:
-        return jsonify({"error": "Error al conectar con la base de datos"}), 500
-
-    cursor = conn.cursor()
-    query = "SELECT usuario_id, usuario, contraseña, cargo, perfil, fecha_registro FROM usuario"
-    try:
-        cursor.execute(query)
-        usuarios = cursor.fetchall()
-        usuarios_list = [
-            {
-                "usuario_id": row[0],
-                "usuario": row[1],
-                "contraseña": row[2],
-                "cargo": row[3],
-                "perfil": row[4],
-                "fecha_registro": row[5],
-            }
-            for row in usuarios
-        ]
-        print(f"Usuarios obtenidos: {usuarios_list}")
-
-        return jsonify(usuarios_list)
-    except Exception as e:
-        print(f"Error al obtener usuarios: {e}")
-        return jsonify({"error": "Error al obtener los usuarios"}), 500
-    finally:
-        cursor.close()
-        conn.close()
-
-
-
-@app.route('/admin_noticias', methods=['GET'])
-def admin_noticias():
+@app.route('/api/mostrar_noticias', methods=['GET'])
+def api_noticias():
     conn = connect_db()  # Reemplaza con tu función de conexión a la base de datos
     if conn is None:
         return jsonify({"error": "Error al conectar con la base de datos"}), 500
@@ -290,6 +261,41 @@ def admin_noticias():
         # Cerrar cursor y conexión
         cursor.close()
         conn.close()
+@app.route('/api/usuarios', methods=['GET'])
+def api_usuarios():
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
+
+    cursor = conn.cursor()
+    query = "SELECT usuario_id, usuario, contraseña, cargo, perfil, fecha_registro FROM usuario"
+    try:
+        cursor.execute(query)
+        usuarios = cursor.fetchall()
+        usuarios_list = [
+            {
+                "usuario_id": row[0],
+                "usuario": row[1],
+                "contraseña": row[2],
+                "cargo": row[3],
+                "perfil": row[4],
+                "fecha_registro": row[5],
+            }
+            for row in usuarios
+        ]
+        print(f"Usuarios obtenidos: {usuarios_list}")
+
+        return jsonify(usuarios_list)
+    except Exception as e:
+        print(f"Error al obtener usuarios: {e}")
+        return jsonify({"error": "Error al obtener los usuarios"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+
 
 @app.route('/registro', methods=['POST'])
 def registrar_usuario():
@@ -320,48 +326,44 @@ def registrar_usuario():
 
     return jsonify({'message': f'Usuario registrado con éxito con ID {nuevo_id}'}), 201
 
+
 @app.route('/inicio_sesion', methods=['POST'])
 def login():
-    data = request.json
-    username = data.get('usuario')
-    password = data.get('contraseña')
-    print(f"valor del usaername: {username}")
-    print(f"valor del password: {password}")
-    conn = connect_db()
-    if conn is None:
-        return jsonify({'message': 'Error al conectar con la base de datos'}), 500
-
-    cursor = conn.cursor()
-    query = """
-    SELECT contraseña, perfil
-    FROM usuario
-    WHERE usuario = %s
-    """
     try:
+        # Asegurarse de que la solicitud tiene un cuerpo válido
+        data = request.get_json()
+        if not data:
+            return jsonify({'message': 'No se enviaron datos'}), 400
+
+        username = data.get('usuario')
+        password = data.get('contraseña')
+
+        if not username or not password:
+            return jsonify({'message': 'Faltan campos obligatorios'}), 400
+
+        # Aquí, maneja la lógica de conexión a la base de datos
+        conn = connect_db()
+        if conn is None:
+            return jsonify({'message': 'Error al conectar con la base de datos'}), 500
+
+        cursor = conn.cursor()
+        query = """
+        SELECT contraseña, perfil
+        FROM usuario
+        WHERE usuario = %s
+        """
         cursor.execute(query, (username,))
         result = cursor.fetchone()
-
-        if result is None:
-            return jsonify({'message': 'Usuario no encontrado'}), 404
-
-        hashed_password, tipo_usuario = result
-        print(hashed_password)
-        print(tipo_usuario)
         print(result)
-        if not check_password_hash(hashed_password, password):
-            return jsonify({'message': 'Contraseña incorrecta'}), 401
-
-        # Redirigir según el tipo de usuario
-        if tipo_usuario == 'admin':
-            return jsonify({'redirect': url_for('admin_vista')})
+        if result:
+            session['usuario'] = username
+            session['perfil'] = result[1]
+            return jsonify({'message': 'success', 'perfil': result[1]}), 200
         else:
-            return jsonify({'message': 'Acceso denegado. Solo administradores pueden entrar.'}), 403
+            return jsonify({'message': 'Usuario o contraseña incorrectos'}), 401
     except Exception as e:
-        print(f"Error al verificar usuario: {e}")
+        print(f"Error durante el inicio de sesión: {e}")
         return jsonify({'message': 'Error interno del servidor'}), 500
-    finally:
-        cursor.close()
-        conn.close()
 
 
 

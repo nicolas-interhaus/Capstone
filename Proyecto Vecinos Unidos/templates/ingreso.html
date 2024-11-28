@@ -138,7 +138,6 @@
               comuna: comuna,
               email: email
           };
-          console.log(datos)
           
           // Enviar datos al backend usando fetch
             fetch('/ingreso', {
@@ -148,13 +147,11 @@
               },
               body: JSON.stringify(datos)
           })
-          console.log("Hizo el fetch correctamente")
           .then((response) => {
 
             if (response.ok) {
                 const result =  response.json();
-                alert(result.message);
-                window.location.href = '/registro.html'; // Redirige al usuario si el registro fue exitoso
+                window.location.href = '/registro'; // Redirige al usuario si el registro fue exitoso
             } else {
                 const error =  response.json();
                 alert("Error en el registro: " + error.message);
