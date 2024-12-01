@@ -446,7 +446,8 @@ def login():
 
         username = data.get('usuario')
         password = data.get('contraseña')
-
+        print(f"valor del username: {username}")
+        print(f"valor del password: {password}")
         if not username or not password:
             return jsonify({'message': 'Faltan campos obligatorios'}), 400
 
@@ -459,9 +460,10 @@ def login():
         query = """
         SELECT contraseña, perfil
         FROM usuario
-        WHERE usuario = %s
+        WHERE usuario = %s and contraseña = %s
         """
-        cursor.execute(query, (password,))
+        cursor.execute(query, (username,password))
+        print(f"valor del query: {query}")
         result = cursor.fetchone()
         print(result)
         if result:
