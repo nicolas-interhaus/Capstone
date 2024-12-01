@@ -216,6 +216,47 @@ def api_vecinos():
     finally:
         cursor.close()
         conn.close()
+
+@app.route('/api/publicar_noticia', methods=['POST'])
+def publicar_noticia():
+    try:
+        # Conectar a la base de datos
+        conn = connect_db()
+        if conn is None:
+            return jsonify({"error": "Error al conectar con la base de datos"}), 500
+        # Obtener el último ID en la tabla
+        ultimo_usuario = db.session.query(Noticias).order_by(Noticias.noticia_id.desc()).first()
+        print("valor ultimo_usuarrio")
+        nuevo_id = (ultimo_usuario.noticia_id + 1) if ultimo_usuario else 1
+
+        # Obtener los datos de la solicitud
+        datos = request.json
+        titulo = datos.get('titulo')
+        detalle = datos.get('detalle')
+        autor = datos.get('autor')
+        fecha_publicacion = datos.get('fecha_publicacion')
+
+        # Validar que todos los campos estén presentes
+        if not all([titulo, detalle, autor, fecha_publicacion]):
+            return jsonify({"error": "Faltan datos en la solicitud"}), 400
+
+        # Insertar la nueva noticia en la base de datos
+        cursor = conn.cursor()
+        query = """
+            INSERT INTO noticia (noticia_id,titulo, detalle, autor, fecha_publicacion, aprobacion, prioridad)
+            VALUES (%s,%s, %s, %s, %s,True,True)
+        """
+        cursor.execute(query, (nuevo_id,titulo, detalle, autor, fecha_publicacion))
+        conn.commit()
+
+        return jsonify({"message": "Noticia publicada exitosamente"}), 201
+    except Exception as e:
+        print(f"Error al publicar noticia: {e}")
+        return jsonify({"error": "Error al publicar la noticia"}), 500
+    finally:
+        if conn:
+            conn.close()
+
 @app.route('/api/mostrar_noticias', methods=['GET'])
 def api_noticias():
     conn = connect_db()  # Reemplaza con tu función de conexión a la base de datos
@@ -229,7 +270,9 @@ def api_noticias():
             titulo, 
             detalle, 
             autor, 
-            fecha_publicacion 
+            fecha_publicacion,
+            aprobacion,
+            prioridad
         FROM 
             noticia
     """
@@ -245,7 +288,9 @@ def api_noticias():
                 "titulo": row[1],
                 "detalle": row[2],
                 "autor": row[3],
-                "fecha_publicacion": row[4].strftime('%Y-%m-%d')  # Formato de fecha
+                "fecha_publicacion": row[4].strftime('%Y-%m-%d'),  # Formato de fecha
+                "aprobacion": False, # Formato de fecha
+                "prioridad": False  # Formato de fecha
             }
             for row in noticias
         ]
@@ -326,6 +371,70 @@ def registrar_usuario():
 
     return jsonify({'message': f'Usuario registrado con éxito con ID {nuevo_id}'}), 201
 
+@app.route('/api/actualizar_aprobacion', methods=['POST'])
+def actualizar_aprobacion():
+    data = request.get_json()
+    noticia_id = data.get('noticia_id')
+    aprobado = True
+
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
+
+    cursor = conn.cursor()
+    query = "UPDATE noticia SET aprobacion = %s WHERE noticia_id = %s"
+    try:
+        cursor.execute(query, (aprobado, noticia_id))
+        conn.commit()
+        return jsonify({"message": "Estado de aprobación actualizado"})
+    except Exception as e:
+        print(f"Error al actualizar aprobación: {e}")
+        return jsonify({"error": "Error al actualizar la aprobación"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+@app.route('/api/noticias_aprobadas', methods=['GET'])
+def noticias_aprobadas():
+    conn = connect_db()
+    if conn is None:
+        return jsonify({"error": "Error al conectar con la base de datos"}), 500
+
+    cursor = conn.cursor()
+    query = """
+        SELECT 
+            noticia_id, 
+            titulo, 
+            detalle, 
+            autor, 
+            fecha_publicacion 
+        FROM 
+            noticia
+        WHERE 
+            aprobacion = TRUE
+        ORDER BY 
+            fecha_publicacion DESC
+        LIMIT 5;
+    """
+    try:
+        cursor.execute(query)
+        noticias = cursor.fetchall()
+        noticias_list = [
+            {
+                "noticia_id": row[0],
+                "titulo": row[1],
+                "detalle": row[2],
+                "autor": row[3],
+                "fecha_publicacion": row[4].strftime('%Y-%m-%d')
+            }
+            for row in noticias
+        ]
+        return jsonify(noticias_list)
+    except Exception as e:
+        print(f"Error al obtener noticias aprobadas: {e}")
+        return jsonify({"error": "Error al obtener las noticias aprobadas"}), 500
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.route('/inicio_sesion', methods=['POST'])
 def login():
@@ -352,11 +461,11 @@ def login():
         FROM usuario
         WHERE usuario = %s
         """
-        cursor.execute(query, (username,))
+        cursor.execute(query, (password,))
         result = cursor.fetchone()
         print(result)
         if result:
-            session['usuario'] = username
+            session['usuario'] = password
             session['perfil'] = result[1]
             return jsonify({'message': 'success', 'perfil': result[1]}), 200
         else:

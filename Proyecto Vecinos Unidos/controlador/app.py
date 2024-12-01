@@ -48,8 +48,8 @@ def login():
 
     # Consulta para verificar las credenciales
     query = """
-    SELECT tipo_usuario
-    FROM vecinos
+    SELECT perfil
+    FROM usuario
     WHERE username = %s AND password = %s
     """
     try:
