@@ -7,27 +7,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:admin@lo
 db = SQLAlchemy(app)
 
 class Reserva(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)
-    fecha = db.Column(db.DateTime, nullable=False)
-
-@app.route('/')
-def index():
-    return render_template('admin_reserva.html')
-
-@app.route('/reserva', methods=['GET', 'POST'])
-def reserva():
-    if request.method == 'GET':
-        reservas = Reserva.query.all()
-        eventos = [{"id": r.id, "title": r.nombre, "start": r.fecha.isoformat()} for r in reservas]
-        return jsonify(eventos)
+    reserva_id = db.Column(db.Integer, primary_key=True)
+    reserva_nombre = db.Column(db.String(100), nullable=False)
+    periodo = db.Column(db.Boolean, nullable=False)
+    aprobacion = db.Column(db.Boolean, nullable=False)  # Campo con fecha actual por defecto
+    rut_solicitante = db.Column(db.String(12), nullable=False)
     
-    if request.method == 'POST':
-        data = request.json
-        nueva_reserva = Reserva(nombre=data['nombre'], fecha=datetime.fromisoformat(data['fecha']))
-        db.session.add(nueva_reserva)
-        db.session.commit()
-        return jsonify({"id": nueva_reserva.id, "message": "Reserva creada con éxito"})
+    fecha_reserva = db.Column(db.DateTime, nullable=False)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -5,6 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
 from models.noticias import Noticias
+from models.reserva import Reserva
+
 from controlador.usuario_controlador import app as usuario_app
 from werkzeug.security import check_password_hash
 import psycopg2
@@ -259,7 +261,7 @@ def publicar_noticia():
 
 @app.route('/api/mostrar_noticias', methods=['GET'])
 def api_noticias():
-    conn = connect_db()  # Reemplaza con tu función de conexión a la base de datos
+    conn = connect_db()  # Conexión a la base de datos
     if conn is None:
         return jsonify({"error": "Error al conectar con la base de datos"}), 500
 
@@ -270,42 +272,107 @@ def api_noticias():
             titulo, 
             detalle, 
             autor, 
-            fecha_publicacion,
-            aprobacion,
+            fecha_publicacion, 
             prioridad
         FROM 
             noticia
+        WHERE 
+            aprobacion = true
+        ORDER BY 
+            prioridad DESC, fecha_publicacion DESC
     """
     try:
-        # Ejecutar consulta
         cursor.execute(query)
         noticias = cursor.fetchall()
         
-        # Formatear las noticias en una lista de diccionarios
         noticias_list = [
             {
                 "noticia_id": row[0],
                 "titulo": row[1],
                 "detalle": row[2],
                 "autor": row[3],
-                "fecha_publicacion": row[4].strftime('%Y-%m-%d'),  # Formato de fecha
-                "aprobacion": False, # Formato de fecha
-                "prioridad": False  # Formato de fecha
+                "fecha_publicacion": row[4].strftime('%Y-%m-%d'),
+                "prioridad": row[5]
             }
             for row in noticias
         ]
-        print(f"Noticias obtenidas: {noticias_list}")
 
-        # Devolver las noticias en formato JSON
         return jsonify(noticias_list)
     
     except Exception as e:
-        print(f"Error al obtener noticias: {e}")
-        return jsonify({"error": "Error al obtener las noticias"}), 500
+        return jsonify({"error": str(e)}), 500
     finally:
-        # Cerrar cursor y conexión
         cursor.close()
         conn.close()
+@app.route('/reserva', methods=['POST'])
+def crear_reserva():
+    data = request.json
+    print("Datos recibidos del cliente:", data)
+    # Obtener el último ID en la tabla
+    ultimo_usuario = db.session.query(Reserva).order_by(Reserva.reserva_id.desc()).first()
+    print("valor ultimo_usuarrio")
+    nuevo_id = (ultimo_usuario.reserva_id + 1) if ultimo_usuario else 1
+    nombre = data.get('nombre')
+    rut_solicitante = data.get('rut_solicitante')
+    fecha = data.get('fecha')
+    periodo = data.get('periodo')  # Booleano para semanal
+    aprobacion = data.get('aprobacion')  # Booleano para aprobación
+    print("Datos recibidos del nombre:", nombre)
+
+    conn = connect_db()
+    if not conn:
+        return jsonify({"error": "No se pudo conectar a la base de datos"}), 500
+
+    cursor = conn.cursor()
+    try:
+        query = """
+            INSERT INTO reserva (reserva_id,reserva_nombre, rut_solicitante, fecha_reserva, periodo, aprobacion)
+            VALUES (%s,%s, %s, %s, %s, %s) RETURNING reserva_id;
+        """
+        cursor.execute(query, (nuevo_id,nombre, rut_solicitante, fecha, periodo, aprobacion))
+        reserva_id = cursor.fetchone()[0]
+        print(f"valor de la cocnsulta reserva {reserva_id}")
+        conn.commit()
+        return jsonify({"id": reserva_id, "reserva_nombre": nombre, "fecha": fecha})
+    except Exception as e:
+        conn.rollback()
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/reservas', methods=['GET'])
+def obtener_reservas():
+    conn = connect_db()  # Conexión a la base de datos
+    cursor = conn.cursor()
+    try:
+        query = """
+            SELECT reserva_id, reserva_nombre, fecha_reserva, rut_solicitante, periodo, aprobacion
+            FROM reserva;
+        """
+        cursor.execute(query)
+        reservas = cursor.fetchall()
+        print(f"valor de reservas {reservas}")
+        reservas_list = [
+            {
+                "reserva_id": row[0],
+                "reserva_nombre": row[1],
+                "fecha_reserva": row[2],
+                "rut_solicitante": row[3],
+                "periodo": "Semanal" if row[4] else "True",
+                "aprobacion": "Sí" if row[5] else "No"
+            }
+            for row in reservas
+        ]
+        print(f"valor de las reservas_list {reservas_list}")
+        return jsonify(reservas_list)
+    except Exception as e:
+        print(f"Error al obtener reservas: {e}")
+        return jsonify({"error": "Error al obtener reservas"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
 @app.route('/api/usuarios', methods=['GET'])
 def api_usuarios():
     conn = connect_db()

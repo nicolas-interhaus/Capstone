@@ -9,7 +9,29 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-<body>
+<body><div class="container mt-4">
+    <h2>Administración de Reservas</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>RUT</th>
+                <th>Periodo</th>
+                <th>Aprobación</th>
+            </tr>
+        </thead>
+        <tbody id="reservasTable">
+            <!-- Las reservas se cargarán dinámicamente -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    
+</script>
+
     <div class="container mt-4">
         <h2>Reservas</h2>
         <div id="calendar"></div>
@@ -29,7 +51,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="fecha" class="form-label">Fecha</label>
-                            <input type="datetime-local" class="form-control" id="fecha">
+                            <input type="datetime" class="form-control" id="fecha">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -70,38 +92,87 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                editable: true,
-                selectable: true,
-                events: '/reservas', // Carga las reservas desde el servidor
-                select: function(info) {
-                    // Mostrar modal para crear reserva
-                    let modal = new bootstrap.Modal(document.getElementById('reservaModal'));
-                    document.getElementById('fecha').value = info.startStr;
-                    modal.show();
-                }
+        
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var reservasTableBody = document.getElementById('reservasTable');
+    
+    // Renderizar el calendario
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        editable: true,
+        selectable: true,
+        events: '/reservas', // Cargar las reservas aprobadas desde el servidor
+        select: function(info) {
+            let modal = new bootstrap.Modal(document.getElementById('reservaModal'));
+            document.getElementById('fecha').value = info.startStr;
+            modal.show();
+        }
+    });
+    calendar.render();
+
+document.getElementById('guardarReservaBtn').addEventListener('click', function() {
+    let nombre = document.getElementById('nombre').value;
+    let fecha = document.getElementById('fecha').value;
+    let rutSolicitante = prompt("Ingrese el RUT del solicitante:");
+    let periodo = confirm("¿Es una reserva semanal?");
+    let aprobacion = confirm("¿Está aprobada esta reserva?");
+
+    fetch('/reserva', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            nombre: nombre, 
+            fecha: fecha, 
+            rut_solicitante: rutSolicitante, 
+            periodo: periodo, 
+            aprobacion: aprobacion 
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Verificar si 'calendar' está definido
+        if (calendar) {
+            console.log('Añadiendo evento al calendario:', data);
+            calendar.addEvent({
+                id: data.id,
+                title: nombre,
+                start: fecha
             });
+        } else {
+            console.error('El calendario no está inicializado.');
+        }
 
-            calendar.render();
-
-            document.getElementById('guardarReservaBtn').addEventListener('click', function() {
-                let nombre = document.getElementById('nombre').value;
-                let fecha = document.getElementById('fecha').value;
-
-                fetch('/reserva', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nombre, fecha })
-                }).then(response => response.json()).then(data => {
-                    calendar.addEvent({ id: data.id, title: nombre, start: fecha });
-                    let modal = bootstrap.Modal.getInstance(document.getElementById('reservaModal'));
-                    modal.hide();
-                });
+        // Cerrar el modal
+        let modal = bootstrap.Modal.getInstance(document.getElementById('reservaModal'));
+        modal.hide();
+    })
+    .catch(error => console.error('Error al guardar la reserva:', error));
+});
+    // Cargar las reservas en la tabla
+    fetch('/reservas')
+        .then(response => response.json())
+        .then(data => {
+            reservasTableBody.innerHTML = ""; // Limpiar la tabla antes de agregar nuevas filas
+            console.log("valores de data",data)
+            data.forEach((reserva, index) => {
+                let row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${reserva.reserva_nombre}</td>
+                        <td>${reserva.fecha_reserva}</td>
+                        <td>${reserva.rut_solicitante}</td>
+                        <td>${reserva.periodo}</td>
+                        <td>${reserva.aprobacion}</td>
+                    </tr>
+                `;
+                reservasTableBody.innerHTML += row;
             });
-        });
+        })
+        .catch(error => console.error('Error al cargar las reservas:', error));
+});
+
     </script>
 </body>
 </html>

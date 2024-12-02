@@ -107,49 +107,41 @@
 
     {% endblock %}
     <script>
-        async function cargarNoticiasAprobadas() {
-            try {
-                const response = await fetch('/api/noticias_aprobadas');
-                const noticias = await response.json();
+        async function cargarCarruselNoticias() {
+    try {
+        const response = await fetch('/api/mostrar_noticias');
+        if (!response.ok) throw new Error('Error al obtener noticias');
+
+        const noticias = await response.json();
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselIndicators = document.querySelector('.carousel-indicators');
+
+        carouselInner.innerHTML = '';
+        carouselIndicators.innerHTML = '';
+
+        noticias.forEach((noticia, index) => {
+            const isActive = index === 0 ? 'active' : '';
+            carouselIndicators.innerHTML += `
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>
+            `;
+            carouselInner.innerHTML += `
+                <div class="carousel-item ${isActive}">
+                    <img src="../static/img/madre-ninos-amarrados-pedro-aguirre-cerda.jpeg" class="d-block w-100" alt="${noticia.titulo}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>${noticia.titulo}</h5>
+                        <p>${noticia.detalle}</p>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error('Error al cargar el carrusel:', error);
+    }
+}
+
+window.onload = cargarCarruselNoticias;
+
     
-                if (response.ok) {
-                    const indicadores = document.querySelector('.carousel-indicators');
-                    const inner = document.querySelector('.carousel-inner');
-                    
-                    indicadores.innerHTML = '';
-                    inner.innerHTML = '';
-    
-                    noticias.forEach((noticia, index) => {
-                        // Crear los indicadores
-                        indicadores.innerHTML += `
-                            <button type="button" data-bs-target="#carouselExampleCaptions" 
-                                    data-bs-slide-to="${index}" 
-                                    ${index === 0 ? 'class="active" aria-current="true"' : ''} 
-                                    aria-label="Slide ${index + 1}">
-                            </button>
-                        `;
-    
-                        // Crear los slides
-                        inner.innerHTML += `
-                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                <img src="../static/img/default_news_image.jpg" class="d-block w-100" alt="${noticia.titulo}">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>${noticia.titulo}</h5>
-                                    <p>${noticia.detalle}</p>
-                                </div>
-                            </div>
-                        `;
-                    });
-                } else {
-                    console.error("Error al cargar las noticias:", noticias.error);
-                }
-            } catch (error) {
-                console.error("Error en la solicitud:", error);
-            }
-        }
-    
-        // Llamar a la función al cargar la página
-        window.onload = cargarNoticiasAprobadas;
     </script>
     
 </body>
