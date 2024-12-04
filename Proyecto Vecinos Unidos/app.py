@@ -1,31 +1,43 @@
 from __init__ import create_app
 from datetime import datetime
-from flask import Flask, make_response, render_template, request, jsonify,redirect, send_file, url_for, flash, session
+from flask import Flask, make_response, render_template, request, jsonify,redirect, send_file, url_for, flash, session, Blueprint, Response
+from weasyprint import HTML
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import Usuario
 from models.vecinos import Vecino
 from models.noticias import Noticias
 from models.reserva import Reserva
+from models.certificado import Certificado
+from models.certificado import Documento
+from werkzeug.utils import secure_filename
+from xhtml2pdf import pisa
+from io import BytesIO
 
 from controlador.usuario_controlador import app as usuario_app
 from werkzeug.security import check_password_hash
 import psycopg2
 from functools import wraps
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
 import os   
 
-app = create_app()
+app = create_app
 
 app = Flask(__name__)
 
 app.secret_key = 'mi_clave_super_secreta'
 
+reservas = Blueprint('reservas', __name__)
 # Configuración de la URI de la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/capstone'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
 
+# Función para verificar si el archivo tiene una extensión permitida
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Directorio para guardar archivos subidos
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 db = SQLAlchemy(app)
 # Función para conectar a la base de datos
 def connect_db():
@@ -49,7 +61,48 @@ def admin_required(f):
 @app.route('/')
 def index():
     return render_template('home.html')
+@app.route('/user_vista')
+def user_vista():
+    return render_template('user_vista.html')
+@app.route('/user_certificado')
+def user_certificado():
+    return render_template('user_certificado.html')
+@app.route('/user_reserva')
+def user_reserva():
+    return render_template('user_reserva.html')
 
+@reservas.route('/reservas', methods=['GET'])
+def obtener_reservas():
+    try:
+        start_date = request.args.get('start')
+        end_date = request.args.get('end')
+
+        start_date = datetime.fromisoformat(start_date)
+        end_date = datetime.fromisoformat(end_date)
+
+        reservas = Reserva.query.filter(
+            Reserva.fecha >= start_date,
+            Reserva.fecha <= end_date,
+            Reserva.aprobacion == True
+        ).all()
+
+        reservas_json = [
+            {
+                'id': reserva.id,
+                'title': reserva.nombre,
+                'start': reserva.fecha.isoformat()
+            }
+            for reserva in reservas
+        ]
+
+        return jsonify(reservas_json)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/user_reserva_registro')
+def user_reserva_registro():
+    return render_template('user_reserva_registro.html')
 @app.route('/inicio_sesion')
 def inicio_sesion():
     return render_template('inicio_sesion.html')
@@ -66,40 +119,69 @@ def registro():
 def registro_vecino():
     return render_template('ingreso.html')  # Asegúrate de que 'registro.html' sea la plantilla correcta
 
-@app.route('/generar_certificado', methods=['POST'])
+@app.route("/generar_certificado", methods=["POST"])
 def generar_certificado():
+    ultimo_folio = db.session.query(Certificado).order_by(Certificado.cert_folio.desc()).first()
+    
+    # Si no hay registros, el folio comenzará en 1438
+    if ultimo_folio is None:
+        nuevo_folio = 1438
+    else:
+        # Si ya existen registros, se incrementa el folio
+        nuevo_folio = ultimo_folio.cert_folio + 1
+    # Obtener los datos del formulario
     nombre = request.form['nombre']
     rut = request.form['rut']
     direccion = request.form['direccion']
     comuna = request.form['comuna']
-    fecha = request.form['fecha']
-    
-    # Ruta completa donde se va a guardar el archivo PDF
-    archivo_pdf = os.path.join(os.getcwd(), 'certificado_residencia.pdf')
-    print(f"Archivo PDF guardado en: {archivo_pdf}")  # Verificar la ruta
-    
-    # Crear el archivo PDF
-    c = canvas.Canvas(archivo_pdf, pagesize=letter)
-    
-    # Escribir contenido en el PDF
-    c.drawString(100, 750, f"Certificado de Residencia")
-    c.drawString(100, 730, f"Nombre completo: {nombre}")
-    c.drawString(100, 710, f"RUT: {rut}")
-    c.drawString(100, 690, f"Dirección: {direccion}")
-    c.drawString(100, 670, f"Comuna: {comuna}")
-    c.drawString(100, 650, f"Fecha de emisión: {fecha}")
-    
-    # Guardar el PDF
-    c.save()
-    
-    # Verificar si el archivo fue creado correctamente
-    if os.path.exists(archivo_pdf):
-        print(f"El archivo PDF se creó correctamente en: {archivo_pdf}")
-    else:
-        print("No se pudo crear el archivo PDF.")
+    fecha_emision = request.form['fecha_emision']
 
-    # Devolver el archivo PDF como respuesta
-    return send_file(archivo_pdf, as_attachment=True)
+    # Crear el certificado
+    nuevo_certificado = Certificado(
+        cert_folio=nuevo_folio,  # Asignamos el nuevo folio
+        cert_nombre=nombre,
+        cert_rut=rut,
+        cert_direccion=direccion,
+        cert_comuna=comuna,
+        cert_fecha=datetime.strptime(fecha_emision, '%Y-%m-%d')
+    )
+    print(nuevo_certificado.cert_nombre)
+    print(nuevo_certificado.cert_rut)
+    print(nuevo_certificado.cert_direccion)
+    db.session.add(nuevo_certificado)
+    db.session.commit()  # Commit para generar el cert_id
+
+    # Procesar los archivos subidos
+    for archivo in request.files.getlist('documentos[]'):
+        if archivo and allowed_file(archivo.filename):
+            file_content = archivo.read()
+
+            # Crear los registros en la tabla Documento
+            nuevo_documento = Documento(
+                doc_nombre=secure_filename(archivo.filename),
+                doc_tipo=archivo.content_type,
+                doc_contenido=file_content,
+                cert_id=nuevo_certificado.cert_id  # Asociar el documento al certificado
+            )
+            print(f"valor de nuevo_documento{nuevo_documento}")
+            db.session.add(nuevo_documento)
+    print(f"valor de nuevo_certificado {nuevo_certificado}")
+    db.session.commit()
+
+    flash('Certificado generado exitosamente y notificado al administrador.', 'success')
+    return redirect(url_for('user_vista'))
+
+
+
+
+@app.route("/ver_documento/<int:certificado_id>")
+def ver_documento(certificado_id):
+    certificado = Certificado.query.get(certificado_id)
+    print(certificado)
+    if certificado and certificado.documentos:
+        return send_file(BytesIO(certificado.documentos), as_attachment=True, download_name="certificado.pdf", mimetype="application/pdf")
+    return "Documento no encontrado", 404
+
 
 @app.route('/admin_certificado')
 def admin_certificado():
@@ -341,37 +423,6 @@ def crear_reserva():
         cursor.close()
         conn.close()
 
-@app.route('/reservas', methods=['GET'])
-def obtener_reservas():
-    conn = connect_db()  # Conexión a la base de datos
-    cursor = conn.cursor()
-    try:
-        query = """
-            SELECT reserva_id, reserva_nombre, fecha_reserva, rut_solicitante, periodo, aprobacion
-            FROM reserva;
-        """
-        cursor.execute(query)
-        reservas = cursor.fetchall()
-        print(f"valor de reservas {reservas}")
-        reservas_list = [
-            {
-                "reserva_id": row[0],
-                "reserva_nombre": row[1],
-                "fecha_reserva": row[2],
-                "rut_solicitante": row[3],
-                "periodo": "Semanal" if row[4] else "True",
-                "aprobacion": "Sí" if row[5] else "No"
-            }
-            for row in reservas
-        ]
-        print(f"valor de las reservas_list {reservas_list}")
-        return jsonify(reservas_list)
-    except Exception as e:
-        print(f"Error al obtener reservas: {e}")
-        return jsonify({"error": "Error al obtener reservas"}), 500
-    finally:
-        cursor.close()
-        conn.close()
 
 @app.route('/api/usuarios', methods=['GET'])
 def api_usuarios():

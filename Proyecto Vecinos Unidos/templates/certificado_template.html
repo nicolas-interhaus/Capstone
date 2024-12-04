@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificado de Residencia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.5;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 60px;
+            vertical-align: middle;
+        }
+        .header h1 {
+            display: inline-block;
+            margin: 0;
+            font-size: 18px;
+            vertical-align: middle;
+        }
+        .sub-header {
+            text-align: right;
+            margin-top: -20px;
+            font-size: 14px;
+        }
+        .content {
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .content span {
+            font-weight: bold;
+        }
+        .signature {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .signature p {
+            margin: 5px 0;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="data:image/png;base64,{{ image_base64 }}" alt="Logo de la asociación">
+        <h1>ASOCIACIÓN DE PROPIETARIOS<br>"Dos de Marzo"</h1>
+    </div>
+    <div class="sub-header">
+        <p>N°: 001438</p>
+        <p>Santiago, _____ de ______________ de _____</p>
+        <p>Socio: <span>[Sí/No]</span></p>
+    </div>
+    <div class="content">
+        <p>La Directiva de la junta de vecinos Asociación de Propietarios "Dos de Marzo" con Personalidad Jurídica N° 248 (14/06/2009) de la comuna de Pedro Aguirre Cerda, otorga el presente documento a:</p>
+        <p>Sr. (a): <span>{{ datos.nombre }}</span></p>
+        <p>Cédula de identidad N°: <span>{{ datos.rut }}</span></p>
+        <p>Se certifica que el solicitante tiene domicilio en: <span>{{ datos.direccion }}</span></p>
+        <p>Comuna: <span>{{ datos.comuna }}</span></p>
+        <p>Se extiende el presente certificado para los fines que el interesado estime conveniente.</p>
+    </div>
+    <div class="signature">
+        <p>__________________________</p>
+        <p>FIRMA</p>
+    </div>
+    <div class="footer">
+        <p>Timbre: ASOCIACIÓN DE PROPIETARIOS "Dos de Marzo"</p>
+        <p>Pers. Jurídica N° 248, 14-06-2009</p>
+    </div>
+</body>
+</html>

@@ -1,25 +1,34 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, request, jsonify, render_template
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, ForeignKey, LargeBinary, DateTime
+from sqlalchemy.orm import relationship
 
 app = Flask(__name__)
-app.secret_key = 'tu_clave_secreta'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:admin@localhost:5432/capstone'
+db = SQLAlchemy(app)
 
-@app.route('/certificado', methods=['GET', 'POST'])
-def generar_certificado():
-    if request.method == 'POST':
-        # Capturamos los datos del formulario
-        nombre = request.form['nombre']
-        rut = request.form['rut']
-        direccion = request.form['direccion']
-        comuna = request.form['comuna']
-        fecha = request.form['fecha']
+class Certificado(db.Model):
+    __tablename__ = 'certificado'
+    cert_id = db.Column(db.Integer, primary_key=True)
+    cert_folio = db.Column(db.Integer, nullable=False)
+    cert_nombre = db.Column(db.String(50), nullable=False) # Campo con fecha actual por defecto
+    cert_rut = db.Column(db.String(12), nullable=False)
+    cert_direccion = db.Column(db.String(100), nullable=False)  # Campo con fecha actual por defecto
+    cert_comuna = db.Column(db.String(50), nullable=False) 
+    cert_fecha = db.Column(db.DateTime, nullable=False)
+    documentos = relationship("Documento", back_populates="certificado", cascade="all, delete-orphan")
 
-        # Aquí podrías agregar lógica para generar el PDF o guardar en la base de datos
-        # Simulamos un mensaje de éxito y una URL de PDF de ejemplo
-        pdf_url = url_for('static', filename='certificado_ejemplo.pdf')
-        flash('Certificado generado exitosamente.', 'info')
-        return render_template('certificado.html', pdf_url=pdf_url)
+class Documento(db.Model):
+    __tablename__ = 'documento'
 
-    return render_template('admin_vista.html')
+    doc_id = db.Column(db.Integer, primary_key=True)
+    doc_nombre = db.Column(db.String(100), nullable=False)
+    doc_tipo = db.Column(db.String(50), nullable=False)
+    doc_contenido = db.Column(db.LargeBinary, nullable=False)  # Almacena el archivo como BLOB
+    cert_id = db.Column(db.Integer, ForeignKey('certificado.cert_id'), nullable=False)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Relación inversa
+    certificado = relationship("Certificado", back_populates="documentos")
+
+

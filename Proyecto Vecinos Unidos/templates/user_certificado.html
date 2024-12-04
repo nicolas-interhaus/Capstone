@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Certificado de Residencia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Generar Certificado de Residencia</h2>
+<!--
+        <div class="mb-3">
+            <label for="usuario" class="form-label">Seleccionar Usuario</label>
+            <select id="usuario" class="form-select">
+                <option value="">Seleccione un usuario</option>
+            </select>
+        </div>
+-->
+        <!-- Formulario de Certificado -->
+        <form method="post" action="/generar_certificado">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="rut" class="form-label">RUT</label>
+                <input type="text" class="form-control" id="rut" name="rut" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+            </div>
+            <div class="mb-3">
+                <label for="comuna" class="form-label">Comuna</label>
+                <input type="text" class="form-control" id="comuna" name="comuna" required>
+            </div>
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha de emisión</label>
+                <input type="date" id="fecha_emision" name="fecha_emision" required><br><br>
+            </div>
+            <div class="mb-3">
+                <label for="documentos" class="form-label">Subir archivos adicionales</label>
+                <input type="file" class="form-control" id="documentos" name="documentos[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                <small class="form-text text-muted">
+                    Puedes subir archivos en formato PDF, JPG, JPEG o PNG. Máximo 5 MB por archivo.
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Generar Certificado</button>
+        </form>
+
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        
+        // Configura el valor predeterminado de la fecha como el día de hoy
+        document.addEventListener("DOMContentLoaded", () => {
+            const fechaInput = document.getElementById("fecha_emision");
+            const hoy = new Date().toISOString().split('T')[0]; // Obtiene la fecha en formato 'YYYY-MM-DD'
+            fechaInput.value = hoy; // Establece el valor predeterminado
+        });
+        document.getElementById('documentos').addEventListener('change', function(event) {
+            const listaArchivos = event.target.files;
+            const contenedor = document.createElement('ul');
+            contenedor.innerHTML = '';
+
+            for (let i = 0; i < listaArchivos.length; i++) {
+                const item = document.createElement('li');
+                item.textContent = `${listaArchivos[i].name} (${(listaArchivos[i].size / 1024).toFixed(2)} KB)`;
+                contenedor.appendChild(item);
+            }
+
+            // Mostrar la lista en la página
+            const divArchivos = document.querySelector('.file-preview') || document.createElement('div');
+            divArchivos.className = 'file-preview mt-3';
+            divArchivos.innerHTML = '<strong>Archivos seleccionados:</strong>';
+            divArchivos.appendChild(contenedor);
+            event.target.parentNode.appendChild(divArchivos);
+        });
+
+    </script>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Powered by:</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+                  <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+                  <li><strong>Institución:</strong> DUOC UC</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Contacto</h5>
+                <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+                <p>Teléfono: +56 9 562 712 75</p>
+              </div>
+            </div>
+        </div>
+        <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
+          <small>&copy; 2024 Todos los derechos reservados</small>
+        </div>
+    </footer>
+</body>
+</html>

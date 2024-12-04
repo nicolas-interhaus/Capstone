@@ -86,13 +86,14 @@
         .then(async response => {
             if (response.ok) {
                 const result = await response.json();
-                alert("Inicio de sesión exitoso");
                 console.log(result);
+                alert("Bienvenido a Vecinos Unidos");
                 // Redirigir según el tipo de usuario
+                
                 if (result.perfil === "admin") {
                     window.location.href = "/admin_vista";
                 } else {
-                    window.location.href = "/";
+                    window.location.href = "/user_vista";
                 }
             } else {
                 const error = await response.json();
