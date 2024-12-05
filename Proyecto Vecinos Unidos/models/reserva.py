@@ -2,9 +2,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:admin@localhost:5432/capstone'
-db = SQLAlchemy(app)
+
+db = SQLAlchemy()
 
 class Reserva(db.Model):
     __tablename__ = 'reserva'

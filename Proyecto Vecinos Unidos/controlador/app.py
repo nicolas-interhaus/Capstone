@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2, pg8000
 from flask import Flask, redirect, request, jsonify, render_template, flash, url_for
 from flask_cors import CORS
 import webbrowser
@@ -19,7 +19,7 @@ DATABASE_CONFIG = {
 # Función para conectar a la base de datos
 def connect_db():
     try:
-        conn = psycopg2.connect(**DATABASE_CONFIG)
+        conn = pg8000.connect(**DATABASE_CONFIG)
         return conn
     except Exception as e:
         print(f"Error conectando a la base de datos: {e}")

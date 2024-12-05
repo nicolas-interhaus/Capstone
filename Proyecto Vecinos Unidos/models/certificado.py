@@ -4,9 +4,8 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, ForeignKey, LargeBinary, DateTime
 from sqlalchemy.orm import relationship
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:admin@localhost:5432/capstone'
-db = SQLAlchemy(app)
+
+db = SQLAlchemy()
 
 class Certificado(db.Model):
     __tablename__ = 'certificado'

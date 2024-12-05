@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask, make_response, render_template, request, jsonify,redirect, send_file, url_for, flash, session, Blueprint, Response, g
 from weasyprint import HTML
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text, create_engine
+from sqlalchemy import text
 from models.usuario import Usuario
 from models.vecinos import Vecino
 from models.noticias import Noticias
@@ -14,9 +14,8 @@ from werkzeug.utils import secure_filename
 from xhtml2pdf import pisa
 from io import BytesIO
 
-from controlador.usuario_controlador import app as usuario_app
 from werkzeug.security import check_password_hash
-import psycopg2, base64
+import  base64, pg8000
 from functools import wraps
 import os   
 
@@ -28,19 +27,9 @@ app.secret_key = 'mi_clave_super_secreta'
 
 reservas = Blueprint('reservas', __name__)
 # Configuración de la URI de la base de datos
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/capstone'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:admin@localhost/capstone'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
-engine = create_engine("postgresql://postgres:admin@localhost/capstone")
-
-@app.before_request
-def before_request():
-    g.db = engine.connect()
-
-@app.teardown_request
-def teardown_request(exception):
-    if hasattr(g, 'db'):
-        g.db.close()
 # Función para verificar si el archivo tiene una extensión permitida
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -52,7 +41,12 @@ db = SQLAlchemy(app)
 # Función para conectar a la base de datos
 def connect_db():
     try:
-        conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
+        conn = pg8000.connect(
+            user="postgres",
+            password="admin",
+            host="localhost",
+            database="capstone"
+        )
         return conn
     except Exception as e:
         print(f"Error conectando a la base de datos: {e}")
@@ -406,7 +400,7 @@ def registro_vecinos():
         db.session.commit()
         flash(f'Vecino registrado con éxito con RUT {rut}', 'success')
         # Redirigir al formulario de registro después de éxito
-        return redirect(url_for('registro'))
+        return redirect(url_for('user_vista'))
     except Exception as e:
         print(f"Error al registrar vecino: {e}")
         db.session.rollback()  # Revertir cambios si ocurre un error
