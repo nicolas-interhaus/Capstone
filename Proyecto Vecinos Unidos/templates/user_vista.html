@@ -37,7 +37,8 @@
 {% block body %}
 <body>
     
-    <div class="container">
+    <div class="container"><a href="{{ url_for('inicio_sesion') }}" class="btn btn-warning btn-login">Volver al Inicio de Sesión</a>
+        
         <h1 class="my-4 text-center">Inicio, Junta de Vecinos N°14</h1>
         <div class="row">
             <div class="col-12">
@@ -95,8 +96,9 @@
             try {
                 const response = await fetch('/api/mostrar_noticias');
                 if (!response.ok) throw new Error('Error al obtener noticias');
-
+                
                 const noticias = await response.json();
+                console.log("noticias: ",noticias)
                 const noticiasPrioritarias = noticias.filter(noticia => noticia.prioridad === true);
                 const otrasNoticias = noticias.filter(noticia => noticia.prioridad === false);
 
@@ -113,9 +115,15 @@
                     carouselIndicators.innerHTML += `
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>
                     `;
+                    // Aquí, si noticia.noticia_imagen está en base64, lo usamos directamente en el src
+                    const imagenBase64 = noticia.noticia_imagen ? `data:image/jpeg;base64,${noticia.noticia_imagen}` : ''; // Cambia 'jpeg' por el tipo correcto si es necesario
+
                     carouselInner.innerHTML += `
                         <div class="carousel-item ${isActive}">
-                            <img src="${noticia.imagen}" class="d-block w-100" alt="${noticia.titulo}">
+                            <div>
+                                <img src="${imagenBase64}" class="d-block w-100" alt="${noticia.titulo}">
+
+                                </div>
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>${noticia.titulo}</h5>
                                 <p>${noticia.detalle}</p>

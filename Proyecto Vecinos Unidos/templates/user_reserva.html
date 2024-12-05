@@ -19,6 +19,7 @@
 </script>
 
     <div class="container mt-4">
+        <button type="button" id="reservar">Solicitar reserva</button>
         <div id="calendar"></div>
 
         <!-- Modal para crear/editar reservas -->
@@ -37,6 +38,14 @@
                         <div class="mb-3">
                             <label for="fecha" class="form-label">Fecha</label>
                             <input type="datetime" class="form-control" id="fecha">
+                        </div>
+                        <div class="mb-3">
+                            <label for="rut_solicitante" class="form-label">Rut solicitante</label>
+                            <input type="text" class="form-control" id="rut_solicitante">
+                        </div>
+                        <div class="mb-3">
+                            <label for="periodico" class="form-label">Periódico</label>
+                            <input type="checkbox" id="periodico">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -79,56 +88,56 @@
     <script>
         
     
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             var calendarEl = document.getElementById('calendar');
-            
+            var reservasTableBody = document.getElementById('reservasTable');
+            var eventos= [({title: "Bingo1", start: '2024-12-04', allDay: true}),
+                     ({title: "Bingo2", start: '2024-12-05', allDay: false}),
+                     ({title: "Bingo3", start: '2024-12-06', allDay: true})]
             // Renderizar el calendario
+            const segundo_evento = await cargaEventos();
+            console.log("segundo_evento",segundo_evento)
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'es',
                 initialView: 'dayGridMonth',
+                firstDay: 1,
                 editable: true,
                 selectable: true,
-                events: '/api/reservas', // Cambiado para incluir el prefijo del blueprint
+                events: segundo_evento, 
                 select: function(info) {
                     let modal = new bootstrap.Modal(document.getElementById('reservaModal'));
                     document.getElementById('fecha').value = info.startStr;
                     modal.show();
                 }
             });
+            console.log(calendar)
             calendar.render();
+
         });
 
 
         document.getElementById('guardarReservaBtn').addEventListener('click', function() {
             let nombre = document.getElementById('nombre').value;
             let fecha = document.getElementById('fecha').value;
-            let rutSolicitante = prompt("Ingrese el RUT del solicitante:");
-            let periodo = confirm("¿Es una reserva semanal?");
-            let aprobacion = confirm("¿Está aprobada esta reserva?");
-
+            let rutSolicitante = document.getElementById('rut_solicitante').value;
+            let periodo = document.getElementById('periodico').value;
+            console.log("nombre",nombre);
+            console.log("fecha",fecha);
+            console.log("rutSolicitante",rutSolicitante);
+            console.log("periodo",periodo);
             fetch('/reserva', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     nombre: nombre, 
-                    reserva_fecha_reserva: fecha, 
+                    reserva_fecha_inicio: fecha, 
                     rut_solicitante: rutSolicitante, 
-                    periodo: periodo, 
-                    aprobacion: aprobacion 
+                    periodo: periodo 
                 })
             })
             .then(response => response.json())
             .then(data => {
                 // Verificar si 'calendar' está definido
-                if (calendar) {
-                    console.log('Añadiendo evento al calendario:', data);
-                    calendar.addEvent({
-                        id: data.id,
-                        title: nombre,
-                        start: fecha
-                    });
-                } else {
-                    console.error('El calendario no está inicializado.');
-                }
 
                 // Cerrar el modal
                 let modal = bootstrap.Modal.getInstance(document.getElementById('reservaModal'));
@@ -136,6 +145,29 @@
             })
             .catch(error => console.error('Error al guardar la reserva:', error));
         });
+        
+        async function cargaEventos() {
+            let eventos = [];
+            try {
+                const reservaResponse = await fetch('/api/reservas/aprobado');
+                if (!reservaResponse.ok) throw new Error('Error al obtener las reservas');
+                const reservas = await reservaResponse.json();
+
+                // Convertir los datos de reservas en un formato adecuado para FullCalendar
+                eventos = reservas.map(reserva => ({
+                    title: reserva.reserva_nombre,  // Asigna el título adecuado del objeto de reserva
+                    start: reserva.fecha_reserva_inicio,  // Usa la fecha de inicio de la reserva
+                    allDay: false  // O ajusta si es necesario
+                }));
+
+                console.log("valor de eventos: ",eventos);  // Verifica los eventos cargados
+            } catch (error) {
+                console.error('Error al cargar los eventos:', error);
+            }
+            console.log("valores obtenidos para eventos: ",eventos)
+            return eventos;
+            
+        };
     </script>
 </body>
 </html>

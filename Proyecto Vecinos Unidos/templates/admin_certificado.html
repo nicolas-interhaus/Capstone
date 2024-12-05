@@ -3,50 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificados Generados</title>
+    <title>Admin - Certificados</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Certificados Generados</h2>
-        
-        <!-- Alerta Flash -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="alert alert-success">
-                    <ul>
-                        {% for category, message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        {% endwith %}
-        
-        <table class="table table-bordered">
+        <h2>Administración de Certificados</h2>
+
+        <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Certificado ID</th>
                     <th>Nombre</th>
                     <th>RUT</th>
                     <th>Dirección</th>
                     <th>Comuna</th>
                     <th>Fecha de Emisión</th>
-                    <th>Documentos Adjuntos</th>
+                    <th>Estado</th>
+                    <th>Documentos</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for certificado in certificados %}
+                {% for item in certificados %}
                     <tr>
-                        <td>{{ certificado.nombre }}</td>
-                        <td>{{ certificado.rut }}</td>
-                        <td>{{ certificado.direccion }}</td>
-                        <td>{{ certificado.comuna }}</td>
-                        <td>{{ certificado.fecha_emision }}</td>
+                        <td>{{ item.certificado.cert_id }}</td>
+                        <td>{{ item.certificado.cert_nombre }}</td>
+                        <td>{{ item.certificado.cert_rut }}</td>
+                        <td>{{ item.certificado.cert_direccion }}</td>
+                        <td>{{ item.certificado.cert_comuna }}</td>
+                        <td>{{ item.certificado.cert_fecha }}</td>
+                        <td>{{ item.certificado.cert_estado }}</td>
                         <td>
-                            {% if certificado.documentos %}
-                                <a href="{{ url_for('ver_documento', certificado_id=certificado.id) }}" class="btn btn-info">Ver Documento</a>
+                            {% if item.documentos|length > 0 %}
+                                <ul>
+                                    {% for doc in item.documentos %}
+                                        <li>
+                                            <a href="{{ url_for('ver_documento', certificado_id=item.certificado.cert_id, documento_id=doc.documento_id) }}" class="btn btn-link">
+                                                Ver Documento {{ doc.doc_id }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             {% else %}
-                                <p>No hay documentos</p>
+                                <p>No hay documentos adjuntos</p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.certificado.cert_estado == 'Pendiente' %}
+                            <form action="{{ url_for('aprobar_certificado', certificado_id=item.certificado.cert_id) }}" method="POST" style="display:inline;" target="_blank">
+                                <button type="submit" class="btn btn-success">Aprobar</button>
+                            </form>
+                                <form action="{{ url_for('rechazar_certificado', certificado_id=item.certificado.cert_id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger">Rechazar</button>
+                                </form>
+                            {% elif item.certificado.cert_estado == 'Aprobado' %}
+                            
+                                <span class="badge bg-primary">Aprobado</span>
+                            {% else %}
+                            
+                                <span class="badge bg-secondary">Invalidado</span>
                             {% endif %}
                         </td>
                     </tr>
@@ -56,42 +73,61 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".aprobar-btn").click(function() {
+            const certData = {
+                cert_id: $(this).data("cert-id"),
+                cert_nombre: $(this).data("cert-nombre"),
+                rut: $(this).data("rut"),
+                direccion: $(this).data("direccion"),
+                comuna: $(this).data("comuna"),
+                fecha_emision: $(this).data("fecha-emision")
+            };
+
+            $.ajax({
+                url: "/generar_certificado",
+                method: "POST",
+                contentType: "application/json",  // Enviar como JSON
+                data: JSON.stringify(certData),   // Convertir el objeto a JSON
+                success: function(response) {
+                    alert("Certificado aprobado y generado exitosamente.");
+                    window.location.reload();  // Recargar la página para mostrar los cambios
+                },
+                error: function(xhr, status, error) {
+                    alert("Hubo un error al aprobar el certificado.");
+                }
+            });
 
 
-
+            function rechazarCertificado(certId) {
+                // Lógica para rechazar el certificado
+                alert("Certificado rechazado: " + certId);
+            };
+    });
+});
+    </script>
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
             <div class="row">
-              <div class="col-md-6">
-                <h5>Powered by:</h5>
-                <ul class="list-unstyled">
-                  <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
-                  <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
-                  <li><strong>Institución:</strong> DUOC UC</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5>Contacto</h5>
-                <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
-                <p>Teléfono: +56 9 562 712 75</p>
-              </div>
+                <div class="col-md-6">
+                    <h5>Powered by:</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Nombre:</strong> Nicolás Zamorano Vásquez</li>
+                        <li><strong>Escuela:</strong> Escuela de Informática y Telecomunicaciones</li>
+                        <li><strong>Institución:</strong> DUOC UC</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5>Contacto</h5>
+                    <p>Email: <a href="mailto:ni.zamoranov@duocuc.cl" class="text-white">ni.zamoranov@duocuc.cl</a></p>
+                    <p>Teléfono: +56 9 562 712 75</p>
+                </div>
             </div>
         </div>
         <div class="text-center py-3 mt-3" style="border-top: 1px solid #777;">
-          <small>&copy; 2024 Todos los derechos reservados</small>
+            <small>&copy; 2024 Todos los derechos reservados</small>
         </div>
     </footer>
-    
-
-    <script>
-        // Configura el valor predeterminado de la fecha como el día de hoy
-        document.addEventListener("DOMContentLoaded", () => {
-            const fechaInput = document.getElementById("fecha_emision");
-            const hoy = new Date().toISOString().split('T')[0]; // Obtiene la fecha en formato 'YYYY-MM-DD'
-            fechaInput.value = hoy; // Establece el valor predeterminado
-        });
-
-       
-    </script>
 </body>
 </html>

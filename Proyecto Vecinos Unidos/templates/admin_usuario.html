@@ -98,10 +98,9 @@
                         <td>${vecino.direccion}</td>
                         <td>${vecino.comuna}</td>
                         <td>${vecino.email}</td>
-                        <td>
-                            <button class="btn btn-success btn-sm">Publicar</button>
-                            <button class="btn btn-danger btn-sm">Rechazar</button>
-                        </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarVecino(${vecino.vecino_id})">Eliminar</button>
+                    </td>
                     </tr>
                 `;
             });
@@ -123,8 +122,8 @@
                         <td>${usuario.perfil}</td>
                         <td>${new Date(usuario.fecha_registro).toLocaleDateString()}</td>
                         <td>
-                            <button class="btn btn-success btn-sm">Publicar</button>
-                            <button class="btn btn-danger btn-sm">Rechazar</button>
+                            <button class="btn btn-success btn-sm" onclick="cambiarPerfil(${usuario.usuario_id})">Editar Usuario a Administrador</button>
+    <button class="btn btn-danger btn-sm" onclick="rechazarUsuario(${usuario.usuario_id})">Rechazar</button>
                         </td>
                     </tr>
                 `;
@@ -134,10 +133,39 @@
             alert('No se pudieron cargar los datos. Intenta nuevamente.');
         }
     }
+    // Función para cambiar el perfil a admin
+    async function cambiarPerfil(usuario_id) {
+    try {
+        const response = await fetch(`/api/cambiar_perfil/${usuario_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
+        if (response.ok) {
+            alert("Perfil cambiado a 'admin' exitosamente.");
+            cargarDatos();  // Recargar los datos para ver los cambios
+        } else {
+            const data = await response.json();
+            alert(`Error: ${data.error}`);
+        }
+    } catch (error) {
+        console.error('Error al cambiar el perfil:', error);
+        alert('No se pudo cambiar el perfil. Intenta nuevamente.');
+    }
+}
 
-        // Llamar a la función al cargar la página
-        window.onload = cargarDatos;
+async function rechazarUsuario(usuario_id) {
+    try {
+        // Lógica para rechazar el usuario (puedes hacer lo que desees)
+        alert(`Usuario con ID ${usuario_id} rechazado.`);
+    } catch (error) {
+        console.error('Error al rechazar el usuario:', error);
+        alert('No se pudo rechazar el usuario. Intenta nuevamente.');
+    }
+}
+        window.onload(cargarDatos()); 
 
         
     </script>

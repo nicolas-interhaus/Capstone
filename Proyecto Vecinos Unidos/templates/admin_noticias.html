@@ -22,6 +22,7 @@
                     <th>Fecha de Publicación</th>
                     <th>Aprobación</th>
                     <th>Prioridad</th>
+                    <th>Imagen</th>
                 </tr>
             </thead>
             <tbody id="noticiasTableBody">
@@ -30,7 +31,7 @@
         </table>
         <div class="container">
             <h2>Agregar Nueva Noticia</h2>
-            <form  >
+            <form enctype="multipart/form-data" >
                 <table>
                     <tr>
                 <div class="form-group">
@@ -53,7 +54,14 @@
                 <div class="form-group">
                     <label for="Fecha_publicacion">Fecha de Publicación</label>
                     <input type="date" class="form-control" id="Fecha_publicacion" name="Fecha_publicacion" required>
-                    </div></tr>
+                </div>
+                <div class="mb-3">
+                    <input type="file" class="form-control" id="documentos" name="documentos[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                    <small class="form-text text-muted">
+                        Puedes subir archivos en formato PDF, JPG, JPEG o PNG. Máximo 5 MB por archivo.
+                    </small>
+                </div>
+                </tr>
                 </table>
                 <button type="button" class="btn btn-primary" onclick="publicarNoticia()">Agregar Noticia</button>
             </form>
@@ -102,6 +110,13 @@
                 
                 // Iterar sobre las noticias y agregarlas a la tabla
                 noticias.forEach(noticia => {
+                    console.log("valores de imagenes en noticias",noticia.noticia_imagen)
+                    let mimeType = "image/jpeg"; // Cambiar si el MIME es diferente
+                    if (noticia.noticia_imagen.startsWith('/9j/')) { 
+                        mimeType = "image/jpeg"; 
+                    } else if (noticia.noticia_imagen.startsWith('iVBOR')) { 
+                        mimeType = "image/png"; 
+                    }
                     noticiasTableBody.innerHTML += `
                         <tr>
                             <td>${noticia.noticia_id}</td>
@@ -117,6 +132,9 @@
                                 <input type="checkbox" ${noticia.prioridad ? "checked" : ""} 
                                     onchange="actualizarAprobacion(${noticia.noticia_id}, this.checked)">
                             </td>
+                            <td>
+                        <img src="data:image/jpeg;base64,${noticia.noticia_imagen}" alt="Imagen Noticia" width="100">
+                    </td>
                         </tr>
                     `;
                 });
@@ -132,7 +150,19 @@
         const detalle = document.getElementById('detalle').value;
         const autor = document.getElementById('autor').value;
         const fechaPublicacion = document.getElementById('Fecha_publicacion').value;
-
+        const archivos = document.getElementById('documentos').files;
+        console.log("archivos",archivos);
+        let imagenBase64 = null;
+        if (archivos.length > 0) {
+            const archivo = archivos[0]; // Suponiendo que subes una sola imagen
+            const reader = new FileReader();
+            const base64 = await new Promise((resolve, reject) => {
+                reader.onload = () => resolve(reader.result.split(',')[1]); // Remover el encabezado
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(archivo);
+            });
+            imagenBase64 = base64;
+        }
         // Crear el cuerpo de la solicitud
         const nuevaNoticia = {
             titulo: titulo,
@@ -140,9 +170,10 @@
             autor: autor,
             fecha_publicacion: fechaPublicacion,
             aprobado: false,
-            prioridad: false
+            prioridad: false,
+            imagen:imagenBase64
         };
-
+        console.log("nueva noticia",nuevaNoticia);
         // Enviar los datos a la API
         const response = await fetch('/api/publicar_noticia', {
             method: 'POST',
@@ -151,7 +182,7 @@
             },
             body: JSON.stringify(nuevaNoticia)
         });
-
+        console.log("response: ",response)
         if (!response.ok) throw new Error('Error al publicar la noticia.');
 
         const result = await response.json();
@@ -184,6 +215,24 @@ async function actualizarAprobacion(noticiaId, aprobado) {
         alert("No se pudo actualizar la aprobación.");
     }
 };
+document.getElementById('documentos').addEventListener('change', function(event) {
+            const listaArchivos = event.target.files;
+            const contenedor = document.createElement('ul');
+            contenedor.innerHTML = '';
+
+            for (let i = 0; i < listaArchivos.length; i++) {
+                const item = document.createElement('li');
+                item.textContent = `${listaArchivos[i].name} (${(listaArchivos[i].size / 1024).toFixed(2)} KB)`;
+                contenedor.appendChild(item);
+            }
+
+            // Mostrar la lista en la página
+            const divArchivos = document.querySelector('.file-preview') || document.createElement('div');
+            divArchivos.className = 'file-preview mt-3';
+            divArchivos.innerHTML = '<strong>Archivos seleccionados:</strong>';
+            divArchivos.appendChild(contenedor);
+            event.target.parentNode.appendChild(divArchivos);
+        });
 
         // Llamar a la función al cargar la página
         window.onload = cargarNoticias;

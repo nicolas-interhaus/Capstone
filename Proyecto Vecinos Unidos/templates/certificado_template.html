@@ -59,16 +59,15 @@
         <h1>ASOCIACIÓN DE PROPIETARIOS<br>"Dos de Marzo"</h1>
     </div>
     <div class="sub-header">
-        <p>N°: 001438</p>
-        <p>Santiago, _____ de ______________ de _____</p>
-        <p>Socio: <span>[Sí/No]</span></p>
+        <p>N°: {{ datos.cert_folio }}</p>
+        <p>Santiago, {{dia}} de {{mes}} de {{anio}}</p>
     </div>
     <div class="content">
         <p>La Directiva de la junta de vecinos Asociación de Propietarios "Dos de Marzo" con Personalidad Jurídica N° 248 (14/06/2009) de la comuna de Pedro Aguirre Cerda, otorga el presente documento a:</p>
-        <p>Sr. (a): <span>{{ datos.nombre }}</span></p>
-        <p>Cédula de identidad N°: <span>{{ datos.rut }}</span></p>
-        <p>Se certifica que el solicitante tiene domicilio en: <span>{{ datos.direccion }}</span></p>
-        <p>Comuna: <span>{{ datos.comuna }}</span></p>
+        <p>Sr. (a): <span>{{ datos.cert_nombre }}</span></p>
+        <p>Cédula de identidad N°: <span>{{ datos.cert_rut }}</span></p>
+        <p>Se certifica que el solicitante tiene domicilio en: <span>{{ datos.cert_direccion }}</span></p>
+        <p>Comuna: <span>{{ datos.cert_comuna }}</span></p>
         <p>Se extiende el presente certificado para los fines que el interesado estime conveniente.</p>
     </div>
     <div class="signature">

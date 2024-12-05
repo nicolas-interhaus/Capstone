@@ -12,6 +12,7 @@ class Noticias(db.Model):
     fecha_publicacion = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Campo con fecha actual por defecto
     aprobacion = db.Column(db.Boolean, nullable=False, default=False)  # Campo con fecha actual por defecto
     prioridad = db.Column(db.Boolean, nullable=False, default=False)  # Campo con fecha actual por defecto
+    noticia_imagen = db.Column(db.LargeBinary, nullable=False)  # Almacena el archivo como BLOB
     
     def __repr__(self):
         return f'<Noticias {self.titulo} - {self.autor}>'
